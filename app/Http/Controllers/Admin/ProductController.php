@@ -30,14 +30,15 @@ class ProductController extends Controller
     {
         return view('admin.product.add',[
             'title'=>'Thêm sản phẩm mới',
-            'menus' =>$this->productService->findMenu()
+            'categories' =>$this->productService->findMenu(),
+            'brands'=>$this->productService->findBrand()
         ]);
     }
 
 
-    public function store(ProductRequest $request)
+    public function store(Product $product,ProductRequest $request)
     {
-        $this->productService->create($request);
+        $this->productService->create($product,$request);
         return redirect()->back();
     }
 
@@ -47,6 +48,7 @@ class ProductController extends Controller
         return view('admin.product.show',[
             'title'=>$product->productname,
             'categories' =>$this->productService->findMenu(),
+            'brands'=>$this->productService->findBrand(),
             'product'=>$product
         ]);
     }

@@ -1,15 +1,16 @@
 @extends('admin.main')
 
 @section('content')
-    <table class="table">
+    <a href="/admin/product/add" class="btn btn-success" style="width: 5%"><i class="fas fa-plus"></i></a>
+    <table class="table custom">
         <thead>
             <th>ID</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Price_Sale</th>
-            <th>Category</th>
-            <th>Active</th>
-            <th>Image</th>
+            <th>Tên</th>
+            <th>Giá gốc</th>
+            <th>Khuyến mãi</th>
+            <th>Thể loại</th>
+            <th>Hoạt động</th>
+            <th>Ảnh</th>
             <th style="width:10%">&nbsp;</th>
         </thead>
         <tbody>
@@ -20,7 +21,7 @@
                     <td>{!! \App\Helpers\Helper::price($product->pricesell) !!}</td>
                     <td>{!! \App\Helpers\Helper::price($product->priceentry) !!}</td>
                     <td>{{$product->category->categoryname}}</td>
-                    <td>{!!\App\Helpers\Helper::status($product->status)!!}</td>
+                    <td class="status-cus">{!!\App\Helpers\Helper::status($product->status)!!}</td>
                     <td><img src="{{$product->images}}" style="width: 100px;"></td>
                     <td>
                         <a href="/admin/product/edit/{{$product->id}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>

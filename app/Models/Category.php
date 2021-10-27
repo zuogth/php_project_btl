@@ -18,4 +18,9 @@ class Category extends Model
         'categorycode',
         'status'
     ];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class,'id','category_id');
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Services\Category;
 
 use App\Http\Requests\Menu\CreateFormRequest;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
@@ -39,6 +40,7 @@ class CategoryService{
         $id=(int)$request->input('id');
         $rs=Category::where('id',$id)->first();
         if($rs){
+            Product::where('category_id',$id)->delete();
             return Category::where('id',$id)->orWhere('parent_id',$id)->delete();
         }
         return false;

@@ -23,9 +23,19 @@ class LoginController extends Controller
         ]);
 
         if(Auth::attempt($credentials,$request->input('remember'))){
-            return redirect()->route('admin');
+            $user=Auth::user();
+            if($user->roles[0]->rolecode=='admin'){
+                return redirect()->route('admin');
+            }
+            return 'User';
         }
         Session::flash('error','Username or password invalid');
         return redirect()->back();
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

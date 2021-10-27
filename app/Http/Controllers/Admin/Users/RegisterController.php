@@ -13,9 +13,7 @@ class RegisterController extends Controller
 {
     public function store()
     {
-        $bill=Bill::with('products')->where('id',2)->first();
-        foreach ($bill->products as $product){
-            echo $product->pivot->quantily;
-        }
+        $bills=Bill::with('products')->first();
+        dd($bills->products[0]->pivot);
     }
 }

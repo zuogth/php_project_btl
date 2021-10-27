@@ -2,10 +2,12 @@
 
 namespace App\Http\Services\Product;
 
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class ProductService
 {
@@ -14,12 +16,19 @@ class ProductService
         return Category::where('status',1)->get();
     }
 
-    public function create($request)
+    public function findBrand()
+    {
+        return Brand::all();
+    }
+
+    public function create($product,$request)
     {
         if($this->isValidPrice($request)==false) return false;
         try{
             $request->except('_token');
-            Product::create($request->all());
+            $product->fill($request->all());
+            $product->productcode=Str::slug($request->productname,'');
+            $product->save();
             Session::flash('success','Thêm sản phẩm thành công');
         }catch (\Exception $err){
             Session::flash('error',$err->getMessage());
@@ -43,8 +52,8 @@ class ProductService
 
     private function isValidPrice($request)
     {
-        if($request->input('price_sale')>=$request->input('price')){
-            Session::flash('price_sale','Giá giảm phải nhỏ hơn giá gốc');
+        if($request->input('priceentry')>=$request->input('pricesell')){
+            Session::flash('priceentry','Giá giảm phải nhỏ hơn giá gốc');
             return false;
         }
         return true;

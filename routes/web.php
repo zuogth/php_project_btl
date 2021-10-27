@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UploadController;
 use \App\Http\Controllers\Admin\Users\RegisterController;
+use \App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,11 +23,16 @@ use \App\Http\Controllers\Admin\Users\RegisterController;
 Route::get('/admin/users/login',[LoginController::class,'index'])->name('login');
 Route::post('/admin/users/login/store',[LoginController::class,'store']);
 Route::get('admin/users/register/store',[RegisterController::class,'store']);
-Route::middleware(['auth'])->group(function () {
+Route::get('admin/users/logout',[LoginController::class,'logout']);
+Route::middleware(['auth','role'])->group(function () {
     Route::prefix('admin')->group(function(){
         Route::get('/',[MainController::class,'index'])->name('admin');
         Route::get('main',[MainController::class,'index']);
 
+        #Users
+        Route::prefix('user')->group(function(){
+            Route::get('list',[UserController::class,'index']);
+        });
         #Category
         Route::prefix('category')->group(function(){
             Route::get('add',[CategoryController::class,'create']);

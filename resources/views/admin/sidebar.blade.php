@@ -13,8 +13,11 @@
           <img src="/template/admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{\Illuminate\Support\Facades\Auth::user()->username}}</a>
         </div>
+          <div class="info">
+              <a href="/admin/users/logout" class="d-block">Logout</a>
+          </div>
       </div>
 
       <!-- SidebarSearch Form -->
@@ -34,51 +37,29 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-bars"></i>
-              <p>
-                Category
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/admin/category/add" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Thêm danh mục</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/admin/category/list" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Danh sách danh mục</p>
-                </a>
-              </li>
-            </ul>
-          </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-store"></i>
+                <a href="/admin/user/list" class="nav-link">
+                    <i class="nav-icon fas fa-users"></i>
                     <p>
-                        Product
-                        <i class="right fas fa-angle-left"></i>
+                        Users
                     </p>
                 </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="/admin/product/list" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Danh sách sản phẩm</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/admin/product/add" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Thêm sản phẩm</p>
-                        </a>
-                    </li>
-                </ul>
+            </li>
+            <li class="nav-item">
+            <a href="/admin/category/list" class="nav-link">
+                <i class="nav-icon fas fa-bars"></i>
+              <p>
+                Thể loại
+              </p>
+            </a>
+          </li>
+            <li class="nav-item">
+                <a href="/admin/product/list" class="nav-link">
+                    <i class="nav-icon fas fa-store"></i>
+                    <p>
+                        Sản phẩm
+                    </p>
+                </a>
             </li>
         </ul>
       </nav>

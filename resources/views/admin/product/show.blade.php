@@ -32,14 +32,14 @@
         </div>
         <div class="row">
             <div class="form-group col-sm-6">
-                <label for="pricesell">Giá gốc</label>
+                <label for="pricesell">Giá bán</label>
                 <input type="number" name="pricesell" class="form-control" id="pricesell" value="{{$product->pricesell}}">
                 @error('pricesell')
                     <span style="color: #da0101">{{$message}}</span>
                 @enderror
             </div>
             <div class="form-group col-sm-6">
-                <label for="priceentry">Giá giảm</label>
+                <label for="priceentry">Giá nhập</label>
                 <input type="number" name="priceentry" class="form-control" id="priceentry" value="{{$product->priceentry}}">
                 @error('priceentry')
                     <span style="color: #da0101">{{$message}}</span>

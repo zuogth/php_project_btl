@@ -27,7 +27,8 @@ class ProductRequest extends FormRequest
             'productname'=>'required',
             'images'=>'required',
             'pricesell'=>'integer|min:100000',
-            'category_id'=>'integer'
+            'category_id'=>'integer',
+            'brand_id'=>'integer'
         ];
     }
 
@@ -38,7 +39,8 @@ class ProductRequest extends FormRequest
             'images.required'=>'Hãy chọn ảnh sản phẩm',
             'pricesell.integer'=>'Hãy nhập giá sản phẩm',
             'pricesell.min'=>'Giá ít nhất phải 100.000',
-            'category_id.integer'=>'Hãy chọn thể loại cho sản phẩm'
+            'category_id.integer'=>'Hãy chọn thể loại cho sản phẩm',
+            'brand_id.integer'=>'Hãy chọn brand cho sản phẩm'
         ];
     }
 }
