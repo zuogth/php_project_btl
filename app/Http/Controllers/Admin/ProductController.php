@@ -72,13 +72,6 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-
     public function destroy(Request $request)
     {
         $result=$this->productService->delete($request);

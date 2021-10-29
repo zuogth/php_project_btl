@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UploadController;
 use \App\Http\Controllers\Admin\Users\RegisterController;
 use \App\Http\Controllers\Admin\UserController;
+use \App\Http\Controllers\Admin\BillController;
+use \App\Http\Controllers\Admin\ReceiptController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +53,20 @@ Route::middleware(['auth','role'])->group(function () {
             Route::get('edit/{code}/{product}', [ProductController::class,'show']);
             Route::post('edit/{code}/{product}', [ProductController::class,'edit']);
             Route::delete('delete', [ProductController::class,'destroy']);
+        });
+
+        #Bill
+        Route::prefix('bill')->group(function(){
+            Route::get('list',[BillController::class,'index']);
+            Route::get('edit/{bill}',[BillController::class,'show']);
+            Route::post('edit/{bill}',[BillController::class,'edit']);
+        });
+
+        #Receipt
+        Route::prefix('receipt')->group(function(){
+            Route::get('list',[ReceiptController::class,'index']);
+            Route::get('edit/{receipt}',[ReceiptController::class,'show']);
+            Route::post('edit/{receipt}',[ReceiptController::class,'edit']);
         });
 
         #Upload

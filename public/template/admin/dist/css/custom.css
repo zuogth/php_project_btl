@@ -1,2 +1,6 @@
 table.custom thead tr th{text-align: center}
-table.custom tbody tr td.status-cus{text-align: center}
+td.status-cus{text-align: center}
+.quantity-prod{
+    display: flex;
+    align-items: baseline;
+}

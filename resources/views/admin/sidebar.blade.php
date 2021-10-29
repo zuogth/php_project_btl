@@ -75,18 +75,34 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/admin/product/list/4" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Mát giặt</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a href="/admin/product/list/3" class="nav-link">
-                            <i class="fal fa-air-conditioner"></i>
+                            <i class="far fa-circle nav-icon"></i>
                             <p>Điều hòa</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="/admin/product/list/4" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Máy giặt</p>
+                        </a>
+                    </li>
                 </ul>
+            </li>
+            <li class="nav-item">
+                <a href="/admin/bill/list" class="nav-link">
+                    <i class="fas fa-money-bill nav-icon"></i>
+                    <p>
+                        Hóa đơn bán
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/admin/receipt/list" class="nav-link">
+                    <i class="fas fa-receipt nav-icon"></i>
+                    <p>
+                        Hóa đơn nhập
+                    </p>
+                </a>
             </li>
         </ul>
       </nav>

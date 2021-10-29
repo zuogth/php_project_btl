@@ -20,6 +20,7 @@
                     <th>Giá gốc</th>
                     <th>Khuyến mãi</th>
                     <th>Thể loại</th>
+                    <th>Số lượng</th>
                     <th>Hoạt động</th>
                     <th>Ảnh</th>
                     <th style="width:10%">&nbsp;</th>
@@ -32,6 +33,7 @@
                             <td>{!! \App\Helpers\Helper::price($product->pricesell) !!}</td>
                             <td>{!! \App\Helpers\Helper::price($product->priceentry) !!}</td>
                             <td>{{$product->categoryname}}</td>
+                            <td class="status-cus">{{$product->import-$product->sell}}</td>
                             <td class="status-cus">{!!\App\Helpers\Helper::status($product->status)!!}</td>
                             <td><img src="{{$product->images}}" style="width: 100px;"></td>
                             <td>

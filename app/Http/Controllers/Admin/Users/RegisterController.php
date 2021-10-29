@@ -14,14 +14,7 @@ class RegisterController extends Controller
 {
     public function store()
     {
-        DB::table('product_bill')
-            ->where('product_id','=',20)
-            ->delete();
-        DB::table('product_speciality')
-            ->where('product_id','=',20)
-            ->delete();
-        DB::table('product')->where('id','=',20)->detele();
-
-        return 'success';
+        $today = date("Y-m-d H:i:s");
+        return $today;
     }
 }
