@@ -5,7 +5,7 @@
         <!-- jquery validation -->
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">{{$title}}</h3>
+                <h3 class="card-title">Danh sách <span style="text-transform: lowercase;">{{$catename}}</span></h3>
             </div>
             @if($typeproduct==1||$typeproduct==2)
                 <a href="/admin/product/add/{{$typeproduct==1?'TV':'TL'}}" class="btn btn-success" style="width: 5%"><i class="fas fa-plus"></i></a>
@@ -31,7 +31,7 @@
                             <td>{{$product->id}}</td>
                             <td>{{$product->productname}}</td>
                             <td>{!! \App\Helpers\Helper::price($product->pricesell) !!}</td>
-                            <td>{!! \App\Helpers\Helper::price($product->priceentry) !!}</td>
+                            <td class="status-cus">{{$product->discount}} %</td>
                             <td>{{$product->categoryname}}</td>
                             <td class="status-cus">{{$product->import-$product->sell}}</td>
                             <td class="status-cus">{!!\App\Helpers\Helper::status($product->status)!!}</td>

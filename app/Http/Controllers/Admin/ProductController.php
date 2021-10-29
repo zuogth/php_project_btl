@@ -25,7 +25,8 @@ class ProductController extends Controller
         return view('admin.product.list',[
             'title'=>'Danh sách sản phẩm',
             'products'=>$products,
-            'typeproduct'=>$products[0]->parent_id
+            'typeproduct'=>$products[0]->parent_id,
+            'catename'=>$category->categoryname
         ]);
     }
 
