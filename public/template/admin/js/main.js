@@ -39,6 +39,9 @@ $('#file').change(function(){
             }else{
                 alert("Upload image error");
             }
+        },
+        error:function (){
+            alert("Error!");
         }
     })
 });

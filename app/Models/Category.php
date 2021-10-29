@@ -15,8 +15,7 @@ class Category extends Model
     protected $fillable=[
         'categoryname',
         'parent_id',
-        'categorycode',
-        'status'
+        'categorycode'
     ];
 
     public function products()

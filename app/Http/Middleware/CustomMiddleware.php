@@ -19,7 +19,7 @@ class CustomMiddleware
     public function handle(Request $request, Closure $next)
     {
         $user=Auth::user();
-        if($user->roles[0]->rolecode=='admin'){
+        if($user->roles[0]->rolecode=='QL'){
             return $next($request);
         }
         Session::flash('error','You do not have access');

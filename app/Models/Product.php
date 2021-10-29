@@ -15,13 +15,15 @@ class Product extends Model
     protected $fillable=[
         'productname',
         'description',
+        'content',
         'category_id',
         'brand_id',
         'pricesell',
         'priceentry',
         'productcode',
         'status',
-        'images'
+        'images',
+        'discount'
     ];
 
     public function category(){
@@ -31,5 +33,15 @@ class Product extends Model
     public function brand()
     {
         return $this->hasOne(Brand::class,'id','brand_id');
+    }
+
+    public function specialities()
+    {
+        return $this->belongsToMany(Speciality::class,'product_speciality','product_id','speciality_id');
+    }
+
+    public function bills(){
+        return $this->belongsToMany(Bill::class,'product_bill','product_id','bill_id')
+            ->withPivot('id','quantily');
     }
 }

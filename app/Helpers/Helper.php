@@ -15,7 +15,6 @@ class Helper{
                 <tr>
                     <td>$category->id</td>
                     <td>$char$category->categoryname</td>
-                    <td class='status-cus'>".self::status($category->status)."</td>
                     <td>
                         <a href='/admin/category/edit/$category->id' class='btn btn-primary btn-sm'><i class='fas fa-edit'></i></a>
                         <a href='#' class='btn btn-danger btn-sm' onclick='removeRow($category->id,\"/admin/category/delete\")'><i class='fas fa-trash-alt'></i></a>

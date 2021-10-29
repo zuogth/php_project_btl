@@ -45,11 +45,11 @@ Route::middleware(['auth','role'])->group(function () {
 
         #Product
         Route::prefix('product')->group(function(){
-            Route::get('add', [ProductController::class,'create']);
-            Route::post('add', [ProductController::class,'store']);
-            Route::get('list', [ProductController::class,'index']);
-            Route::get('edit/{product}', [ProductController::class,'show']);
-            Route::post('edit/{product}', [ProductController::class,'edit']);
+            Route::get('add/{code}', [ProductController::class,'create']);
+            Route::post('add/{code}', [ProductController::class,'store']);
+            Route::get('list/{category}', [ProductController::class,'index']);
+            Route::get('edit/{code}/{product}', [ProductController::class,'show']);
+            Route::post('edit/{code}/{product}', [ProductController::class,'edit']);
             Route::delete('delete', [ProductController::class,'destroy']);
         });
 

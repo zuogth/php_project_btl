@@ -20,7 +20,7 @@ class CategoryController extends Controller
     {
         return view('admin.category.add',[
             'title'=>'Thêm danh mục mới',
-            'categories'=>$this->categoryService->findParent(0)
+            'categories'=>$this->categoryService->findParent(null)
         ]);
     }
 

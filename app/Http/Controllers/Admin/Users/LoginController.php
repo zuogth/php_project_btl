@@ -24,7 +24,7 @@ class LoginController extends Controller
 
         if(Auth::attempt($credentials,$request->input('remember'))){
             $user=Auth::user();
-            if($user->roles[0]->rolecode=='admin'){
+            if($user->roles[0]->rolecode=='QL'){
                 return redirect()->route('admin');
             }
             return 'User';

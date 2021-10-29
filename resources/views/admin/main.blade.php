@@ -6,6 +6,10 @@
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
+        <!-- Preloader -->
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="/template/admin/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+        </div>
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
@@ -61,17 +65,10 @@
                     @include('admin.alert')
                     <div class="row">
                         <!-- left column -->
-                        <div class="col-md-12">
-                            <!-- jquery validation -->
-                            <div class="card card-primary">
-                                <div class="card-header">
-                                    <h3 class="card-title">{{$title}}</h3>
-                                </div>
+
                                 <!-- /.card-header -->
                                 @yield('content')
-                            </div>
-                            <!-- /.card -->
-                        </div>
+
                         <!--/.col (left) -->
                         <!-- right column -->
                         <div class="col-md-6">

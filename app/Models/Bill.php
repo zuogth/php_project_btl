@@ -17,7 +17,8 @@ class Bill extends Model
         'bill_date',
         'totalprice',
         'deliverytime',
-        'status'
+        'status',
+        'bill_type'
     ];
 
     public function user()
