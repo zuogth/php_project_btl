@@ -20,13 +20,17 @@
                     <div class="form-group">
                         <label for="menu">Danh mục</label>
                         <select name="parent_id" class="form-control">
-                            <option value="0">Danh mục cha</option>
+                            <option value="">Danh mục cha</option>
                             @foreach ($categories as $cateParent)
                                 @if ($cateParent->id!=$category->id)
                                 <option value="{{$cateParent->id}}" {{$cateParent->id==$category->parent_id ?'selected':''}}>{{$cateParent->categoryname}}</option>
                                 @endif
                             @endforeach
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Mô tả</label>
+                        <textarea rows="5" name="description" class="form-control" id="description">{{$category->description}}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="">Kích hoạt</label>

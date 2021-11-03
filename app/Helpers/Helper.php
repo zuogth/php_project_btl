@@ -8,6 +8,7 @@ class Helper{
 
     public static function category($categories,$parent_id=0,$char='')
     {
+
         $html='';
         foreach ($categories as $key => $category) {
             if($category->parent_id==$parent_id){
@@ -15,6 +16,8 @@ class Helper{
                 <tr>
                     <td>$category->id</td>
                     <td>$char$category->categoryname</td>
+                    <td>$category->description</td>
+                    <td>".self::status($category->status)."</td>
                     <td>
                         <a href='/admin/category/edit/$category->id' class='btn btn-primary btn-sm'><i class='fas fa-edit'></i></a>
                         <a href='#' class='btn btn-danger btn-sm' onclick='removeRow($category->id,\"/admin/category/delete\")'><i class='fas fa-trash-alt'></i></a>
@@ -49,7 +52,7 @@ class Helper{
     public static function price($price)
     {
         if($price>0){
-            $fmt = new NumberFormatter( 'de_DE', NumberFormatter::CURRENCY );
+            $fmt = new NumberFormatter( 'it-IT', NumberFormatter::CURRENCY );
             return $fmt->formatCurrency($price, "VND");
         }
         return '_';

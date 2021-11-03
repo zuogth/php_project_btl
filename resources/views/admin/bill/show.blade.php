@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group col-sm-3">
                         <label for="status">Trạng thái</label>
-                        <select name="status" class="form-control">
+                        <select name="status" class="form-control" {{$bill->status==2?'disabled':''}}>
                             @for($i=0;$i<3;$i++)
                                 <option value="{{$i}}" {{$bill->status==$i?'selected':''}}>
                                     {{$i==0?'Chờ xác nhận':($i==1?'Đang giao':'Hoàn tất')}}
@@ -70,7 +70,11 @@
             @csrf
             <!-- /.card-body -->
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    @if($bill->status==2)
+                        <a href="/admin/bill/list" class="btn btn-primary">Back</a>
+                    @else
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    @endif
                 </div>
             </form>
         </div>

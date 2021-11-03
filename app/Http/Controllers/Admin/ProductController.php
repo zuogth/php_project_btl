@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\ProductRequest;
+use App\Http\Services\Category\CategoryService;
 use App\Http\Services\Product\ProductService;
 use App\Models\Category;
+use App\Models\Images;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -14,18 +16,21 @@ use function Sodium\add;
 class ProductController extends Controller
 {
     protected ProductService $productService;
-    public function __construct(ProductService $productService)
+    protected CategoryService $categoryService;
+    public function __construct(ProductService $productService,CategoryService $categoryService)
     {
         $this->productService=$productService;
+        $this->categoryService=$categoryService;
     }
 
-    public function index(Category $category)
+    public function index($code)
     {
-        $products=$this->productService->findByCategory($category->id);
+        $category=$this->categoryService->findByCode($code);
+        $products=$this->productService->findByCategory($category->id,'');
         return view('admin.product.list',[
             'title'=>'Danh sách sản phẩm',
             'products'=>$products,
-            'typeproduct'=>$products[0]->parent_id,
+            'code'=>$code,
             'catename'=>$category->categoryname
         ]);
     }
@@ -47,7 +52,7 @@ class ProductController extends Controller
         $spec_id=[];
         $this->addArray($code,$request,$spec_id);
         $this->productService->create($spec_id,$product,$request);
-        return redirect()->back();
+        return redirect('admin/product/list/'.$code);
     }
 
 
@@ -58,9 +63,9 @@ class ProductController extends Controller
             'categories' =>$this->productService->findMenu($code),
             'brands'=>$this->productService->findBrand(),
             'specialities'=>$this->productService->findSpeciality($code),
-            'product_speciality'=>$this->productService->findSpecialityByProduct_id($product->id),
             'count_spec'=>$this->productService->findSpecialityByProduct_id($product->id)->count(),
-            'product'=>$product
+            'product'=>$this->productService->findByImagesSpec($product->id),
+            'count_images'=>$this->productService->findByImagesSpec($product->id)->imagess->count()
         ]);
     }
 
@@ -84,6 +89,17 @@ class ProductController extends Controller
         }
         return response()->json([
             'error'=>true
+        ]);
+    }
+
+    public function order(Request $request)
+    {
+        $category=$this->categoryService->findByCode($request->input('code'));
+        $products=$this->productService->findByCategory($category->id,$request->input('order'));
+        return response()->json([
+            'products'=>$products,
+            'code'=>$request->input('code'),
+            'catename'=>$category->categoryname
         ]);
     }
 

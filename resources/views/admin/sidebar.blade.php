@@ -13,7 +13,7 @@
           <img src="/template/admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{\Illuminate\Support\Facades\Auth::user()->username}}</a>
+          <a href="#" class="d-block">{{\Illuminate\Support\Facades\Auth::user()->fullname}}</a>
         </div>
           <div class="info">
               <a href="/admin/users/logout" class="d-block">Logout</a>
@@ -41,7 +41,7 @@
                 <a href="/admin/user/list" class="nav-link">
                     <i class="nav-icon fas fa-users"></i>
                     <p>
-                        Users
+                        Tài khoản
                     </p>
                 </a>
             </li>
@@ -54,6 +54,14 @@
             </a>
           </li>
             <li class="nav-item">
+                <a href="/admin/speciality/list" class="nav-link">
+                    <i class="fab fa-product-hunt nav-icon"></i>
+                    <p>
+                        Đặc tính
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="/admin/product/list" class="nav-link">
                     <i class="nav-icon fas fa-store"></i>
                     <p>
@@ -63,25 +71,25 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="/admin/product/list/1" class="nav-link">
+                        <a href="/admin/product/list/ti-vi" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>TiVi</p>
+                            <p>Ti vi</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/admin/product/list/2" class="nav-link">
+                        <a href="/admin/product/list/tu-lanh" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Tủ lạnh</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/admin/product/list/3" class="nav-link">
+                        <a href="/admin/product/list/dieu-hoa" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Điều hòa</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/admin/product/list/4" class="nav-link">
+                        <a href="/admin/product/list/may-giat" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Máy giặt</p>
                         </a>

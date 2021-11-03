@@ -15,8 +15,8 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="categoryname">Tên danh mục</label>
-                        <input type="text" name="categoryname" class="form-control" id="categoryname" placeholder="Enter name">
-                        @error('name')
+                        <input type="text" name="categoryname" class="form-control" id="categoryname" placeholder="Enter name" value="{{old('categoryname')}}">
+                        @error('categoryname')
                             <span style="color: #da0101">{{$message}}</span>
                         @enderror
                     </div>
@@ -25,9 +25,13 @@
                         <select name="parent_id" class="form-control">
                             <option value="0">Danh mục cha</option>
                             @foreach ($categories as $categoriy)
-                                <option value="{{$categoriy->id}}">{{$categoriy->categoryname}}</option>
+                                <option value="{{$categoriy->id}}" {{old('parent_id')?'selected':''}}>{{$categoriy->categoryname}}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Mô tả</label>
+                        <textarea rows="5" name="description" class="form-control" id="description">{{old('description')}}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="">Kích hoạt</label>

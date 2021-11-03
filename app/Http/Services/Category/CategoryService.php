@@ -48,9 +48,14 @@ class CategoryService{
 
     public function edit($category,$request){
         $category->fill($request->input());
-        $category->categorycode=Str::slug($request->input('categoryname'),'');
+        $category->categorycode=Str::slug($request->input('categoryname'),'-');
         $category->save();
         $request->session()->flash('success', 'Update thành công!');
         return true;
+    }
+
+    public function findByCode($code)
+    {
+        return Category::where('categorycode',$code)->first();
     }
 }

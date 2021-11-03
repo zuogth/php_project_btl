@@ -105,18 +105,26 @@
                             @endif
                         @endforeach
                     </div>
+                    <label>Ảnh</label>
                     <div class="row">
                         <div class="form-group col-sm-6">
-                            <label for="images">Image</label>
-                            <input type="file" class="form-control" id="file">
+                            <label id="select_img" for="file" data-img="image" onclick="selectImg(this)">
+                                <img src="{{old('images')}}" id="image" alt='Chọn ảnh sản phẩm' style='width:100%;'>
+                            </label>
+                            <input type="hidden" name="images" id="image" value="{{old('images')}}">
                             @error('images')
                                 <span style="color: #da0101">{{$message}}</span>
                             @enderror
                         </div>
-                        <div class="col-sm-6" id="show-thumb">
+                        <div class="form-group col-sm-6">
+                            <div id="addImages">
 
+                            </div>
+                            <button type="button" class="btn btn-primary btn-xs" onclick="addImages(this)" data-count="1">
+                                <i class="fas fa-plus"></i>
+                            </button>
                         </div>
-                        <input type="hidden" name="images" id="image">
+                        <input type="file" class="form-control" name="file" id="file" hidden>
                         <input type="hidden" name="productcode" id="productcode">
                     </div>
                     <div class="form-group">

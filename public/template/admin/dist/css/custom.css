@@ -4,3 +4,18 @@ td.status-cus{text-align: center}
     display: flex;
     align-items: baseline;
 }
+div#addImages{display: contents;}
+label#select_img{
+    width: 100%;
+    height: auto;
+    border: 1px solid silver;
+}
+
+label#select_imgs{
+    width: 6rem;
+    height: auto;
+    border: 1px solid silver;
+}
+#orderMoney{
+    cursor: pointer;
+}

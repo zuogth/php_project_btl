@@ -7,13 +7,8 @@
             <div class="card-header">
                 <h3 class="card-title">Danh sách <span style="text-transform: lowercase;">{{$catename}}</span></h3>
             </div>
-            @if($typeproduct==1||$typeproduct==2)
-                <a href="/admin/product/add/{{$typeproduct==1?'TV':'TL'}}" class="btn btn-success" style="width: 5%"><i class="fas fa-plus"></i></a>
-            @else
-                <a href="/admin/product/add/{{$typeproduct==3?'ML':'MG'}}" class="btn btn-success" style="width: 5%"><i class="fas fa-plus"></i></a>
-            @endif
-
-            <table class="table custom">
+            <a href="/admin/product/add/{{$code}}" class="btn btn-success" style="width: 5%"><i class="fas fa-plus"></i></a>
+            <table class="table custom" id="table-data">
                 <thead>
                     <th>ID</th>
                     <th>Tên</th>
@@ -25,30 +20,47 @@
                     <th>Ảnh</th>
                     <th style="width:10%">&nbsp;</th>
                 </thead>
-                <tbody>
+                <tbody id="table-products">
                     @foreach($products as $product)
                         <tr>
                             <td>{{$product->id}}</td>
                             <td>{{$product->productname}}</td>
-                            <td>{!! \App\Helpers\Helper::price($product->pricesell) !!}</td>
+                            <td>{{$product->pricesell}}</td>
                             <td class="status-cus">{{$product->discount}} %</td>
                             <td>{{$product->categoryname}}</td>
                             <td class="status-cus">{{$product->import-$product->sell}}</td>
                             <td class="status-cus">{!!\App\Helpers\Helper::status($product->status)!!}</td>
                             <td><img src="{{$product->images}}" style="width: 100px;"></td>
                             <td>
-                                @if($typeproduct==1||$typeproduct==2)
-                                    <a href="/admin/product/edit/{{$typeproduct==1?'TV/'.$product->id:'TL/'.$product->id}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                @else
-                                    <a href="/admin/product/edit/{{$typeproduct==3?'ML/'.$product->id:'MG/'.$product->id}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                @endif
+                                <a href="/admin/product/edit/{{$code}}/{{$product->id}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                                 <a href='#' class='btn btn-danger btn-sm' onclick='removeRow({{$product->id}},"/admin/product/delete")'><i class='fas fa-trash-alt'></i></a>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-            {{$products->links()}}
         </div>
     </div>
+@endsection
+@section('footer')
+    <script>
+        $(document).ready(function() {
+            $('#table-data').DataTable({
+                "dom": '<"toolbar">frtip',
+                "info": false,
+                columnDefs: [
+                    { orderable: false, targets: [3,4,5,6,7,8] },
+                    {
+                        targets: 2,
+                        render: $.fn.dataTable.render.intlNumber('it-IT', {
+                            style: 'currency',
+                            currency: 'VND'
+                        })
+                    }
+                ],
+                "pageLength": 10
+            });
+            $("div.toolbar").html();
+        } );
+    </script>
 @endsection

@@ -44,4 +44,9 @@ class Product extends Model
         return $this->belongsToMany(Bill::class,'product_bill','product_id','bill_id')
             ->withPivot('id','quantily');
     }
+
+    public function imagess()
+    {
+        return $this->hasMany(Images::class);
+    }
 }

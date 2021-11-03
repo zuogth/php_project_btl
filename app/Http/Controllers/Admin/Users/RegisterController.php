@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Bill;
 use App\Models\Product;
 use App\Models\Role;
+use App\Models\Speciality;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +15,8 @@ class RegisterController extends Controller
 {
     public function store()
     {
-        $today = date("Y-m-d H:i:s");
-        return $today;
+        $speciality=Speciality::where('id',21)->first();
+        $speciality->products()->detach(21);
+        return 'success';
     }
 }

@@ -24,10 +24,14 @@ class LoginController extends Controller
 
         if(Auth::attempt($credentials,$request->input('remember'))){
             $user=Auth::user();
-            if($user->roles[0]->rolecode=='QL'){
-                return redirect()->route('admin');
+            if($user->status!=0){
+                if($user->roles[0]->rolecode=='QL'){
+                    return redirect()->route('admin');
+                }
+                return 'User';
             }
-            return 'User';
+            Session::flash('error','Tài khoản đã bị khóa');
+            return redirect()->back();
         }
         Session::flash('error','Username or password invalid');
         return redirect()->back();

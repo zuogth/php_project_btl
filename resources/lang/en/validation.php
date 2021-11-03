@@ -137,8 +137,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'product_selected' => [
+            'required' => 'Hãy thêm sản phẩm vào',
         ],
     ],
 

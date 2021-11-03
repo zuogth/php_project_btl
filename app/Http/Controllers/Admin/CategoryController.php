@@ -40,7 +40,7 @@ class CategoryController extends Controller
         return view('admin.category.show',[
             'title'=>$category->categoryname,
             'category'=>$category,
-            'categories'=>$this->categoryService->findParent(0)
+            'categories'=>$this->categoryService->findParent(null)
         ]);
     }
 

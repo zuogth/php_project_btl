@@ -14,7 +14,7 @@
                 <div class="icon">
                     <i class="fal fa-shopping-bag"></i>
                 </div>
-                <a href="/admin/product/list/{{$val->parent_id}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="/admin/product/list/{{$val->parent_id}}" class="small-box-footer">Xem chi tiết <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
     @endforeach

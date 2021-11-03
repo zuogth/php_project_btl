@@ -94,7 +94,7 @@
                                         @foreach($specialities as $speciality)
                                             @if($speciality->code==$old)
                                                 @if($count_spec>0)
-                                                    @if($product_speciality[$index]->id==$speciality->id)
+                                                    @if($product->specialities[$index]->id==$speciality->id)
                                                         <option value="{{$speciality->id}}" selected>{{$speciality->mata}}</option>
                                                         @if($count_spec!=$index+1)
                                                             <span {{$index=$index+1}}></span>
@@ -105,7 +105,6 @@
                                                 @else
                                                     <option value="{{$speciality->id}}">{{$speciality->mata}}</option>
                                                 @endif
-
                                             @endif
                                         @endforeach
                                     </select>
@@ -113,20 +112,34 @@
                             @endif
                         @endforeach
                     </div>
+                    <label>Ảnh</label>
                     <div class="row">
-                        <div class="form-group col-sm-8">
-                            <label for="file">Image</label>
-                            <input type="file" name="file" class="form-control" id="file">
+                        <div class="form-group col-sm-6">
+                            <label id="select_img" for="file" data-img="image" onclick="selectImg(this)">
+                                <img src="{{old('images')??$product->images}}" id="image" alt='Chọn ảnh sản phẩm' style='width:100%;'>
+                            </label>
                             @error('images')
-                                <span style="color: #da0101">{{$message}}</span>
+                            <span style="color: #da0101">{{$message}}</span>
                             @enderror
                         </div>
-                        <div class="col-sm-4" id="show-thumb">
-                            <a href="{{$product->images}}" target="_blank">
-                                <img src="{{$product->images}}" alt="" width="100%">
-                            </a>
+                        <div class="form-group col-sm-6">
+                            <div id="addImages">
+                                @if($count_images>0)
+                                    @for($i=1;$i<=$count_images;$i++)
+                                        <label id="select_imgs" for="file" data-img="image-{{$i}}" onclick="selectImg(this)">
+                                            <img src="{{$product->imagess[$i-1]->image}}" id="image-{{$i}}" alt='Thêm ảnh' style='width:100%;'>
+                                            <input type="hidden" name="images-{{$i}}" id="image-{{$i}}" value="{{$product->imagess[$i-1]->image}}">
+                                        </label>
+                                    @endfor
+                                @endif
+                            </div>
+                            <button type="button" class="btn btn-primary btn-xs" onclick="addImages(this)" data-count="{{$count_images+1}}">
+                                <i class="fas fa-plus"></i>
+                            </button>
                         </div>
-                        <input type="hidden" name="images" id="image" value="{{$product->images}}">
+                        <input type="file" class="form-control" name="file" id="file" hidden>
+                        <input type="hidden" name="images" id="image" value="{{old('images')??$product->images}}">
+                        <input type="hidden" name="productcode" id="productcode">
                     </div>
                     <div class="form-group">
                         <label for="">Kích hoạt</label>

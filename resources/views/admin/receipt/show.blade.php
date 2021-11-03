@@ -57,7 +57,7 @@
                                     <img src="{{$product->images}}" style="width: 80px">
                                 </td>
                                 <td>{{$product->productname}}</td>
-                                <td>{!! \App\Helpers\Helper::price($product->pricesell) !!}</td>
+                                <td>{!! \App\Helpers\Helper::price($product->priceentry) !!}</td>
                                 <td>{{$product->pivot->quantily}}</td>
                             </tr>
                         @endforeach

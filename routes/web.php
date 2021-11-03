@@ -10,6 +10,7 @@ use \App\Http\Controllers\Admin\Users\RegisterController;
 use \App\Http\Controllers\Admin\UserController;
 use \App\Http\Controllers\Admin\BillController;
 use \App\Http\Controllers\Admin\ReceiptController;
+use \App\Http\Controllers\Admin\SpecialityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,8 @@ Route::middleware(['auth','role'])->group(function () {
         #Users
         Route::prefix('user')->group(function(){
             Route::get('list',[UserController::class,'index']);
+            Route::get('edit/{user}',[UserController::class,'show']);
+            Route::post('edit/{user}',[UserController::class,'edit']);
         });
         #Category
         Route::prefix('category')->group(function(){
@@ -49,10 +52,11 @@ Route::middleware(['auth','role'])->group(function () {
         Route::prefix('product')->group(function(){
             Route::get('add/{code}', [ProductController::class,'create']);
             Route::post('add/{code}', [ProductController::class,'store']);
-            Route::get('list/{category}', [ProductController::class,'index']);
+            Route::get('list/{code}', [ProductController::class,'index']);
             Route::get('edit/{code}/{product}', [ProductController::class,'show']);
             Route::post('edit/{code}/{product}', [ProductController::class,'edit']);
             Route::delete('delete', [ProductController::class,'destroy']);
+            Route::get('order', [ProductController::class,'order']);
         });
 
         #Bill
@@ -67,6 +71,20 @@ Route::middleware(['auth','role'])->group(function () {
             Route::get('list',[ReceiptController::class,'index']);
             Route::get('edit/{receipt}',[ReceiptController::class,'show']);
             Route::post('edit/{receipt}',[ReceiptController::class,'edit']);
+            Route::get('add',[ReceiptController::class,'create']);
+            Route::post('add',[ReceiptController::class,'store']);
+            Route::get('product/list',[ReceiptController::class,'list']);
+            Route::get('product/selected',[ReceiptController::class,'productSelected']);
+        });
+
+        #Speciality
+        Route::prefix('speciality')->group(function(){
+            Route::get('list',[SpecialityController::class,'index']);
+            Route::get('edit/{speciality}',[SpecialityController::class,'show']);
+            Route::post('edit/{speciality}',[SpecialityController::class,'edit']);
+            Route::get('add',[SpecialityController::class,'create']);
+            Route::post('add',[SpecialityController::class,'store']);
+            Route::delete('delete',[SpecialityController::class,'destroy']);
         });
 
         #Upload

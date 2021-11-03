@@ -4,6 +4,7 @@ namespace App\Http\Services\Product;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Images;
 use App\Models\Product;
 use App\Models\Speciality;
 use Illuminate\Pagination\Paginator;
@@ -24,6 +25,25 @@ class ProductService
         return Brand::all();
     }
 
+    public function findAll()
+    {
+        return Product::with('category')->get();
+    }
+
+    public function findById($ids)
+    {
+        $array=[];
+        foreach ($ids as $id){
+            array_push($array,Product::with('category')->where('id',$id)->first());
+        }
+        return $array;
+    }
+
+    public function findByImagesSpec($id)
+    {
+        return Product::with(['imagess','specialities'])->where('id',$id)->first();
+    }
+
     public function create($spec_id,$product,$request)
     {
         if($this->isValidPrice($request)==false) return false;
@@ -33,6 +53,14 @@ class ProductService
             $product->productcode=Str::slug($request->productname,'-');
             $product->save();
             $product->specialities()->attach($spec_id);
+            for ($i=1;$i<=5;$i++){
+                if($request->input('images-'.$i)!=null){
+                    $product->imagess()->create([
+                        'image'=>$request->input('images-'.$i),
+                        'product_id'=>$product->id
+                    ]);
+                }
+            }
             Session::flash('success','Thêm sản phẩm thành công');
         }catch (\Exception $err){
             Session::flash('error',$err->getMessage());
@@ -41,8 +69,10 @@ class ProductService
         return true;
     }
 
-    public function findByCategory($category_id)
+    public function findByCategory($category_id,$orderby)
     {
+        $str=($orderby==''?'product.id':'product.pricesell');
+        $order=($orderby==''?'asc':$orderby);
         Paginator::useBootstrap();
 
         $receipt=DB::table('product')
@@ -58,8 +88,8 @@ class ProductService
                     ->joinSub($receipt,'receipt','receipt.id','=','product.id')
                     ->where('category.parent_id',$category_id)
                     ->groupBy('product.id')
-                    ->orderBy('product.id')
-                    ->paginate(10);
+                    ->orderBy($str,$order)
+                    ->get();
     }
 
     public function findSpeciality($code)
@@ -78,7 +108,11 @@ class ProductService
 
     public function edit($product,$request,$spec_id){
         $product->fill($request->input());
+        $product->productcode=Str::slug($request->productname,'-');
         $product->save();
+        DB::table('product_speciality')
+            ->where('product_id','=',$product->id)
+            ->delete();
         $product->specialities()->attach($spec_id);
         Session::flash('success','Cập nhật thông tin sản phẩm thành công');
         return true;
@@ -105,6 +139,10 @@ class ProductService
             DB::table('product_speciality')
                 ->where('product_id','=',$id)
                 ->delete();
+            DB::table('product_receipt')
+                ->where('product_id','=',$id)
+                ->delete();
+            Images::where('product_id',$product->id)->delete();
             return Product::where('id',$id)->delete();
         }
         return false;
