@@ -114,7 +114,16 @@ class ProductService
             ->where('product_id','=',$product->id)
             ->delete();
         $product->specialities()->attach($spec_id);
-        Session::flash('success','Cập nhật thông tin sản phẩm thành công');
+        Images::where('product_id',$product->id)->delete();
+        for ($i=1;$i<=5;$i++){
+            if($request->input('images-'.$i)!=null){
+                $product->imagess()->create([
+                    'image'=>$request->input('images-'.$i),
+                    'product_id'=>$product->id
+                ]);
+            }
+        }
+        Session::flash('success','Cập nhật thông tin sản phẩm thành công ');
         return true;
     }
 
