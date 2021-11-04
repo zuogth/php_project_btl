@@ -3,7 +3,6 @@
 namespace App\Http\Services\Bill;
 
 use App\Models\Bill;
-use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Session;
 
 class BillService

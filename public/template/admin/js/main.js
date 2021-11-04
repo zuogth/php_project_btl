@@ -112,7 +112,7 @@ $('#btnAddProd').click(function (){
                             <tr id="${item.id}">
                                 <td><img src="${item.images}" style="width: 80px"></td>
                                 <td>${item.productname}</td>
-                                <td id="priceentry">${toMoney(item.priceentry)}</td>
+                                <td id="priceentry" data="${item.priceentry}">${toMoney(item.priceentry)}</td>
                                 <td><input type="number" value="1" name="quantily-${index}" id="quantily" onchange="updateTotal()" price="${item.priceentry}"></td>
                                 <td>${item.category.categoryname}</td>
                                 <td>
@@ -138,7 +138,7 @@ $('#btnAddProd').click(function (){
         }
     })
 })
-
+//Sắp xếp bằng ajax
 function orderMoney(event){
     let order=$(event).attr("data-by");
     let code=$(event).attr("data-cate");
@@ -199,8 +199,9 @@ function updateTotal(){
 function totalPrice(){
     totalprice=0;
     $('td#priceentry').each(function(index,element){
-        price=Number($(element).html());
+        price=Number($(element).attr("data"));
         sl=Number($('td input#quantily:eq('+index+')').val());
+        console.log(price+' '+sl);
         totalprice+=price*sl;
     })
     totalprice_s=toMoney(totalprice);

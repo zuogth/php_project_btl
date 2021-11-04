@@ -24,9 +24,10 @@ use \App\Http\Controllers\Admin\SpecialityController;
 */
 
 Route::get('/admin/users/login',[LoginController::class,'index'])->name('login');
-Route::post('/admin/users/login/store',[LoginController::class,'store']);
-Route::get('admin/users/register/store',[RegisterController::class,'store']);
+Route::post('/admin/users/login',[LoginController::class,'store']);
 Route::get('admin/users/logout',[LoginController::class,'logout']);
+Route::get('admin/users/register',[RegisterController::class,'register']);
+Route::post('admin/users/register',[RegisterController::class,'store']);
 Route::middleware(['auth','role'])->group(function () {
     Route::prefix('admin')->group(function(){
         Route::get('/',[MainController::class,'index'])->name('admin');
@@ -85,6 +86,11 @@ Route::middleware(['auth','role'])->group(function () {
             Route::get('add',[SpecialityController::class,'create']);
             Route::post('add',[SpecialityController::class,'store']);
             Route::delete('delete',[SpecialityController::class,'destroy']);
+        });
+
+        #Comment
+        Route::prefix('comment')->group(function(){
+            Route::get('list',[\App\Http\Controllers\Admin\CommentController::class,'index']);
         });
 
         #Upload

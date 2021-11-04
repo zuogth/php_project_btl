@@ -97,6 +97,14 @@
                 </ul>
             </li>
             <li class="nav-item">
+                <a href="/admin/comment/list" class="nav-link">
+                    <i class="fas fa-comment nav-icon"></i>
+                    <p>
+                        Đánh giá
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="/admin/bill/list" class="nav-link">
                     <i class="fas fa-money-bill nav-icon"></i>
                     <p>

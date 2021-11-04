@@ -19,3 +19,6 @@ label#select_imgs{
 #orderMoney{
     cursor: pointer;
 }
+.err-register{
+    margin-top: 1rem !important;
+}

@@ -3,20 +3,31 @@
 namespace App\Http\Controllers\Admin\Users;
 
 use App\Http\Controllers\Controller;
-use App\Models\Bill;
-use App\Models\Product;
-use App\Models\Role;
-use App\Models\Speciality;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Http\Requests\User\UserRequest;
+use App\Http\Services\User\UserService;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    public function store()
+    protected UserService $userService;
+    public function __construct(UserService $userService)
     {
-        $speciality=Speciality::where('id',21)->first();
-        $speciality->products()->detach(21);
-        return 'success';
+        $this->userService=$userService;
+    }
+
+    public function store(UserRequest $request)
+    {
+        $result=$this->userService->create($request);
+        if($result){
+            return redirect('/admin/users/login');
+        }
+        return redirect()->back();
+    }
+
+    public function register()
+    {
+        return view('admin.users.register',[
+            'title'=>'Đăng ký tài khoản mới'
+        ]);
     }
 }
