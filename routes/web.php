@@ -11,6 +11,7 @@ use \App\Http\Controllers\Admin\UserController;
 use \App\Http\Controllers\Admin\BillController;
 use \App\Http\Controllers\Admin\ReceiptController;
 use \App\Http\Controllers\Admin\SpecialityController;
+use \App\Http\Controllers\GoogleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,11 @@ Route::post('/admin/users/login',[LoginController::class,'store']);
 Route::get('admin/users/logout',[LoginController::class,'logout']);
 Route::get('admin/users/register',[RegisterController::class,'register']);
 Route::post('admin/users/register',[RegisterController::class,'store']);
+// Google URL
+Route::prefix('google')->name('google.')->group( function(){
+    Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login');
+    Route::any('callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
+});
 Route::middleware(['auth','role'])->group(function () {
     Route::prefix('admin')->group(function(){
         Route::get('/',[MainController::class,'index'])->name('admin');
@@ -97,4 +103,8 @@ Route::middleware(['auth','role'])->group(function () {
         Route::post('upload',[UploadController::class,'store']);
     });
 
+});
+
+Route::prefix('/')->group(function(){
+    Route::get('',[\App\Http\Controllers\Client\HomeController::class,'index'])->name('home');
 });
