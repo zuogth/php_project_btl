@@ -14,7 +14,11 @@
                 <div class="icon">
                     <i class="fal fa-shopping-bag"></i>
                 </div>
-                <a href="/admin/product/list/{{$val->parent_id}}" class="small-box-footer">Xem chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+                @if($val->parent_id==1||$val->parent_id==2)
+                    <a href="/admin/product/list/{{$val->parent_id==1?'ti-vi':'tu-lanh'}}" class="small-box-footer">Xem chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+                @else
+                    <a href="/admin/product/list/{{$val->parent_id==3?'dieu-hoa':'may-giat'}}" class="small-box-footer">Xem chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+                @endif
             </div>
         </div>
     @endforeach
