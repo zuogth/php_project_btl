@@ -12,6 +12,11 @@ use \App\Http\Controllers\Admin\BillController;
 use \App\Http\Controllers\Admin\ReceiptController;
 use \App\Http\Controllers\Admin\SpecialityController;
 use \App\Http\Controllers\GoogleController;
+use \App\Http\Controllers\Users\ProductListController;
+use \App\Http\Controllers\Users\HomePageController;
+use \App\Http\Controllers\Users\ProductDetailController;
+use \App\Http\Controllers\Users\SearchController;
+use  \App\Http\Controllers\Users\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,6 +110,46 @@ Route::middleware(['auth','role'])->group(function () {
 
 });
 
+//route client
 Route::prefix('/')->group(function(){
-    Route::get('',[\App\Http\Controllers\Client\HomeController::class,'index'])->name('home');
+//    Home product
+    Route::get('',[HomePageController::class,'index']);
+    Route::get('/new',[HomePageController::class,'new']);
+    Route::get('/product-search',[HomePageController::class,'searchDetail']);
+
+
+//    search page
+
+    Route::get('/search/',[SearchController::class,'index']);
+
+    Route::get('/search-all-page',[SearchController::class,'show']);
+
+    Route::get('/search-total-page',[SearchController::class,'total']);
+
+    Route::get('/search-all-page-two',[SearchController::class,'showTwo']);
+
+//    list product
+    Route::get('/product/{cate}/{type?}',[ProductListController::class,'index']);
+
+//    phân trang
+    Route::get('/page',[ProductListController::class,'pagination']);
+
+
+    Route::get('/product/brand/{cates}/{brand?}',[ProductListController::class,'brand']);
+
+//    filter
+    Route::get('/product',[ProductListController::class,'search']);
+    Route::get('/total',[ProductListController::class,'total']);
+
+//    sắp xếp
+    Route::get('/sort',[ProductListController::class,'sort']);
+
+
+//    product detal
+    Route::get('/product-detail/{slug}/',[ProductDetailController::class,'index']);
+    Route::get('/product-comment',[ProductDetailController::class,'comment']);
+
+
+    //    cart
+    Route::get('/cart',[CartController::class,'index']);
 });

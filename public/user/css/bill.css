@@ -1,0 +1,159 @@
+.main{
+    width: 100%;
+    margin: 4rem 0 ;
+}
+.m-product-bill-container{
+    width: 85%;
+    margin: auto;
+}
+/* m-product-bill-user-info-contact */
+
+.m-product-bill-user-info{
+    width: 100%;
+    background-color: #fff;
+}
+.m-product-bill-user-info>div{
+    margin: 2rem 0;
+}
+/* h2 */
+.m-product-bill-user-info-contact>div>div{
+    margin: 0.5rem 0 0 0;
+}
+/* input */
+.m-product-bill-user-info-contact{
+    width: 100%;
+}
+.m-product-bill-user-info-contact>div>div>label{
+    font-size: 1.2rem;
+}
+.m-product-bill-user-info-contact>div>div>input{
+    width: 90%;
+    height: 3rem;
+    padding: 1rem;
+    border: 1px solid rgba(82, 81, 81, 0.61);
+}
+/* m-product-bill-user-info-sent-email */
+.m-product-bill-user-info-sent-email{
+    margin-top: 1rem;
+ 
+}
+#sendemail{
+    width: 1.2rem;
+    height: 1.2rem;
+    border: 1px solid rgba(82, 81, 81, 0.61);
+
+}
+.m-product-bill-user-info-sent-email>label{
+
+   line-height: 2.4rem;
+   margin-left: 0.5rem;
+}
+/* button */
+
+.m-product-bill-user-info-button{
+    margin: 1rem 0 ;
+    width: 44.7%;
+    height: 3.6rem;
+    background-color: #fff;
+    color: black;
+    border: 1px solid rgba(82, 81, 81, 0.61);
+}
+
+.m-product-bill-user-info-button:hover{
+    background-color: black;
+    color: #fff;
+}
+
+/* m-product-bill-detail-price */
+.m-product-bill-design-detail{
+    width: 100%;
+    background-color: rgba(190, 186, 186, 0.13);;;
+}
+.m-product-bill-detail-price{
+    width: 100%;
+    margin: 2rem 0 0 0;
+}
+.m-product-bill-detail-list{
+    width: 100%;
+    height: 25rem;
+    overflow: auto;
+    border-bottom: 1px solid rgba(143, 142, 142, 0.164);
+    border-top: 1px solid rgba(143, 142, 142, 0.164);
+
+ 
+}
+.m-product-bill-detail-list-incart{
+    width: 90%;
+    display: flex;
+    justify-content:space-between;
+    margin: 2rem auto;
+    
+  
+}
+.m-product-bill-detail-list-incart>div>img{
+    width: 5rem;
+    height: 6rem;
+}
+.m-product-bill-detail-list-incart p{
+    font-size: 1.2rem;
+    line-height: 3rem;
+    padding: 1rem;
+}
+
+/* m-product-bill-detail-discount */
+.m-product-bill-detail-discount{
+    width: 100%;
+    margin: auto;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(143, 142, 142, 0.164);
+
+}
+.m-product-bill-detail-discount>input{
+    width: 69%;
+    height: 3.2rem;
+    padding: 1rem;
+    border: 1px solid rgba(82, 81, 81, 0.61);
+
+}
+
+.m-product-bill-detail-discount>button{
+    margin: 1rem 0 ;
+    width: 30%;
+    height: 3.1rem;
+    background-color: #fff;
+    color: black;
+    border: 1px solid rgba(82, 81, 81, 0.61);
+}
+.m-product-bill-detail-discount>button:hover{
+    background-color: black;
+    color: #fff;
+}
+/* payment */
+.m-product-bill-detail-payment{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem auto;
+    border-bottom: 1px solid rgba(143, 142, 142, 0.164);
+
+}
+.m-product-bill-detail-payment>div{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem auto;
+}
+
+/* m-product-bill-detail-total */
+.m-product-bill-detail-total{
+    width: 100%;
+
+}
+.m-product-bill-detail-total>div{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 3rem auto;
+    font-size: 1.3rem;
+}
+
