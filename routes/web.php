@@ -113,7 +113,7 @@ Route::middleware(['auth','role'])->group(function () {
 //route client
 Route::prefix('/')->group(function(){
 //    Home product
-    Route::get('',[HomePageController::class,'index']);
+    Route::get('',[HomePageController::class,'index'])->name("home");
     Route::get('/new',[HomePageController::class,'new']);
     Route::get('/product-search',[HomePageController::class,'searchDetail']);
 
