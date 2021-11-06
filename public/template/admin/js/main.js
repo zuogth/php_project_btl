@@ -93,51 +93,7 @@ function selectImg(event){
 //     })
 // }
 
-$('#btnAddProd').click(function (){
-    ids=$('tbody input[type=checkbox]:checked').map(function(){
-        return $(this).attr("data");
-    }).get();
-    $.ajax({
-        url:'/admin/receipt/product/selected',
-        type:"GET",
-        datatype:'JSON',
-        data: {ids},
-        success:function (result){
-            html='';
-            totalprice=0;
-            index=0
-            for(item of result.products){
-                index++;
-                html+=`
-                            <tr id="${item.id}">
-                                <td><img src="${item.images}" style="width: 80px"></td>
-                                <td>${item.productname}</td>
-                                <td id="priceentry" data="${item.priceentry}">${toMoney(item.priceentry)}</td>
-                                <td><input type="number" value="1" name="quantily-${index}" id="quantily" onchange="updateTotal()" price="${item.priceentry}"></td>
-                                <td>${item.category.categoryname}</td>
-                                <td>
-                                    <a class="btn btn-danger btn-xs" onclick="removeProduct(${item.id})"><i class="fas fa-times"></i></a>
-                                </td>
-                                <input type="hidden" name="product-${index}" value="${item.id}">
-                            </tr>
-                `;
-                totalprice+=item.priceentry;
-            }
-            $('tbody#productsSelected').html(html);
-            totalprice_s=totalprice.toLocaleString('it-IT',{
-                style:'currency',
-                currency:'VND'
-            });
-            $('input#totalprice_s').val(totalprice_s);
-            $('input#totalprice').val(totalprice);
-            $('input#count_prod').val(index);
-            $('input#product_selected').val('true');
-        },
-        error:function (){
-            alert("Error!");
-        }
-    })
-})
+
 //Sắp xếp bằng ajax
 function orderMoney(event){
     let order=$(event).attr("data-by");
@@ -182,35 +138,10 @@ function orderMoney(event){
     $('#table-data').DataTable();
 }
 //id="orderMoney" onclick="orderMoney(this)" data-by="asc" data-cate="{{$code}}"
-function removeProduct(id){
-    $('tr#'+id).remove();
-    totalPrice();
-    let count=$('tbody#productsSelected tr').length;
-    $('input#count_prod').val(count);
-    if(count==0){
-        $('input#product_selected').val('');
-    }
-}
-
-function updateTotal(){
-    totalPrice();
-}
-
-function totalPrice(){
-    totalprice=0;
-    $('td#priceentry').each(function(index,element){
-        price=Number($(element).attr("data"));
-        sl=Number($('td input#quantily:eq('+index+')').val());
-        console.log(price+' '+sl);
-        totalprice+=price*sl;
-    })
-    totalprice_s=toMoney(totalprice);
-    $('input#totalprice_s').val(totalprice_s);
-    $('input#totalprice').val(totalprice);
-}
 
 function addImages(event){
     let i=Number($(event).attr("data-count"));
+    $('input#countImg').val(i);
     html=`
         <label id="select_imgs" for="file" data-img="image-${i}" onclick="selectImg(this)">
             <img src="" id="image-${i}" alt='Thêm ảnh' style='width:100%;'>
@@ -227,3 +158,5 @@ function toMoney(totalprice){
         currency: 'VND'
     });
 }
+
+

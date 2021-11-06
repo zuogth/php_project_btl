@@ -123,6 +123,7 @@
                             <button type="button" class="btn btn-primary btn-xs" onclick="addImages(this)" data-count="1">
                                 <i class="fas fa-plus"></i>
                             </button>
+                            <input type="hidden" name="countImg" id="countImg" value="">
                         </div>
                         <input type="file" class="form-control" name="file" id="file" hidden>
                         <input type="hidden" name="productcode" id="productcode">

@@ -112,3 +112,7 @@
         </div>
     </div>
 @endsection
+
+@section('footer')
+    <script src="/template/admin/js/receipt.js"></script>
+@endsection

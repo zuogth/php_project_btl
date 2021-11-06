@@ -13,7 +13,7 @@ function suggestion(value){
                console.log(e)
                 html += '  <div class="img-new1">\n' +
                     '                            <div class="img-scale">\n' +
-                    '                                <img src="/storage/'+e.images+'" alt="" srcset="" class="product-img">\n' +
+                    '                                <img src="'+e.images+'" alt="" srcset="" class="product-img">\n' +
                     '                            </div>\n' +
                     '                            <div class="product-detail">\n' +
                     '                                <div class="product-name"><a href="#">'+e.productname + disount(e.discount) +'</a>  </div>\n' +

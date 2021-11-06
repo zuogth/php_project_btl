@@ -38,7 +38,7 @@
                       @foreach($productsSale as $e)
                             <div class="img-new1">
                                 <div class="img-scale">
-                                    <img src="/storage/{{$e->images}}" alt="" srcset="" class="product-img">
+                                    <img src="{{$e->images}}" alt="" srcset="" class="product-img">
                                 </div>
                                 <div class="product-detail">
                                     <div class="product-name"><a href="#">{{$e->productname}}
@@ -165,7 +165,7 @@
                         @foreach($productBestSell as $e)
                         <div class="img-new1">
                             <div class="img-scale">
-                                <img src="/storage/{{$e->images}}" alt="" srcset="" class="product-img">
+                                <img src="{{$e->images}}" alt="" srcset="" class="product-img">
 
                             </div>
                             <div class="product-detail">

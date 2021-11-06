@@ -54,7 +54,7 @@ $(function () {
                         result.forEach(e=>{
                             html += `<div class="img-new1 col-xl-4">
                     <div class="img-scale">
-                        <img src="/storage/${e.images}" alt="" srcset="" class="product-img">
+                        <img src="${e.images}" alt="" srcset="" class="product-img">
                     </div>
                     <div class="product-detail">
                         <div class="product-name"><a href="#">${e.productname} </a> ${disount(e.discount)}</div>

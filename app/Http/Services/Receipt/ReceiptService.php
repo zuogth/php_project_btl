@@ -10,7 +10,7 @@ class ReceiptService
 {
     public function findAll()
     {
-        return Receipt::with('user')->paginate(10);
+        return Receipt::with('user')->get();
     }
 
     public function findById($id)

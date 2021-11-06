@@ -53,7 +53,8 @@ class ProductService
             $product->productcode=Str::slug($request->productname,'-');
             $product->save();
             $product->specialities()->attach($spec_id);
-            for ($i=1;$i<=5;$i++){
+            $count=$request->input('countImg');
+            for ($i=1;$i<=$count;$i++){
                 if($request->input('images-'.$i)!=null){
                     $product->imagess()->create([
                         'image'=>$request->input('images-'.$i),
