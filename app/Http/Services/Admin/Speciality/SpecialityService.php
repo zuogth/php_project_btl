@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services\Speciality;
+namespace App\Http\Services\Admin\Speciality;
 
 use App\Models\Speciality;
 use Illuminate\Pagination\Paginator;

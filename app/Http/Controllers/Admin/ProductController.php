@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\ProductRequest;
-use App\Http\Services\Category\CategoryService;
-use App\Http\Services\Product\ProductService;
+use App\Http\Services\Admin\Category\CategoryService;
+use App\Http\Services\Admin\Product\ProductService;
 use App\Models\Category;
 use App\Models\Images;
 use App\Models\Product;

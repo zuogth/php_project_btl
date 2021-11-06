@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Services\Product\ProductService;
-use App\Http\Services\Receipt\ReceiptService;
+use App\Http\Services\Admin\Product\ProductService;
+use App\Http\Services\Admin\Receipt\ReceiptService;
 use App\Models\Receipt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;

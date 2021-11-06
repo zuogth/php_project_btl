@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services\Receipt;
+namespace App\Http\Services\Admin\Receipt;
 
 use App\Models\Receipt;
 use Illuminate\Support\Facades\Session;

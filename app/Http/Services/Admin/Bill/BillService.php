@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services\Bill;
+namespace App\Http\Services\Admin\Bill;
 
 use App\Models\Bill;
 use Illuminate\Support\Facades\Session;

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Speciality\SpecialityRequest;
-use App\Http\Services\Category\CategoryService;
-use App\Http\Services\Speciality\SpecialityService;
+use App\Http\Services\Admin\Category\CategoryService;
+use App\Http\Services\Admin\Speciality\SpecialityService;
 use App\Models\Speciality;
 use Illuminate\Http\Request;
 

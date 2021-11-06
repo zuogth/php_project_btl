@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services\User;
+namespace App\Http\Services\Admin\User;
 
 use App\Models\User;
 use Illuminate\Hashing\BcryptHasher;

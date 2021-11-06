@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services\Category;
+namespace App\Http\Services\Admin\Category;
 
 use App\Http\Requests\Menu\CreateFormRequest;
 use App\Models\Category;

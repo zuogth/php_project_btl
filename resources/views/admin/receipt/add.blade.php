@@ -81,7 +81,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <table class="table" >
+                            <table class="table" id="tableModal">
                                 <thead>
                                     <th>Ảnh</th>
                                     <th>Tên</th>
@@ -115,4 +115,24 @@
 
 @section('footer')
     <script src="/template/admin/js/receipt.js"></script>
+    <script>
+        $(document).ready(function (){
+            $('#tableModal').DataTable({
+                "dom": '<"toolbar">frtip',
+                "info": false,
+                columnDefs: [
+                    { orderable: false, targets: [0,1,3,4] },
+                    {
+                        targets: 2,
+                        render: $.fn.dataTable.render.intlNumber('it-IT', {
+                            style: 'currency',
+                            currency: 'VND'
+                        })
+                    }
+                ],
+                "pageLength": 5
+            });
+            $("div.toolbar").html();
+        });
+    </script>
 @endsection

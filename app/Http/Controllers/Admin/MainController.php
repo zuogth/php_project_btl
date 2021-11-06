@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Services\Product\ProductService;
-use App\Http\Services\User\UserService;
+use App\Http\Services\Admin\Product\ProductService;
+use App\Http\Services\Admin\User\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
