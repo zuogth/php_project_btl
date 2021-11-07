@@ -17,6 +17,8 @@ use \App\Http\Controllers\Users\HomePageController;
 use \App\Http\Controllers\Users\ProductDetailController;
 use \App\Http\Controllers\Users\SearchController;
 use  \App\Http\Controllers\Users\CartController;
+use \App\Http\Controllers\Users\BillClientController;
+use \App\Http\Controllers\Users\UserClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -155,6 +157,12 @@ Route::prefix('/')->group(function(){
     Route::put('/cart',[CartController::class,'update']);
     Route::get('/cart/{product}',[CartController::class,'addCart']);
     Route::DELETE('/cart/delete/{product}',[CartController::class,'delete']);
+    Route::DELETE('/cart/delete',[CartController::class,'deleteBill']);
 
+    #Bill
+    Route::get('/bill/{bill}',[BillClientController::class,'index']);
+    Route::post('/bill/{bill}',[BillClientController::class,'store']);
 
+    #User
+    Route::get('/user/detail',[UserClientController::class,'index']);
 });

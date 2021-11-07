@@ -152,6 +152,39 @@ function removeItemCart(event,id){
     })
 }
 
+
+$('button.clear-test').click(function (){
+    Swal.fire({
+        title: 'Bạn có chắc muốn xóa không?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Xóa',
+        cancelButtonText:'Hủy'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            bill_id=$('#bill_id').val();
+            $.ajax({
+                url:'/cart/delete/',
+                type:'DELETE',
+                datatype: 'JSON',
+                data: {bill_id},
+                success:function (result){
+                    location.reload();
+                },
+                error:function (){
+                    Swal.fire(
+                        'Lỗi!',
+                        'Xảy ra lỗi, vui lòng thử lại.',
+                        'error'
+                    )
+                }
+            })
+        }
+    })
+})
+
 function toMoney(totalprice){
     return totalprice.toLocaleString('it-IT', {
         style: 'currency',

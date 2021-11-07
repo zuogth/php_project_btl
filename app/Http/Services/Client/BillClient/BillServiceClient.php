@@ -15,6 +15,21 @@ class BillServiceClient
         return Bill::with('products')->where('user_id',$id)->where('bill_type','cart')->first();
     }
 
+    public function findById($id)
+    {
+        return Bill::with('products')->where('id',$id)->where('bill_type','cart')->first();
+    }
+
+    public function updateBill($bill)
+    {
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $bill->bill_date= date("Y-m-d H:i:s");
+        $bill->bill_type='bill';
+        $bill->save();
+        Session::flash('success','Bạn đã đặt hàng thành công!');
+        return true;
+    }
+
     public function updateCart($request)
     {
         try{
@@ -93,15 +108,28 @@ class BillServiceClient
             $bill=Bill::with('products')->where('id',$bill_id)->first();
             $bill->products()->detach($product->id);
             $bill=Bill::with('products')->where('id',$bill_id)->first();
-            $total=0;
-            foreach ($bill->products as $item){
-                $total+=$item->pricesell*(1-$item->discount/100)*$item->pivot->quantily;
+            if($bill->products->count()==0){
+                $bill->delete();
+            }else{
+                $total=0;
+                foreach ($bill->products as $item){
+                    $total+=$item->pricesell*(1-$item->discount/100)*$item->pivot->quantily;
+                }
+                $bill->totalprice=$total;
+                $bill->save();
             }
-            $bill->totalprice=$total;
-            $bill->save();
+
         }catch (\Exception $err){
             return $err->getMessage();
         }
+        return true;
+    }
+
+    public function deleteBill($bill_id){
+        DB::table('product_bill')
+            ->where('bill_id',$bill_id)
+            ->delete();
+        Bill::where('id',$bill_id)->delete();
         return true;
     }
 

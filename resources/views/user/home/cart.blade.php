@@ -101,7 +101,7 @@
                                     </label>
                                 </div>
                                 <div>
-                                    <textarea name="note" id="title-note" rows="6" cols="90"
+                                    <textarea name="note" id="title-note"
                                               placeholder="Thêm ghi chú vào đơn đặt hàng của bạn" form="m-product-to-bill"></textarea>
                                 </div>
                             </div>
@@ -115,10 +115,9 @@
                                         <div><span id="m-cart-grand-total" data-total-price="{{$cart->totalprice}}">{!! \App\Helpers\Helper::price($cart->totalprice) !!}</span></div>
                                     </div>
                                     <div class="m-product-cart-price-total-submit">
-
-                                        <button class="test" type="button">
+                                        <a href="/bill/{{$cart->id}}">
                                             Mua hàng
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

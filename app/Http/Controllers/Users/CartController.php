@@ -54,4 +54,12 @@ class CartController
             'message'=>$rs
         ]);
     }
+
+    public function deleteBill(Request $request)
+    {
+        $rs=$this->billServiceClient->deleteBill($request->bill_id);
+        return response()->json([
+            'message'=>$rs
+        ]);
+    }
 }

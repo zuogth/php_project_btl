@@ -31,13 +31,8 @@ class RegisterController extends Controller
     public function register()
     {
         $bill=Bill::with('products')->where('id',3)->first();
-        #$bill->products()->detach(24);
-        $total=0;
-        foreach ($bill->products as $item){
-            $total+=$item->pricesell*(1-$item->discount/100)*$item->pivot->quantily;
-        }
-        $bill->totalprice=$total;
-        $bill->save();
+
+        dd($bill->products->count());
         return view('admin.users.register',[
             'title'=>'Đăng ký tài khoản mới'
         ]);
