@@ -1,12 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\Users\LoginController;
+use App\Http\Controllers\Login\LoginController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UploadController;
-use \App\Http\Controllers\Admin\Users\RegisterController;
+use \App\Http\Controllers\Login\RegisterController;
 use \App\Http\Controllers\Admin\UserController;
 use \App\Http\Controllers\Admin\BillController;
 use \App\Http\Controllers\Admin\ReceiptController;
@@ -29,11 +29,11 @@ use  \App\Http\Controllers\Users\CartController;
 |
 */
 
-Route::get('/admin/users/login',[LoginController::class,'index'])->name('login');
-Route::post('/admin/users/login',[LoginController::class,'store']);
-Route::get('admin/users/logout',[LoginController::class,'logout']);
-Route::get('admin/users/register',[RegisterController::class,'register']);
-Route::post('admin/users/register',[RegisterController::class,'store']);
+Route::get('/admin/user/login',[LoginController::class,'index'])->name('login');
+Route::post('/user/login',[LoginController::class,'store']);
+Route::get('/user/logout',[LoginController::class,'logout']);
+Route::get('/user/register',[RegisterController::class,'register']);
+Route::post('/user/register',[RegisterController::class,'store']);
 // Google URL
 Route::prefix('google')->name('google.')->group( function(){
     Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login');
@@ -141,15 +141,20 @@ Route::prefix('/')->group(function(){
     Route::get('/product',[ProductListController::class,'search']);
     Route::get('/total',[ProductListController::class,'total']);
 
-//    sắp xếp
+    # sắp xếp
     Route::get('/sort',[ProductListController::class,'sort']);
 
 
-//    product detal
+    #product detal
     Route::get('/product-detail/{slug}/',[ProductDetailController::class,'index']);
     Route::get('/product-comment',[ProductDetailController::class,'comment']);
 
 
-    //    cart
+    #cart
     Route::get('/cart',[CartController::class,'index']);
+    Route::put('/cart',[CartController::class,'update']);
+    Route::get('/cart/{product}',[CartController::class,'addCart']);
+    Route::DELETE('/cart/delete/{product}',[CartController::class,'delete']);
+
+
 });

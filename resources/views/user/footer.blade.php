@@ -57,7 +57,6 @@
      aria-hidden="true">
     <div class="modal-dialog login-desgin" role="document">
         <div class="modal-content">
-
             <div class="modal-body-desgin">
                 <div class="l-detail">
                     <h3>Đăng nhập</h3>
@@ -65,7 +64,7 @@
                         <i class="fas fa-times" data-dismiss="modal"></i>
                     </div>
                 </div>
-                <form method="post" id="modal-form-login" >
+                <form action="/user/login" method="POST" id="modal-form-login" >
                     <div class="form-login-input">
                         <input type="text" id="username" placeholder="Tài khoản*" name="username">
                         <div class="modal-errorMessage">
@@ -93,6 +92,7 @@
 
                         </div>
                     </div>
+                    @csrf
                 </form>
             </div>
 
@@ -120,4 +120,5 @@
         }
     })
 </script>
+<script src="/template/admin/plugins/sweet/sweetalert2.all.min.js"></script>
 @yield('footer')<?php

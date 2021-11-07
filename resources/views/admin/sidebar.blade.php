@@ -16,7 +16,7 @@
           <a href="#" class="d-block">{{\Illuminate\Support\Facades\Auth::user()->fullname}}</a>
         </div>
           <div class="info">
-              <a href="/admin/users/logout" class="d-block">Logout</a>
+              <a href="/user/logout" class="d-block">Logout</a>
           </div>
       </div>
 

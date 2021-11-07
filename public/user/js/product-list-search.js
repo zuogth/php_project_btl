@@ -72,7 +72,8 @@ function pagetest(data,count) {
 
                             </div>
                             <div class="add-cart">
-                                <a href="" class="btn btn-danger">Mua</a>
+
+                                <a onclick="addCart(this,${e.id})" class="btn btn-danger">Mua</a>
                             </div>
                         </div><script src="/user/stars/starts-rating.js"></script>`;
                         })
@@ -183,7 +184,7 @@ $(function () {
 
                             </div>
                             <div class="add-cart">
-                                <a href="" class="btn btn-danger">Mua</a>
+                                <a onclick="addCart(this,${e.id})" class="btn btn-danger">Mua</a>
                             </div>
                         </div><script src="/user/stars/starts-rating.js"></script>`;
                     })
@@ -198,6 +199,20 @@ $(function () {
     })
 });
 
+//Thêm sản phẩm vào cart
+function addCart(event,id){
+    $.ajax({
+        url:'/cart/'+id,
+        type:'GET',
+        success:function (result){
+            html=`<a onclick="addCart(this,${id})" class="btn btn-danger">Mua<i class="fas fa-check"></i></a>`
+            $(event).parents().eq(0).html(html);
+        },
+        error:function (){
+            alert('Error');
+        }
+    })
+}
 
 
 //////////////////////////////////////////////////////////////////////////

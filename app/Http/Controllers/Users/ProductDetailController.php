@@ -65,7 +65,7 @@ class ProductDetailController extends Controller
 
 
         return view('user.home.detail',[
-            'title'=>'detail',
+            'title'=>$product->productname,
             'product'=>$product,
             'star'=>$this->commentServiceClient->findStarsByProductId($product->id),
             'img'=>$this->thumbServiceClient->findAllImgByProductId($product->id),

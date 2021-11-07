@@ -51,6 +51,9 @@
             <div class="product-detail">
                 <div class="imgs-prod">
                     <div class="gallery_01">
+                        <a class="img-item" id="img_01" data-image="{{$product->images}}">
+                            <img src="{{$product->images}}" />
+                        </a>
                         @foreach($img as $e)
                             <a class="img-item" id="img_{{$e->id}}" data-image="{{$e->image}}">
                                 <img src="{{$e->image}}" />
@@ -98,6 +101,7 @@
                 </div>
                 <div class="imgs-prod-resp">
                     <div class="imgs-prod-resp-item">
+                        <img id="img_01" src="{{$product->images}}"/>
                         @foreach($img as $e)
                             <img id="img_{{$e->id}}" src="{{$e->image}}"/>
                         @endforeach
@@ -117,9 +121,10 @@
                             </div>
                             <div class="modal-body">
                                 <div class="list-imgs-modal">
-
+                                    <a class="img-item" id="img_01" data-image="{{$product->images}}">
+                                        <img src="{{$product->images}}" />
+                                    </a>
                                     @foreach($img as $e)
-
                                         <a class="img-item" id="img_{{$e->id}}" data-image="{{$e->image}}">
                                             <img src="{{$e->image}}" />
                                         </a>
@@ -128,7 +133,7 @@
                                 </div>
                                 <div class="show-img-modal">
                                     <img id="zoom_05" onmousemove="myFunction()" onmouseout="clearZoom()"
-                                         src="/storage/{{$product->images}}" />
+                                         src="{{$product->images}}" />
                                 </div>
                             </div>
                         </div>
@@ -192,7 +197,7 @@
                         {!! \App\Helpers\HelperMenu::repo($bill,$receipt) !!}
                     </div>
                     <div class="add-cart">
-                        <a href="" class="btn btn-danger">Mua</a>
+                        <a onclick="addCart(this,{{$product->id}})" class="btn btn-danger">Mua</a>
                     </div>
                     <ul class="hidden-info-min">
                         {!! $product->content !!}
@@ -289,7 +294,7 @@
 
                     </div>
                 </div>
-                <button class="btn btn-danger" id="btn-comment" data-toggle="collapse" data-target="#formComment">Nhận xét</button>
+                <button class="btn btn-danger" id="btn-comment">Nhận xét</button>
             </div>
             <div class="form-rate collapse" id="formComment">
                 <p><span>*</span> Mục bắt buộc</p>
@@ -315,7 +320,7 @@
                             <label for="policy">Tôi đồng ý với chính sách bảo vệ dữ liệu.<span>*</span></label><a href="#">Đọc chính sách <i class="far fa-chevron-right"></i></a>
                         </div>
                         <div class="form-group-btn">
-                            <a class="btn btn-secondary" id="btn-comment2" data-toggle="collapse" data-target="#formComment">Hủy</a>
+                            <a class="btn btn-secondary" id="btn-comment2">Hủy</a>
                             <button class="btn btn-danger" type="submit">Nhận xét</button>
                         </div>
                     </form>
@@ -467,94 +472,7 @@
 @section('footer')
     <script src="/user/js/slick.min.js"></script>
     <script src="/user/stars/starts-rating.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.imgs-prod-resp-item').slick({
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                infinite: false,
-                draggable: true,
-                arrows: true,
-                Swipe: true,
-                prevArrow: '<a class="prev-slick btn-slick"><img src="./img/carousel-left-over.svg" alt=""></a>',
-                nextArrow: '<a class="next-slick btn-slick"><img src="./img/carousel-right-over.svg" alt=""></a>',
-                responsive: [{
-                    breakpoint: 991,
-                    settings: "slick"
-                },
-                    {
-                        breakpoint: 767,
-                        settings: {
-                            arrows: false,
-                            dots: true,
-                            appendDots: '.dotClass'
-                        }
-                    }
-                ]
-            })
-        })
-    </script>
-    <!-- search -->
-    <script>
-        $(document).ready(function () {
-            $("#h-btn-search").click(function () {
-                $("#h-search").show();
-                $("body").addClass("scroll-hand");
-            });
-            $(".h-btn-close-search").click(function () {
-                $("#h-search").hide();
-                $("body").removeClass("scroll-hand");
-            });
-        })
-    </script>
-    <!-- scrollTop -->
-    <script>
-        $(document).ready(function () {
-            $(window).scroll(function () {
-                var e = $(window).scrollTop();
-                if (e > 1000) {
-                    $('#myBtnTop').show();
-                } else {
-                    $('#myBtnTop').hide();
-                }
-                // $('nav.nav-options div').hide();
-            });
-            $('#myBtnTop').click(function () {
-                $('body,html').animate({
-                    scrollTop: 0
-                });
-            });
-        })
-    </script>
-    <!-- load image product -->
-    <script>
-        $(document).ready(function () {
-            var id = '';
-            $('.gallery_01 a.img-item').click(function () {
-                loadImg(this, '.gallery_01 a.img-item', '#zoom_04', 'data-image');
-                $(this).addClass('active-imgs');
-                id = $(this).attr('id');
-            });
-            $('.list-imgs-modal a').click(function () {
-                loadImg(this, '.list-imgs-modal a', '#zoom_05', 'data-image');
-                $(this).addClass('active-imgs');
-            });
-            $('#zoom_04').click(function () {
-                loadImg(this, '.list-imgs-modal a', '#zoom_05', 'src');
-                if (id == '') {
-                    $('.list-imgs-modal a#img_01').addClass('active-imgs');
-                } else {
-                    $('.list-imgs-modal a#' + id).addClass('active-imgs');
-                }
-            })
-        });
-
-        function loadImg(obj, focus, imgMain, attr) {
-            var url = $(obj).attr(attr);
-            $(imgMain).attr('src', url);
-            $(focus).removeClass("active-imgs");
-        }
-    </script>
+    <script src="/user/js/options-detail.js"></script>
     <script>
         var flag = false;
 
@@ -573,59 +491,6 @@
         function clearZoom() {
             flag = false;
         };
-    </script>
-    <!-- nav-options -->
-    <script>
-        $(document).ready(function(){
-            $(window).scroll(function(){
-                $('.nav-options div ul li a').removeClass("active");
-                var scrolls=$(window).scrollTop();
-                for (let index = 1; index <=4; index++) {
-                    var url='#section'+index;
-                    var scroll_sec=$(url).offset().top-100;
-                    if(index!=4){
-                        var i=index+1;
-                        var urln='#section'+i;
-                        var scroll_sec_n=$(urln).offset().top-100;
-                        if(scroll_sec>scrolls && index==1){
-                            $('.nav-options div ul li:eq(0) a').addClass("active");
-                        }else if(scroll_sec<=scrolls && scrolls<scroll_sec_n){
-                            $('.nav-options div ul li:eq('+(index-1)+') a').addClass("active");
-                        }
-                    }else{
-                        if(scroll_sec<=scrolls){
-                            $('.nav-options div ul li:eq('+(index-1)+') a').addClass("active");
-                        }
-                    }
-
-                }
-            })
-            $('.nav-options a').click(function(){
-                var href=$(this).attr("href-link");
-                $('body,html').animate({
-                    scrollTop:$(href).offset().top-60
-                });
-            })
-            $('#btn-comment').click(function(){
-                $(this).hide();
-            });
-            $('#btn-comment2').click(function(){
-                $('#btn-comment').show();
-                $('body,html').animate({
-                    scrollTop:$('#section3').offset().top-60
-                })
-            });
-            $('.rating-cus').click(function(){
-                var rate=$(this).attr("rate-index");
-                $('.rates-star-cus ul li').removeClass("on");
-                $('.rates-star-cus strong').html(rate);
-                $('.rates-star-cus ul li:eq('+(rate-1)+') input').attr("checked","true");
-                for (let index = 0; index < rate; index++) {
-                    $('.rates-star-cus ul li').eq(index).addClass("on");
-
-                }
-            })
-        })
     </script>
     <script src="/user/js/product-detail-comment.js"></script>
 

@@ -1,6 +1,14 @@
 .main{
     width: 100%;
 }
+.main>div{
+    padding: 4rem 2rem;
+    text-align: center;
+}
+.main>div hr{
+    border-top: 2px solid;
+    margin: 2rem 0;
+}
 .m-product-cart-container{
     width: 85%;
     margin: auto;
@@ -23,11 +31,11 @@
 }
 .m-product-cart-table-body{
     width: 100%;
-    
+
 }
 .m-product-cart-table-body-img{
     display: flex;
- 
+
 }
 .m-product-cart-table-body-img >a> img{
     width: 7rem;
@@ -39,7 +47,7 @@
 }
 .m-product-cart-table-body-img>div>span{
    font-size: 1.2rem;
-}   
+}
 /* td khác */
 .m-product-cart-table-body>tr>td>.m-product-cart-price-total-button{
     display: flex;
@@ -51,7 +59,7 @@
 .m-product-cart-table-body-count-button{
     width: 100%;
     display: flex;
-   
+
 }
 /* minus */
 .m-product-cart-table-body-minus>button{
@@ -66,7 +74,7 @@
 }
 .m-product-cart-table-body-minus>button:hover i {
     color: #fff;
-   
+
 }
 .m-product-cart-table-body-minus>button>i{
     font-size: 0.8rem;
@@ -85,7 +93,7 @@
     text-align: center;
     border-left:none ;
     border-right:none ;
-    
+
 }
 
 .m-product-cart-table-body-count>input::-webkit-outer-spin-button,
@@ -107,7 +115,7 @@
 }
 .m-product-cart-table-body-remove>button>a{
     text-decoration: none;
-    
+
 }
 .m-product-cart-table-body-remove>button>a>i{
     color: rgba(31, 30, 30, 0.74);
@@ -136,7 +144,7 @@
 /* note add */
 .m-product-cart-add-note {
     width: 100%;
-   
+
 
 }
 .m-product-cart-add-note >div>label{
@@ -158,7 +166,7 @@
 .m-product-cart-price-total{
     width: 100%;
     border:  1px solid rgba(104, 103, 103, 0.411);
- 
+
 }
 
 .m-product-cart-price-title{
@@ -186,7 +194,7 @@
     background-color: #fff;
     border: 1px solid rgba(104, 103, 103, 0.411);
     color: black;
-    
+
 }
 
 .m-product-cart-price-total-submit>button:hover{

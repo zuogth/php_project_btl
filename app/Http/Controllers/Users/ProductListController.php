@@ -54,7 +54,7 @@ class ProductListController extends Controller
             $typeDesciption = $cateChild->description;
         }
         return view('user.home.list',[
-            'title'=>'sản phẩm',
+            'title'=>'Sản phẩm',
             'products'=>$prodcut,
             'typeName'=> $typeName,
 //            test
@@ -85,7 +85,7 @@ class ProductListController extends Controller
 
         $typeDesciption = $cate2->description;
         return view('user.home.list',[
-            'title'=>'sản phẩm',
+            'title'=>'Sản phẩm',
             'products'=>$prodcut,
             'typeName'=> $typeName,
             'productName'=>  $cate2->categoryname,
@@ -108,7 +108,7 @@ class ProductListController extends Controller
         $product = $this->productService->findProductByRequest($request);
         return $product ->offset($page)
             ->limit(6)
-            ->get();;
+            ->get();
     }
 
     public function total(Request $request){

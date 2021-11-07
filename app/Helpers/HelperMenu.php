@@ -71,13 +71,13 @@ class HelperMenu
         $html = '';
         if($value){
             $html .='<div class="label-prod-item"><i class="fab fa-sellsy"></i>
-                            <span>đã bán: </span>
+                            <span>Đã bán: </span>
                             <span> ' .$value->count_bill.'</span>
                         </div>';
 
         } else{
             $html .='<div class="label-prod-item"><i class="fab fa-sellsy"></i>
-                            <span>đã bán: </span>
+                            <span>Đã bán: </span>
                             <span>0</span>
                         </div>';
         }
@@ -89,19 +89,19 @@ class HelperMenu
         $html = '';
         if($receipt != null && $bill !=null){
             $html .='<div class="label-prod-item"><i class="fas fa-warehouse"></i>
-                            <span>còn trong kho:</span>
+                            <span>Còn trong kho:</span>
                             <span>'. $receipt->count_receipt - $bill->count_bill .'</span>
                         </div>';
 
         } else if ($receipt != null && $bill == null){
             $html .='<div class="label-prod-item"><i class="fas fa-warehouse"></i>
-                            <span>còn trong kho:</span>
+                            <span>Còn trong kho:</span>
                             <span>'. $receipt->count_receipt .'</span>
                         </div>';
         }
         else{
             $html .='<div class="label-prod-item"><i class="fas fa-warehouse"></i>
-                            <span>còn trong kho:</span>
+                            <span>Còn trong kho:</span>
                             <span> 0 </span>
                         </div>';
         }

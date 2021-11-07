@@ -14,7 +14,7 @@
     <div class="container-cus container-header">
         <div class="header">
             <div class="h-logo">
-                <a href="/"><img src="/user/img/logo-b2c.jpg" alt=""></a>
+                <a href="/"><img src="/user/img/logo2.png" alt=""></a>
             </div>
             <div class="header-r">
                 <div class="h-menu-t">
@@ -101,9 +101,14 @@
                     </div>
                     <div class="h-menu-right">
                         <ul>
-                            <li><a><i class="far fa-user" data-toggle="modal" data-target="#form-login"></i></a>
+                            <li>
+                                @if(\Illuminate\Support\Facades\Auth::user())
+                                    <a>{{\Illuminate\Support\Facades\Auth::user()->fullname}}</a>
+                                @else
+                                    <a><i class="far fa-user" data-toggle="modal" data-target="#form-login"></i></a>
+                                @endif
                             </li>
-                            <li><a href="./cart.html"><i class="fas fa-shopping-cart"></i></a></li>
+                            <li><a href="/cart"><i class="fas fa-shopping-cart"></i></a></li>
                             <li><a href="#" id="h-btn-search"><i class="fas fa-search"></i></a></li>
                         </ul>
                     </div>

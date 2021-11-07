@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Users;
+namespace App\Http\Controllers\Login;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserRequest;
-use App\Http\Services\User\UserService;
+use App\Http\Services\Admin\User\UserService;
+use App\Models\Bill;
+use App\Models\Comments;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -17,6 +20,7 @@ class RegisterController extends Controller
 
     public function store(UserRequest $request)
     {
+
         $result=$this->userService->create($request);
         if($result){
             return redirect('/admin/users/login');
@@ -26,6 +30,14 @@ class RegisterController extends Controller
 
     public function register()
     {
+        $bill=Bill::with('products')->where('id',3)->first();
+        #$bill->products()->detach(24);
+        $total=0;
+        foreach ($bill->products as $item){
+            $total+=$item->pricesell*(1-$item->discount/100)*$item->pivot->quantily;
+        }
+        $bill->totalprice=$total;
+        $bill->save();
         return view('admin.users.register',[
             'title'=>'Đăng ký tài khoản mới'
         ]);

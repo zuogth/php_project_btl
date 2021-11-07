@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Users;
+namespace App\Http\Controllers\Login;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -28,7 +28,7 @@ class LoginController extends Controller
                 if($user->roles[0]->rolecode=='QL'){
                     return redirect()->route('admin');
                 }
-                return 'User';
+                return redirect()->route('home');
             }
             Session::flash('error','Tài khoản đã bị khóa');
             return redirect()->back();

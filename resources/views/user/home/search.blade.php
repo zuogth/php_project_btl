@@ -9,12 +9,12 @@
     <div class="main">
         <div class="container">
             <div class="m-search-top">
-                <h1>Kết quả tìm kiển của "<span id="m-text-search">hehe</span>" là <span id="m-count-search">0</span> kết quả</h1>
+                <h1>Kết quả tìm kiếm của "<span id="m-text-search">hehe</span>" là <span id="m-count-search">0</span> kết quả</h1>
             </div>
             <form action="/search">
             <div class="m-search-middle">
 
-                <input type="text" placeholder="nhập tên sản phẩm muốn tìm" id="m-input-search-two-page" name="name">
+                <input type="text" placeholder="Nhập tên sản phẩm muốn tìm" id="m-input-search-two-page" name="name">
                 <i class="fas fa-search"></i>
 
             </div>

@@ -19,6 +19,7 @@ class BillService
 
     public function editStatus($bill,$request)
     {
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
         $status=$request->input('status');
         $bill->status=$status;
         if($status==2){

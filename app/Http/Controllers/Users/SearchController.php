@@ -46,7 +46,7 @@ class SearchController
 
         $product = $this->searchServiceClient->findAllByProductName($request);
         return view('user.home.search',[
-            'title'=>'search',
+            'title'=>'Tìm kiếm',
             'count' =>count($product->get()),
             'name' =>$request->name
         ]);
