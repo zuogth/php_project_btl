@@ -33,6 +33,7 @@ use \App\Http\Controllers\Users\UserClientController;
 
 Route::get('/admin/user/login',[LoginController::class,'index'])->name('login');
 Route::post('/user/login',[LoginController::class,'store']);
+Route::get('/user/login',[LoginController::class,'login']);
 Route::get('/user/logout',[LoginController::class,'logout']);
 Route::get('/user/register',[RegisterController::class,'register']);
 Route::post('/user/register',[RegisterController::class,'store']);

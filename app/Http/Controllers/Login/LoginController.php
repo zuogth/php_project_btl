@@ -15,6 +15,12 @@ class LoginController extends Controller
         ]);
     }
 
+    public function login(){
+        return view('user.home.login',[
+            'title'=>'Đăng nhập'
+        ]);
+    }
+
     public function store(Request $request)
     {
         $credentials=$request->validate([
@@ -39,7 +45,12 @@ class LoginController extends Controller
 
     public function logout()
     {
+        $user = Auth::user();
+        if ($user->roles[0]->rolecode == 'QL') {
+            Auth::logout();
+            return redirect()->route('login');
+        }
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('home');
     }
 }

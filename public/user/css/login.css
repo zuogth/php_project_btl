@@ -1,13 +1,13 @@
 
 .l-page-desgin{
     width: 60%;
-   
+
     padding: 2rem;
    margin: auto;
 }
 /* tiêu đề */
 .l-detail-page {
-    
+
     font-weight: 100;
     display: flex;
     justify-content: center;
@@ -27,16 +27,16 @@
     content: "";
     background-color: black;
     top: 0;
-    bottom: 1;
-    left: 1;
+    bottom: 1px;
+    left: 1px;
     right: 0;
     margin:3rem 0 0 0.5rem;
 }
 .l-detail-page>.l-themes-register-page>h1>a{
     text-decoration: none;
     color: rgba(54, 53, 53, 0.815);
-   
-   
+
+
 }
 .l-detail-page>.l-themes-register-page>h1:hover>a{
     color: black;
@@ -61,7 +61,7 @@
     display: flex;
     justify-content: space-between;
     margin:1.2rem auto;
-    
+
 }
 .l-footer-page>.forgot-password-page>a{
     text-decoration: none;
@@ -84,7 +84,7 @@
     height: 3.6rem;
     width: 100%;
     padding: 0.8rem;
-   
+
     background-color: black ;
     border: 1px solid black;
     color: #fff;
@@ -110,8 +110,8 @@
     height: 3.6rem;
     width: 98%;
     padding: 0.8rem;
-   
-    
+
+
     color: #fff;
 }
 .l-list-button-page>.l-button-login-page-forgot>.submit{
@@ -141,8 +141,12 @@
     background-color: #fff;
 }
 .l-button-login-page-forgot-cancel>button:hover{
-  
+
     color: #fff;
     background-color: black;
 }
-  
+.btn-google{
+    width: 100%;
+    padding-left: .5rem;
+}
+.btn-google>a{font-size: 1.8rem;}

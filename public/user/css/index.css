@@ -23,7 +23,7 @@ header{
     width: 100%;
     height: 98%;
 }
-.header-r{width: 90%;}
+.header-r{width: 90%}
 .h-menu-t{
     height: 50%;
     text-align: end;
@@ -54,6 +54,26 @@ header{
 }
 .header .h-menu .h-menu-right ul li{padding: 0 0.5em;}
 .header .h-menu .h-menu-right ul li a{color: black;}
+
+#info-user{
+    font-size: .8rem;
+    background-color: white;
+    top: 100%;
+    right: 0;
+    left: 80%;
+    position: absolute;
+    z-index: 9;
+    padding: 1rem;
+    border: 1px solid silver;
+}
+#info-user p{
+    font-weight: 700;
+}
+.info-user-item{
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
 .header .h-menu .h-menu-left>nav>div>ul>li{padding: 0 2em;}
 .header .h-menu .h-menu-left ul li.h-span{padding: 0;line-height: 29px;}
 .header .h-menu .h-logo-m{display: none;height: 100%;}

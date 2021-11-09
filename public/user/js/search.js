@@ -70,3 +70,15 @@ function toMoney(totalprice){
 $(document).on('click','#m-delete-text-input',function (){
     search_menu($('#m-input-search-product').val(''))
 })
+
+
+$(document).ready(function () {
+    $("#h-btn-search").click(function () {
+        $("#h-search").show();
+        $("body").addClass("scroll-hand");
+    });
+    $(".h-btn-close-search").click(function () {
+        $("#h-search").hide();
+        $("body").removeClass("scroll-hand");
+    });
+})

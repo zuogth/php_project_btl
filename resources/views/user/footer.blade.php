@@ -87,7 +87,7 @@
                         </div>
                         <div class="l-button-register">
 
-                            <a href="./register.html" >
+                            <a href="/user/register" >
                                 <button id="register" class="register" type="button"> Đăng ký</button></a>
 
                         </div>

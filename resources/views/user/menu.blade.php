@@ -103,7 +103,13 @@
                         <ul>
                             <li>
                                 @if(\Illuminate\Support\Facades\Auth::user())
-                                    <a>{{\Illuminate\Support\Facades\Auth::user()->fullname}}</a>
+                                    <a data-toggle="collapse" data-target="#info-user"><i class="fas fa-user"></i></a>
+                                    <div class="collapse" id="info-user">
+                                        <p>Xin chào {{\Illuminate\Support\Facades\Auth::user()->fullname}}</p>
+                                        <hr/>
+                                        <a href="" class="info-user-item">Đơn đặt hàng</a>
+                                        <a href="/user/logout">Đăng xuất</a>
+                                    </div>
                                 @else
                                     <a><i class="far fa-user" data-toggle="modal" data-target="#form-login"></i></a>
                                 @endif
@@ -159,4 +165,4 @@
 
 </header>
 <script src="/user/js/search.js"></script>
-@yield('slider')<?php
+@yield('slider')
