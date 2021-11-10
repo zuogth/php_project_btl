@@ -10,6 +10,7 @@
     }
 
 </style>
+@include('admin.alert')
 <header>
     <div class="container-cus container-header">
         <div class="header">
@@ -107,7 +108,8 @@
                                     <div class="collapse" id="info-user">
                                         <p>Xin chào {{\Illuminate\Support\Facades\Auth::user()->fullname}}</p>
                                         <hr/>
-                                        <a href="" class="info-user-item">Đơn đặt hàng</a>
+                                        <a href="/user/detail/1" class="info-user-item">Thông tin tài khoản</a>
+                                        <a href="/user/detail/2" class="info-user-item">Đơn đặt hàng</a>
                                         <a href="/user/logout">Đăng xuất</a>
                                     </div>
                                 @else
@@ -164,5 +166,5 @@
     </div>
 
 </header>
-<script src="/user/js/search.js"></script>
+
 @yield('slider')

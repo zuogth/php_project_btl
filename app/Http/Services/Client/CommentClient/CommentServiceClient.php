@@ -2,8 +2,9 @@
 
 namespace App\Http\Services\Client\CommentClient;
 
-use Illuminate\Pagination\Paginator;
+use App\Models\Comments;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class CommentServiceClient
 {
@@ -32,5 +33,30 @@ class CommentServiceClient
         return count(DB::table('comments')
             ->select('comments.*')
             ->having('comments.product_id','=',$product_id)->get());
+    }
+
+    public function comment($user_id,$request)
+    {
+        try{
+            date_default_timezone_set('Asia/Ho_Chi_Minh');
+            Comments::create([
+                'product_id'=>$request->product_id,
+                'user_id'=>$user_id,
+                'title'=>$request->title,
+                'cmt_datetime'=>date("Y-m-d H:i:s"),
+                'context'=>$request->content,
+                'stars'=>$request->stars
+            ]);
+            Session::flash('success','Cảm ơn bạn đã đánh giá');
+        }catch (\Exception $err){
+            Session::flash('error',$err->getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public function findByUserId($user_id)
+    {
+        return Comments::where('user_id',$user_id)->get();
     }
 }

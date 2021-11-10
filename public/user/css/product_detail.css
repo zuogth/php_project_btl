@@ -302,12 +302,14 @@ nav.nav-options div ul li a{
     background: url(../img/star-fill.svg);
     background-size: 100% 100%;
 }
+.ip-policy-pr{
+    border-top: 1px solid silver;
+    border-bottom: 1px solid silver;
+    padding: 2rem 0;
+}
 .ip-policy{
     display: flex;
     margin: 0;
-    padding: 2rem 0;
-    border-top: 1px solid silver;
-    border-bottom: 1px solid silver;
 }
 .ip-policy input{
     width: 1.5rem;

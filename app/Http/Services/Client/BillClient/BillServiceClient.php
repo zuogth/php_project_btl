@@ -15,6 +15,14 @@ class BillServiceClient
         return Bill::with('products')->where('user_id',$id)->where('bill_type','cart')->first();
     }
 
+    public function findByIdUser($id)
+    {
+        return Bill::with('products')->where('user_id',$id)
+            ->where('bill_type','bill')
+            ->orderBy('bill_date')
+            ->get();
+    }
+
     public function findById($id)
     {
         return Bill::with('products')->where('id',$id)->where('bill_type','cart')->first();
@@ -44,13 +52,15 @@ class BillServiceClient
             foreach ($request->input('id') as $key => $product_id){
                 if ($key+1>$product_bill->count()){
                     $bill->products()->attach([
-                        $product_id=>['quantily'=>$request->input('count')[$key]]
+                        $product_id=>[
+                            'quantily'=>$request->input('count')[$key],
+                            'price'=>$request->input('price')[$key]]
                     ]);
                 }else{
                     DB::table('product_bill')
                         ->where('bill_id', $request->input('bill_id'))
                         ->where('product_id',$product_id)
-                        ->update(['quantily'=>$request->input('count')[$key]]);
+                        ->update(['quantily'=>$request->input('count')[$key],'price'=>$request->input('price')[$key]]);
                 }
             }
         }catch (\Exception $err){
@@ -81,7 +91,7 @@ class BillServiceClient
                     ->update(['quantily'=>$quantily]);
             }else{
                 $bill->products()->attach([
-                    $product->id=>['quantily'=>1]
+                    $product->id=>['quantily'=>1,'price'=>$product->pricesell*(1-$product->discount/100)]
                 ]);
             }
             $totalprice=$bill->totalprice+$product->pricesell*(1-$product->discount/100);
@@ -96,7 +106,7 @@ class BillServiceClient
                 'bill_type'=>'cart'
             ]);
             $billNew->products()->attach([
-                $product->id=>['quantily'=>1]
+                $product->id=>['quantily'=>1,'price'=>$product->pricesell*(1-$product->discount/100)]
             ]);
         }
         return true;

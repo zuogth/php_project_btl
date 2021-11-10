@@ -22,7 +22,7 @@ class CustomMiddleware
         if($user->roles[0]->rolecode=='QL'){
             return $next($request);
         }
-        Session::flash('error','You do not have access');
+        Session::flash('error','Bạn không có quyền truy cập');
         return redirect()->route('login');
     }
 }

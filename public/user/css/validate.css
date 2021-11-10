@@ -2,7 +2,6 @@
 .modal-errorMessage{
     display: flex;
     margin: auto;
-    width: 75%;
 }
 .errorMessage{
     color: red;

@@ -42,7 +42,7 @@ class Product extends Model
 
     public function bills(){
         return $this->belongsToMany(Bill::class,'product_bill','product_id','bill_id')
-            ->withPivot('id','quantily');
+            ->withPivot('id','price','quantily');
     }
 
     public function imagess()

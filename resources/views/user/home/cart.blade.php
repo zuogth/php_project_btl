@@ -49,6 +49,7 @@
                                     <td>
                                         <div class="m-product-cart-price-total-button">
                                             <span class="m-cart-price-product" data-price="{{$product->pricesell*(1-$product->discount/100)}}">{!! \App\Helpers\Helper::price($product->pricesell*(1-$product->discount/100)) !!}</span>
+                                            <input type="number" hidden value="{{$product->pricesell*(1-$product->discount/100)}}" name="price" id="price" class="price">
                                         </div>
                                     </td>
                                     <td>

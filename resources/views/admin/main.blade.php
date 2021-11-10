@@ -5,6 +5,7 @@
     @include('admin.head')
 </head>
 <body class="hold-transition sidebar-mini">
+@include('admin.alert')
     <div class="wrapper">
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
@@ -40,7 +41,7 @@
             <br>
             <section class="content">
                 <div class="container-fluid">
-                    @include('admin.alert')
+
                     <div class="row">
                         <!-- left column -->
 

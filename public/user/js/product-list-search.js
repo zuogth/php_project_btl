@@ -205,6 +205,9 @@ function addCart(event,id){
         url:'/cart/'+id,
         type:'GET',
         success:function (result){
+            if(result.error==true){
+                window.location.href='/user/login';
+            }
             html=`<a onclick="addCart(this,${id})" class="btn btn-danger">Mua<i class="fas fa-check"></i></a>`
             $(event).parents().eq(0).html(html);
         },

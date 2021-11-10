@@ -35,11 +35,14 @@ class LoginController extends Controller
                     return redirect()->route('admin');
                 }
                 return redirect()->route('home');
+            }else{
+                Auth::logout();
+                Session::flash('error','Tài khoản đã bị khóa');
+                return redirect()->back();
             }
-            Session::flash('error','Tài khoản đã bị khóa');
-            return redirect()->back();
+
         }
-        Session::flash('error','Username or password invalid');
+        Session::flash('error','Tài khoản hoặc mật khẩu không chính xác');
         return redirect()->back();
     }
 

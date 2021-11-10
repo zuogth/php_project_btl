@@ -15,15 +15,18 @@
                                         Thông tin liên lạc </h2></div>
                                 <div class="form-login-input-page">
                                     <div><label for="">Số điện thoại</label></div>
-                                    <div><input type="number" name="phone" placeholder="Số điện thoại *" id="phone"></div>
+                                    <div><input type="number" name="phone" placeholder="Số điện thoại *" id="phone" value="{{$user->phone}}"></div>
                                     <div class="modal-errorMessage">
                                         <span class="errorMessage"></span>
                                     </div>
                                 </div>
                                 <div class="form-login-input-page">
                                     <div><label for="">Email</label></div>
-                                    <div><input type="text" name="email" placeholder="Email *" id="email"></div>
+                                    <div><input type="text" name="email" placeholder="Email *" id="email" value="{{$user->email}}"></div>
                                     <div class="modal-errorMessage">
+                                        @error('email')
+                                        <span style="color: #da0101;margin-right:5px; ">{{$message}}</span>
+                                        @enderror
                                         <span class="errorMessage"></span>
                                     </div>
                                 </div>
@@ -38,23 +41,15 @@
                                 <div><h2>
                                         Địa chỉ giao hàng</h2></div>
                                 <div class="form-login-input-page">
-                                    <div><label for="">Tên</label></div>
-                                    <div><input type="text" placeholder="Fisrt name" name="firstname" id="firstname">
-                                    </div>
-                                    <div class="modal-errorMessage">
-                                        <span class="errorMessage"></span>
-                                    </div>
-                                </div>
-                                <div class="form-login-input-page">
-                                    <div><label for="">Họ</label></div>
-                                    <div><input type="text" placeholder="Last name" name="lastname" id="lastname"></div>
+                                    <div><label for="">Họ và tên</label></div>
+                                    <div><input type="text" placeholder="Name" name="fullname" id="fullname" value="{{$user->fullname}}"></div>
                                     <div class="modal-errorMessage">
                                         <span class="errorMessage"></span>
                                     </div>
                                 </div>
                                 <div class="form-login-input-page">
                                     <div><label for="">Địa chỉ</label></div>
-                                    <div><input type="text" placeholder="Address" name="address" id="address"></div>
+                                    <div><input type="text" placeholder="Address" name="address" id="address" value="{{$user->address}}"></div>
                                     <div class="modal-errorMessage">
                                         <span class="errorMessage"></span>
                                     </div>
@@ -65,7 +60,7 @@
                                         class="m-product-bill-user-info-button">
                                     Đặt hàng</button>
 
-                                <a href="/cart.html">
+                                <a href="/cart">
                                     <button type="button" class="m-product-bill-user-info-button">
                                         Quay lại giỏ hàng
                                     </button>
@@ -133,8 +128,7 @@
                 validation.isRequired("#phone", "Bạn hãy nhập số điện thoại"),
                 validation.isRequired("#email", "Bạn hãy nhập email"),
                 validation.isEmail("#email","Trường này phải là email"),
-                validation.isRequired("#firstname", "Bạn hãy nhập họ "),
-                validation.isRequired("#lastname", "Bạn hãy nhập tên "),
+                validation.isRequired("#fullname", "Bạn hãy nhập họ và tên "),
                 validation.isRequired("#address","Nhập địa chỉ"),
 
 

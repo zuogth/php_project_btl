@@ -49,6 +49,16 @@ class Helper{
         return '<span class="btn btn-danger btn-xs">Đang xử lý</span>';
     }
 
+    public static function statusBillClient($status):string{
+        if($status==1){
+            return '<span class="btn btn-warning btn-xs">Đang giao</span>';
+        }elseif ($status==2)
+        {
+            return '<span class="btn btn-success btn-xs">Đã giao</span>';
+        }
+        return '<span class="btn btn-danger btn-xs">Đang xử lý</span>';
+    }
+
     public static function price($price)
     {
         if($price>0){

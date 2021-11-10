@@ -7,12 +7,7 @@
     <link rel="stylesheet" href="/user/css/category.css">
     <link rel="stylesheet" href="/user/css/product_detail.css">
     <link rel="stylesheet" href="/user/stars/stars-rating.css">
-    <script src="/user/js/jquery.min.js"></script>
-    <script src="/user/js/bootstrap.min.js"></script>
-    {{--    pagination--}}
-    <script src="/user/js/jquery.min.js"></script>
-    <script src="/user/js/bootstrap.min.js"></script>
-    <script src="/paging/jquery.twbsPagination.js" type="text/javascript"></script>
+
 @endsection
 @section('content')
     <style>
@@ -470,7 +465,8 @@
 @endsection
 
 @section('footer')
-    <script src="/user/js/slick.min.js"></script>
+    <script src="/paging/jquery.twbsPagination.js" type="text/javascript"></script>
+
     <script src="/user/stars/starts-rating.js"></script>
     <script src="/user/js/options-detail.js"></script>
     <script>

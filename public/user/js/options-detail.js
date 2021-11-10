@@ -22,10 +22,7 @@ $(document).ready(function () {
             }
         ]
     })
-})
 
-//Các tiện ích
-$(document).ready(function(){
     $(window).scroll(function(){
         $('.nav-options div ul li a').removeClass("active");
         var scrolls=$(window).scrollTop();
@@ -84,21 +81,6 @@ $(document).ready(function(){
     $(".h-btn-close-search").click(function () {
         $("#h-search").hide();
         $("body").removeClass("scroll-hand");
-    });
-
-    $(window).scroll(function () {
-        var e = $(window).scrollTop();
-        if (e > 1000) {
-            $('#myBtnTop').show();
-        } else {
-            $('#myBtnTop').hide();
-        }
-        // $('nav.nav-options div').hide();
-    });
-    $('#myBtnTop').click(function () {
-        $('body,html').animate({
-            scrollTop: 0
-        });
     });
 })
 

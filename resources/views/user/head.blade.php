@@ -10,7 +10,6 @@
 
 <link rel="stylesheet" href="/user/css/validate.css">
 
-<script src="/user/js/jquery.min.js"></script>
 
 <title>Trang chủ</title>
 @yield('head')

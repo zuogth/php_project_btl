@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Login;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserRequest;
 use App\Http\Services\Client\UserClient\UserClientService;
+use App\Models\Comments;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {

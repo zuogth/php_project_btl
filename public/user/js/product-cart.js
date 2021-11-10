@@ -81,6 +81,7 @@ function updateCart(){
     data['bill_id']=$('#bill_id').val();
     data['id'] = [];
     data['count'] = [];
+    data['price'] = [];
     data['note'] = $("#title-note").val()
     data['totalprice']=$("#m-cart-grand-total").attr("data-total-price");
     $('.id').each(function (index, value) {
@@ -90,6 +91,10 @@ function updateCart(){
     $('.count').each(function (index, value) {
         var listId = $(this).val()
         data['count'].push(listId)
+    });
+    $('.price').each(function (index, value) {
+        var listId = $(this).val()
+        data['price'].push(listId)
     });
     $.ajax({
         url:'/cart',

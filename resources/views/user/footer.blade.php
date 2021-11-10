@@ -1,3 +1,4 @@
+<button id="myBtnTop" title="Lên đầu trang"></button>
 <footer>
     <div class="container-cus footer-t">
         <p>Giá cả, chương trình khuyến mãi có thể thay đổi tùy theo cửa hàng (bao gồm cả cửa hàng trực tuyến).
@@ -64,6 +65,7 @@
                         <i class="fas fa-times" data-dismiss="modal"></i>
                     </div>
                 </div>
+                @include('admin.alert')
                 <form action="/user/login" method="POST" id="modal-form-login" >
                     <div class="form-login-input">
                         <input type="text" id="username" placeholder="Tài khoản*" name="username">
@@ -80,6 +82,11 @@
                     <div class="l-modal-footer-detail">
                         <div class="forgot-password"><a  href="./forgot.html"
                             >Quên mật khẩu?</a></div>
+                    </div>
+                    <div class="btn-google">
+                        <a href="/google/login" class="btn">
+                            <i class="fab fa-google"></i>
+                        </a>
                     </div>
                     <div class="l-list-button">
                         <div class="l-button-login">
@@ -103,7 +110,28 @@
 <!-- jQuery -->
 
 
-
+<script src="/user/js/jquery.min.js"></script>
+<script src="/user/js/bootstrap.min.js"></script>
+<script src="/user/js/slick.min.js"></script>
+<script>
+    $(document).ready(function (){
+        $(window).scroll(function () {
+            var e = $(window).scrollTop();
+            if (e > 1000) {
+                $('#myBtnTop').show();
+            } else {
+                $('#myBtnTop').hide();
+            }
+            // $('nav.nav-options div').hide();
+        });
+        $('#myBtnTop').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            });
+        });
+    });
+</script>
+<script src="/user/js/search.js"></script>
 <script src="/user/js/validate.js"></script>
 <script>
     validation({
@@ -121,4 +149,11 @@
     })
 </script>
 <script src="/template/admin/plugins/sweet/sweetalert2.all.min.js"></script>
-@yield('footer')<?php
+<script>
+    $(()=>{
+        $('.close-alert').click(function(){
+            $('.close-alert').parent().hide();
+        })
+    })
+</script>
+@yield('footer')

@@ -237,8 +237,6 @@
 @endsection
 
 @section('footer')
-    <script src="/user/js/jquery.min.js"></script>
-    <script src="/user/js/bootstrap.min.js"></script>
     <script src="/user/js/product-home.js"></script>
     <script>
         $(document).ready(function () {
@@ -254,6 +252,7 @@
     </script>
     <script src="/user/js/active.js"></script>
     <script src="/user/js/product_new.js"></script>
+
     <script>
         let actice_warp = new activeButton("#m-content-header-myBtn", ".m-content-header-btn", "active-warp");
         actice_warp.activeMethod()

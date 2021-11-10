@@ -4,6 +4,7 @@
   @include('admin.head')
 </head>
 <body class="hold-transition login-page">
+@include('admin.alert')
 <div class="login-box">
   <div class="login-logo">
     <a href="../../index2.html"><b>Admin</b>LTE</a>
@@ -12,7 +13,7 @@
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
-        @include('admin.alert')
+
       <form action="/user/login" method="post">
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Email" name="username">

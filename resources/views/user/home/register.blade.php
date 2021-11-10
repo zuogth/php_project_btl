@@ -7,7 +7,6 @@
     <div class="main" >
         <div class="container">
             <div class="l-page-desgin">
-                @include('admin.alert')
                 <div class="l-detail-page">
                     <div class="l-themes-login-page"> <h1>Đăng ký</h1></div>
 
@@ -29,9 +28,6 @@
                         <input type="password" id="password" placeholder="Nhập mật khẩu *" name="password">
                         <div class="modal-errorMessage">
                             <span class="errorMessage"></span>
-                            @error('password')
-                            <span style="color: #da0101">{{$message}}</span>
-                            @enderror
                         </div>
                     </div>
                     <div class="form-login-input-page">
@@ -49,9 +45,6 @@
                         <input type="text" id="fullname" placeholder="Nhập họ và tên *" name="fullname">
                         <div class="modal-errorMessage">
                             <span class="errorMessage"></span>
-                            @error('fullname')
-                            <span style="color: #da0101">{{$message}}</span>
-                            @enderror
                         </div>
                     </div>
                     <div class="form-login-input-page">

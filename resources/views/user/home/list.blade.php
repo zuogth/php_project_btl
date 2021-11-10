@@ -8,10 +8,7 @@
                 {{--    stars--}}
     <link rel="stylesheet" href="/user/stars/stars-rating.css">
 
-{{--    pagination--}}
-{{--    <script src="/user/js/jquery.min.js"></script>--}}
-    <script src="/user/js/bootstrap.min.js"></script>
-    <script src="/paging/jquery.twbsPagination.js" type="text/javascript"></script>
+
 
 @endsection
 @section('content')
@@ -190,7 +187,7 @@
 @endsection
 
 @section('footer')
-
+    <script src="/paging/jquery.twbsPagination.js" type="text/javascript"></script>
     <script src="/user/js/slick.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){

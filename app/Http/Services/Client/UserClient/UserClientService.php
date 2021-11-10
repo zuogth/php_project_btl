@@ -10,12 +10,11 @@ class UserClientService
 {
     public function update($id,$request)
     {
-        $fullname=$request->lastname.' '.$request->firstname;
         $user=User::find($id);
-        $user->fullname=$fullname;
+        $user->fullname=$request->fullname;
         $user->phone=$request->phone;
         $user->address=$request->address;
-        $user->usercode=Str::slug($fullname,'-');
+        $user->usercode=Str::slug($request->fullname,'-');
         $user->save();
         return true;
     }
@@ -39,6 +38,34 @@ class UserClientService
             Session::flash('error',$err->getMessage());
             return false;
         }
+        return true;
+    }
+
+    public function findByEmail($user_id,$email)
+    {
+        if($email!=''){
+            return User::where('email','=',$email)->where('id','!=',$user_id)->first();
+        }
+        return null;
+    }
+
+    public function updateDetail($id,$request)
+    {
+        $user=User::find($id);
+        $user->fullname=$request->fullname;
+        $user->phone=$request->phone;
+        $user->email=$request->email;
+        $user->address=$request->address;
+        $user->usercode=Str::slug($request->fullname,'-');
+        $user->save();
+        return true;
+    }
+
+    public function changePass($id,$request)
+    {
+        $user=User::find($id);
+        $user->password=bcrypt($request->new_password);
+        $user->save();
         return true;
     }
 }

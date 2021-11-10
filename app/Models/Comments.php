@@ -15,6 +15,7 @@ class Comments extends Model
         'product_id',
         'user_id',
         'cmt_datetime',
+        'title',
         'context',
         'stars'
     ];

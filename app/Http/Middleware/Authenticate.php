@@ -16,7 +16,7 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            Session::flash('error','Please login');
+            Session::flash('error','Xin hãy đăng nhập');
             return route('login');
         }
     }

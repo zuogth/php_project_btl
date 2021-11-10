@@ -42,8 +42,13 @@ class CartController
 
     public function addCart(Product $product)
     {
-        $user_id=Auth::user()->id;
-        $this->billServiceClient->addCart($user_id,$product);
+        $user=Auth::user();
+        if($user==null){
+            return response()->json([
+                'error'=>true
+            ]);
+        }
+        $this->billServiceClient->addCart($user->id,$product);
         return true;
     }
 

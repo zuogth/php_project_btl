@@ -2,8 +2,7 @@
 @extends('user.main')
 @section('head')
     <link rel="stylesheet" href="/user/css/search.css">
-    <script src="/user/js/bootstrap.min.js"></script>
-    <script src="/paging/jquery.twbsPagination.js" type="text/javascript"></script>
+
 @endsection
 @section('content')
     <div class="main">
@@ -36,8 +35,8 @@
 @endsection
 
 @section('footer')
-
-<script src="/user/js/product-search.js"></script>
+    <script src="/paging/jquery.twbsPagination.js" type="text/javascript"></script>
+    <script src="/user/js/product-search.js"></script>
 
 @endsection
 

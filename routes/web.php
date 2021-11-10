@@ -165,5 +165,10 @@ Route::prefix('/')->group(function(){
     Route::post('/bill/{bill}',[BillClientController::class,'store']);
 
     #User
-    Route::get('/user/detail',[UserClientController::class,'index']);
+    Route::get('/user/detail/{active}',[UserClientController::class,'index']);
+    Route::post('/user/detail/check',[UserClientController::class,'check']);
+    Route::get('/user/detail',[UserClientController::class,'detail']);
+    Route::PUT('/user/detail',[UserClientController::class,'update']);
+    Route::post('/user/detail',[UserClientController::class,'password']);
+    Route::post('/user/comment',[UserClientController::class,'comment']);
 });

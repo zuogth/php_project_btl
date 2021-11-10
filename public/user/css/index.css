@@ -5,6 +5,23 @@
     font-family: 'Open Sans', sans-serif;
 }
 html{font-size: 16px;}
+.alert-noti {
+    max-width: 20rem;
+    position: fixed;
+    padding: 1rem 2rem 1rem 1rem;
+    right: 1rem;
+    top: 1rem;
+    z-index: 9999;
+    border-radius: 20px;
+    word-break: break-word;
+}
+.alert-noti .close-alert{
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 12px;
+    cursor: pointer;
+}
 .container-cus{
     width: 95%;
     margin: auto;

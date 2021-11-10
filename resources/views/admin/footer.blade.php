@@ -10,5 +10,11 @@
 <script src="/template/admin/plugins/datatables/intl.js"></script>
 <script src="/template/admin/js/main.js"></script>
 <script src="/template/admin/plugins/sweet/sweetalert2.all.min.js"></script>
-
+<script>
+    $(()=>{
+        $('.close-alert').click(()=>{
+            $('.close-alert').parent().hide();
+        })
+    })
+</script>
 @yield('footer')
