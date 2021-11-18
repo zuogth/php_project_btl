@@ -83,15 +83,7 @@ function updateUser(){
         data:data,
         success:function (result){
             if(result.error){
-                if(!result.email){
-                    Swal.fire(
-                        'Thông báo!',
-                        result.message,
-                        'error'
-                    )
-                }else{
-                    window.location.href='/user/login';
-                }
+                window.location.href='/user/login';
             }else{
                 Swal.fire({
                     title: 'Thành công!',

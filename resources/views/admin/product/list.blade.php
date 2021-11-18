@@ -29,7 +29,7 @@
                             <td class="status-cus">{{$product->discount}} %</td>
                             <td>{{$product->categoryname}}</td>
                             <td class="status-cus">{{$product->import-$product->sell}}</td>
-                            <td class="status-cus">{!!\App\Helpers\Helper::status($product->status)!!}</td>
+                            <td class="status-cus">{!!\App\Helpers\Helper::status('product',$product->status,$product->id)!!}</td>
                             <td><img src="{{$product->images}}" style="width: 100px;"></td>
                             <td>
                                 <a href="/admin/product/edit/{{$code}}/{{$product->id}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>

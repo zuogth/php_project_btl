@@ -19,6 +19,7 @@ use \App\Http\Controllers\Users\SearchController;
 use  \App\Http\Controllers\Users\CartController;
 use \App\Http\Controllers\Users\BillClientController;
 use \App\Http\Controllers\Users\UserClientController;
+use \App\Http\Controllers\Login\ForgotController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +38,10 @@ Route::get('/user/login',[LoginController::class,'login']);
 Route::get('/user/logout',[LoginController::class,'logout']);
 Route::get('/user/register',[RegisterController::class,'register']);
 Route::post('/user/register',[RegisterController::class,'store']);
-// Google URL
+Route::get('/user/forgot',[ForgotController::class,'index']);
+Route::post('/user/forgot',[ForgotController::class,'store']);
+
+#Google URL
 Route::prefix('google')->name('google.')->group( function(){
     Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login');
     Route::any('callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
@@ -109,49 +113,43 @@ Route::middleware(['auth','role'])->group(function () {
 
         #Upload
         Route::post('upload',[UploadController::class,'store']);
+
+        #Status
+        Route::put('status',[MainController::class,'update']);
     });
 
 });
 
-//route client
+#route client
 Route::prefix('/')->group(function(){
-//    Home product
+    #Home product
     Route::get('',[HomePageController::class,'index'])->name("home");
     Route::get('/new',[HomePageController::class,'new']);
     Route::get('/product-search',[HomePageController::class,'searchDetail']);
 
-
-//    search page
-
+    #search page
     Route::get('/search/',[SearchController::class,'index']);
-
     Route::get('/search-all-page',[SearchController::class,'show']);
-
     Route::get('/search-total-page',[SearchController::class,'total']);
-
     Route::get('/search-all-page-two',[SearchController::class,'showTwo']);
 
-//    list product
+    #list product
     Route::get('/product/{cate}/{type?}',[ProductListController::class,'index']);
 
-//    phân trang
+    #phân trang
     Route::get('/page',[ProductListController::class,'pagination']);
-
-
     Route::get('/product/brand/{cates}/{brand?}',[ProductListController::class,'brand']);
 
-//    filter
+    #filter
     Route::get('/product',[ProductListController::class,'search']);
     Route::get('/total',[ProductListController::class,'total']);
 
     # sắp xếp
     Route::get('/sort',[ProductListController::class,'sort']);
 
-
     #product detal
     Route::get('/product-detail/{slug}/',[ProductDetailController::class,'index']);
     Route::get('/product-comment',[ProductDetailController::class,'comment']);
-
 
     #cart
     Route::get('/cart',[CartController::class,'index']);
@@ -159,6 +157,7 @@ Route::prefix('/')->group(function(){
     Route::get('/cart/{product}',[CartController::class,'addCart']);
     Route::DELETE('/cart/delete/{product}',[CartController::class,'delete']);
     Route::DELETE('/cart/delete',[CartController::class,'deleteBill']);
+    Route::POST('/cart/load',[CartController::class,'loadFromLocal']);
 
     #Bill
     Route::get('/bill/{bill}',[BillClientController::class,'index']);

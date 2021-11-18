@@ -16,7 +16,7 @@ class MenuComposer
 
     public function compose(View $view)
     {
-        $menus = Category::select('id', 'categoryname','categorycode', 'parent_id')->where('status', 1)->get();
+        $menus = Category::select('id', 'categoryname','categorycode', 'parent_id','thumb')->where('status', 1)->get();
         $view->with('menus', $menus);
     }
 }

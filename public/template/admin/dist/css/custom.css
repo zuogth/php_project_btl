@@ -29,13 +29,44 @@ label#select_imgs{
     right: 1rem;
     top: 1rem;
     z-index: 9999;
-    border-radius: 20px;
+    border-radius: 5px;
     word-break: break-word;
+    box-shadow: 0 3px 3px black;
 }
 .alert-noti .close-alert{
     position: absolute;
     top: 50%;
     transform: translate(0, -50%);
     right: 12px;
+    cursor: pointer;
+}
+.mb-3{margin: 0!important;}
+.errorMessage{color: red;}
+.form-group-cus {
+    position: relative;
+}
+
+.province,
+.district,
+.commune {
+    overflow: auto;
+    height: auto;
+    max-height: 200px;
+    position: absolute;
+    background-color: white;
+    right: 1rem;
+    left: 1rem;
+    padding: 0 1rem;
+    display: none;
+}
+
+.province ul,
+.district ul,
+.commune ul {
+    list-style: none;
+}
+
+#formAddress li:hover {
+    background-color: aliceblue;
     cursor: pointer;
 }

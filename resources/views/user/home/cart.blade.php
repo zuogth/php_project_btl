@@ -41,7 +41,7 @@
                                             <div>
                                                 <span>{{$product->productname}}</span>
                                                 <input id="input-1" name="input-1" class="rating rating-loading"
-                                                       data-min="0" data-max="5" data-step="0.1" value="4.5" disabled>
+                                                       data-min="0" data-max="5" data-step="0.1" value="{{\App\Helpers\Helper::stars($product->id,$stars)}}" disabled>
                                             </div>
 
                                         </div>
@@ -52,22 +52,23 @@
                                             <input type="number" hidden value="{{$product->pricesell*(1-$product->discount/100)}}" name="price" id="price" class="price">
                                         </div>
                                     </td>
-                                    <td>
+                                    <td class="countOut-td">
                                         <div class="m-product-cart-table-body-count-button">
                                             <div class="m-product-cart-table-body-minus">
-                                                <button type="button" class="m-cart-minus">
+                                                <button type="button" class="m-cart-minus" id="minus-{{$product->id}}" product_id="{{$product->id}}">
                                                     <i class="fas fa-minus"></i>
                                                 </button>
                                             </div>
                                             <div class="m-product-cart-table-body-count">
-                                                <input type="number" value="{{$product->pivot->quantily}}" name="count" class="count">
+                                                <input type="number" value="{{$product->pivot->quantily}}" name="count" class="count" product_id="{{$product->id}}">
                                             </div>
                                             <div class="m-product-cart-table-body-minus">
-                                                <button type="button" class="m-cart-plus">
+                                                <button type="button" class="m-cart-plus" id="plus-{{$product->id}}" product_id="{{$product->id}}">
                                                     <i class="fas fa-plus"></i>
                                                 </button>
                                             </div>
                                         </div>
+                                        <span class="countOut" id="{{$product->id}}"></span>
                                     </td>
                                     <td>
                                         <div class="m-product-cart-price-total-button">
@@ -90,7 +91,7 @@
 
                     </div>
                     <div class="m-product-cart-button-clear">
-                        <button class="clear-test" type="button">
+                        <button class="clear-test" type="button" onclick="removeCart()">
                             Xoá giỏ hàng
                         </button>
                     </div>
@@ -133,11 +134,8 @@
 @endsection
 
 @section('footer')
-    <script src="/user/js/jquery.min.js"></script>
-    <script src="/user/js/bootstrap.min.js"></script>
     <script src="/user/stars/starts-rating.js"></script>
     <script src="/user/js/product-cart.js"></script>
-
 
 
 @endsection

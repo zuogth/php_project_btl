@@ -1,9 +1,9 @@
 <style>
     .m-category-list{
         display: flex;
-        width: 95%;
+        width: 90%;
         margin: auto;
-        justify-content: space-around;
+        justify-content: flex-start;
     }
     .m-category-list>ul{
         width: 30%;
@@ -102,21 +102,26 @@
                     </div>
                     <div class="h-menu-right">
                         <ul>
-                            <li>
-                                @if(\Illuminate\Support\Facades\Auth::user())
-                                    <a data-toggle="collapse" data-target="#info-user"><i class="fas fa-user"></i></a>
-                                    <div class="collapse" id="info-user">
+                            @if(\Illuminate\Support\Facades\Auth::user())
+                                <li data-toggle="collapse" data-target="#info-user">
+                                    <a><i class="fas fa-user"></i></a>
+                                    <div class="collapse" id="info-user"  data-user="{{\Illuminate\Support\Facades\Auth::user()->id}}">
                                         <p>Xin chào {{\Illuminate\Support\Facades\Auth::user()->fullname}}</p>
                                         <hr/>
                                         <a href="/user/detail/1" class="info-user-item">Thông tin tài khoản</a>
                                         <a href="/user/detail/2" class="info-user-item">Đơn đặt hàng</a>
                                         <a href="/user/logout">Đăng xuất</a>
                                     </div>
-                                @else
-                                    <a><i class="far fa-user" data-toggle="modal" data-target="#form-login"></i></a>
-                                @endif
+                                </li>
+                            @else
+                                <li data-toggle="modal" data-target="#form-login">
+                                    <a><i class="far fa-user"></i></a>
+                                </li>
+                            @endif
+
+                            <li>
+                                <a href="/cart"><i class="fas fa-shopping-cart"></i></a>
                             </li>
-                            <li><a href="/cart"><i class="fas fa-shopping-cart"></i></a></li>
                             <li><a href="#" id="h-btn-search"><i class="fas fa-search"></i></a></li>
                         </ul>
                     </div>

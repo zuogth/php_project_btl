@@ -14,33 +14,6 @@
                                 <div><h2>
                                         Thông tin liên lạc </h2></div>
                                 <div class="form-login-input-page">
-                                    <div><label for="">Số điện thoại</label></div>
-                                    <div><input type="number" name="phone" placeholder="Số điện thoại *" id="phone" value="{{$user->phone}}"></div>
-                                    <div class="modal-errorMessage">
-                                        <span class="errorMessage"></span>
-                                    </div>
-                                </div>
-                                <div class="form-login-input-page">
-                                    <div><label for="">Email</label></div>
-                                    <div><input type="text" name="email" placeholder="Email *" id="email" value="{{$user->email}}"></div>
-                                    <div class="modal-errorMessage">
-                                        @error('email')
-                                        <span style="color: #da0101;margin-right:5px; ">{{$message}}</span>
-                                        @enderror
-                                        <span class="errorMessage"></span>
-                                    </div>
-                                </div>
-                                <div class="m-product-bill-user-info-sent-email d-flex">
-                                    <div >
-                                        <input type="checkbox" name="sendemail" id="sendemail">
-                                    </div>
-                                    <label for="sendemail">Gửi email cho tôi với tin tức và ưu đãi</label>
-                                </div>
-                            </div>
-                            <div class="m-product-bill-user-info-contact">
-                                <div><h2>
-                                        Địa chỉ giao hàng</h2></div>
-                                <div class="form-login-input-page">
                                     <div><label for="">Họ và tên</label></div>
                                     <div><input type="text" placeholder="Name" name="fullname" id="fullname" value="{{$user->fullname}}"></div>
                                     <div class="modal-errorMessage">
@@ -48,10 +21,54 @@
                                     </div>
                                 </div>
                                 <div class="form-login-input-page">
-                                    <div><label for="">Địa chỉ</label></div>
-                                    <div><input type="text" placeholder="Address" name="address" id="address" value="{{$user->address}}"></div>
+                                    <div><label for="">Số điện thoại</label></div>
+                                    <div><input type="number" name="phone" placeholder="Số điện thoại *" id="phone" value="{{$user->phone}}"></div>
                                     <div class="modal-errorMessage">
                                         <span class="errorMessage"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="m-product-bill-user-info-contact">
+                                <div><h2>
+                                        Địa chỉ giao hàng</h2></div>
+
+                                <div class="form-login-input-page form-group-cus">
+                                    <div><label for="">Thành phố</label></div>
+                                    <div>
+                                        <input type="text" onkeyup="searchProvince(this)" onfocus="listProvince(this)" id="province" onfocusout="unFocusInput(this)"
+                                               name="province" parent_code="" value="{!! \App\Helpers\Helper::address(0,$user->address) !!}" placeholder="Thành phố...">
+                                    </div>
+                                    <div class="province" onmouseleave="onMouseLeave()" onmouseenter="onMouseEnter()">
+                                        <ul id="listData"></ul>
+                                    </div>
+                                </div>
+                                <div class="form-login-input-page form-group-cus">
+                                    <div><label for="">Quận, huyện</label></div>
+                                    <div>
+                                        <input type="text" onkeyup="searchDistrict(this)" onfocus="listDistrict(this)" parent="province" onfocusout="unFocusInput(this)"
+                                               name="district" id="district" parent_code="" value="{!! \App\Helpers\Helper::address(1,$user->address) !!}"
+                                               placeholder="Huyện...">
+                                    </div>
+                                    <div class="district" onmouseleave="onMouseLeave()" onmouseenter="onMouseEnter()">
+                                        <ul class="listData"></ul>
+                                    </div>
+                                </div>
+                                <div class="form-login-input-page form-group-cus">
+                                    <div><label for="">Xã</label></div>
+                                    <div>
+                                        <input type="text" onkeyup="searchWard(this)" onfocus="listWard(this)" parent="district" onfocusout="unFocusInput(this)"
+                                               name="ward" id="ward" parent_code="" value="{!! \App\Helpers\Helper::address(2,$user->address) !!}"
+                                               placeholder="Xã...">
+                                    </div>
+                                    <div class="ward" onmouseleave="onMouseLeave()" onmouseenter="onMouseEnter()">
+                                        <ul class="listData"></ul>
+                                    </div>
+                                </div>
+                                <div class="form-login-input-page form-group-cus">
+                                    <div><label for="">Thôn, số nhà</label></div>
+                                    <div>
+                                        <input type="text" name="village" id="village"
+                                               value="{!! \App\Helpers\Helper::address(3,$user->address) !!}" placeholder="Chi tiết (thôn, số nhà,...)">
                                     </div>
                                 </div>
                             </div>
@@ -79,13 +96,13 @@
                                             <img src="{{$product->images}}" alt="">
                                             <div> <p>{{$product->productname}}</p></div>
                                         </div>
-                                        <div><p>{{$product->pivot->quantily}}</p></div>
+                                        <div><p>x{{$product->pivot->quantily}}</p></div>
                                         <div> <p>{!! \App\Helpers\Helper::price($product->pricesell*(1-$product->discount/100)) !!}</p></div>
                                     </div>
                                 @endforeach
                             </div>
                             <div class="m-product-bill-detail-discount">
-                                <input type="text" name="discount" id="discount" placeholder="mã voucher">
+                                <input type="text" name="discount" id="discount" placeholder="Mã voucher">
                                 <button type="button">Áp dụng</button>
                             </div>
                             <div class="m-product-bill-detail-payment" >
@@ -95,19 +112,16 @@
                                 </div>
                                 <div>
                                     <div>Phí giao hàng</div>
-                                    <div><span>$3.00</span></div>
-                                </div>
-                                <div>
-                                    <div>Thuế</div>
-                                    <div><span>$328.60</span></div>
+                                    <div><span>100.000 VND</span></div>
                                 </div>
                             </div>
                             <div class="m-product-bill-detail-total" >
                                 <div>
                                     <div>Tổng </div>
-                                    <div><span>$328.60</span></div>
+                                    <div><span>{!! \App\Helpers\Helper::price($bill->totalprice+100000) !!}</span></div>
                                 </div>
                             </div>
+                            <input type="hidden" name="totalprice" value="{{$bill->totalprice+100000}}">
                         </div>
 
                     </div>
@@ -138,4 +152,5 @@
             }
         })
     </script>
+    <script src="/user/js/getcities.js"></script>
 @endsection

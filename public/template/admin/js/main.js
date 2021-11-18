@@ -158,5 +158,25 @@ function toMoney(totalprice){
         currency: 'VND'
     });
 }
+//Update status
+function updateStatus(element,id,status){
+    let table=$(element).attr("table");
+    $.ajax({
+        url:'/admin/status',
+        type:'PUT',
+        datatype:'JSON',
+        data:{status,table,id},
+        success:function (result){
+            location.reload();
+        },
+        error:function (){
+            Swal.fire(
+                'Lỗi!',
+                'Xảy ra lỗi, vui lòng thử lại.',
+                'error'
+            )
+        }
+    })
+}
 
 

@@ -36,4 +36,9 @@ class UserService
         }
         return true;
     }
+
+    public function findById($id)
+    {
+        return User::find($id);
+    }
 }

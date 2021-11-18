@@ -242,16 +242,15 @@
         <div id="section1">
             <div class="content-intro">
                 <p>{!! $categoryParent->description !!}</p>
-                <div style="padding: 2rem"></div>
 
             </div>
-            <img src="/storage/{{$categoryParent->thumb}}" alt="" width="100%">
+            <img src="{{$categoryParent->thumb}}" alt="" width="100%">
 
             <div class="content-intro">
                 <span>Độ trung thực màu 100%</span>
                 <p>{!! $categoryChild->description !!}</p>
             </div>
-            <img src="/storage/{{$categoryChild->thumb}}" alt="" width="100%">
+            <img src="{{$categoryChild->thumb}}" alt="" width="100%">
         </div>
         <div id="section2">
             <h1>Thông số kỹ thuật</h1>
@@ -289,38 +288,6 @@
 
                     </div>
                 </div>
-                <button class="btn btn-danger" id="btn-comment">Nhận xét</button>
-            </div>
-            <div class="form-rate collapse" id="formComment">
-                <p><span>*</span> Mục bắt buộc</p>
-                <div class="form-rate-content">
-                    <form action="product_detail.html" method="GET">
-                        <div class="form-group">
-                            <label for="">Đánh giá <span>*</span></label>
-                            <input id="input-1" name="input-1" class="rating rating-loading"
-                                   data-min="0" data-max="5" data-step="0.1" value="">
-                        </div>
-                        <div class="form-group">
-                            <label for="title">Tiêu đề <span>*</span></label>
-                            <input type="text" class="form-control" name="title" id="title" placeholder="Tiêu đề ví dụ: Tính năng tuyệt vời!" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="content">Nội dung <span>*</span></label>
-                            <textarea name="content" id="content" rows="10" class="form-control" placeholder="Ví dụ: Tôi mua sản phẩm này một tháng trước và tôi cảm thấy rất hạnh phúc với quyết định này" required></textarea>
-                        </div>
-                        <h6>Hướng dẫn viết</h6>
-                        <p>Hãy gửi chúng tôi nhận xét về sản phẩm. Vui lòng không đề cập tới đối thủ, giá sản phẩm và các sản phẩm khác, trang web, thư rác hoặc quảng cáo tại đây. Không bình luận thông tin cá nhân và các nhận xét mang tính chất tục tĩu. Nếu bạn cần thông tin về lắp đặt và dịch vụ khách hàng: liên hệ trực tiếp với chúng tôi qua tổng đài hotline.</p>
-                        <div class="form-group ip-policy">
-                            <input type="checkbox" id="policy" required>
-                            <label for="policy">Tôi đồng ý với chính sách bảo vệ dữ liệu.<span>*</span></label><a href="#">Đọc chính sách <i class="far fa-chevron-right"></i></a>
-                        </div>
-                        <div class="form-group-btn">
-                            <a class="btn btn-secondary" id="btn-comment2">Hủy</a>
-                            <button class="btn btn-danger" type="submit">Nhận xét</button>
-                        </div>
-                    </form>
-                </div>
-
             </div>
             <div class="comments">
                 <h3>Nhận xét</h3>

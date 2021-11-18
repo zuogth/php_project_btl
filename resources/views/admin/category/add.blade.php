@@ -1,9 +1,5 @@
 @extends('admin.main')
 
-@section('head')
-<script src="/ckeditor/ckeditor.js"></script>
-@endsection
-
 @section('content')
     <div class="col-md-12">
         <!-- jquery validation -->
@@ -33,6 +29,19 @@
                         <label for="description">Mô tả</label>
                         <textarea rows="5" name="description" class="form-control" id="description">{{old('description')}}</textarea>
                     </div>
+                    <label>Ảnh</label>
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label id="select_img" for="file" data-img="thumb" onclick="selectImg(this)">
+                                <img src="{{old('thumb')}}" id="thumb" alt='Chọn ảnh sản phẩm' style='width:100%;'>
+                            </label>
+                            <input type="hidden" name="thumb" id="thumb" value="{{old('thumb')}}">
+                            @error('thumb')
+                            <span style="color: #da0101">{{$message}}</span>
+                            @enderror
+                        </div>
+                        <input type="file" class="form-control" name="file" id="file" hidden>
+                    </div>
                     <div class="form-group">
                         <label for="">Kích hoạt</label>
                         <div class="custom-control custom-radio">
@@ -54,4 +63,18 @@
         </div>
         <!-- /.card -->
     </div>
+@endsection
+@section('footer')
+    <script src="/ckeditor/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#description'))
+            .then( editor => {
+                editor.ui.view.editable.element.style.height = '200px';
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+    </script>
 @endsection

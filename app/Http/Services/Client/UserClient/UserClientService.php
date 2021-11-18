@@ -8,23 +8,12 @@ use Illuminate\Support\Str;
 
 class UserClientService
 {
-    public function update($id,$request)
-    {
-        $user=User::find($id);
-        $user->fullname=$request->fullname;
-        $user->phone=$request->phone;
-        $user->address=$request->address;
-        $user->usercode=Str::slug($request->fullname,'-');
-        $user->save();
-        return true;
-    }
 
     public function create($request)
     {
         try{
             $user=User::create([
                 'fullname'=>(string)$request->input('fullname'),
-                'username'=>(string)$request->input('username'),
                 'email'=>(string)$request->input('email'),
                 'phone'=>(string)$request->input('phone'),
                 'password'=>bcrypt((string)$request->input('password')),
@@ -41,12 +30,9 @@ class UserClientService
         return true;
     }
 
-    public function findByEmail($user_id,$email)
+    public function findByEmail($email)
     {
-        if($email!=''){
-            return User::where('email','=',$email)->where('id','!=',$user_id)->first();
-        }
-        return null;
+        return User::where('email','=',$email)->first();
     }
 
     public function updateDetail($id,$request)
@@ -54,17 +40,17 @@ class UserClientService
         $user=User::find($id);
         $user->fullname=$request->fullname;
         $user->phone=$request->phone;
-        $user->email=$request->email;
-        $user->address=$request->address;
+        $address=$request->province.'-'.$request->district.'-'.$request->ward.'-'.$request->village;
+        $user->address=$address;
         $user->usercode=Str::slug($request->fullname,'-');
         $user->save();
         return true;
     }
 
-    public function changePass($id,$request)
+    public function changePass($id,$new_pass)
     {
         $user=User::find($id);
-        $user->password=bcrypt($request->new_password);
+        $user->password=bcrypt($new_pass);
         $user->save();
         return true;
     }

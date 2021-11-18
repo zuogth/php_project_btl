@@ -2,7 +2,7 @@
     <!-- Brand Logo -->
     <a href="/admin" class="brand-link">
       <img src="/template/admin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Admin</span>
+      <span class="brand-text font-weight-light">AdminH3</span>
     </a>
 
     <!-- Sidebar -->
@@ -16,7 +16,7 @@
           <a href="#" class="d-block">{{\Illuminate\Support\Facades\Auth::user()->fullname}}</a>
         </div>
           <div class="info">
-              <a href="/user/logout" class="d-block">Logout</a>
+              <a href="/user/logout" class="d-block" style="text-decoration: underline"><i class="fas fa-sign-out-alt"></i></a>
           </div>
       </div>
 

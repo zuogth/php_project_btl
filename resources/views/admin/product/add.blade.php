@@ -1,9 +1,5 @@
 @extends('admin.main')
 
-@section('head')
-<script src="/ckeditor/ckeditor.js"></script>
-@endsection
-
 @section('content')
     <div class="col-md-12">
         <!-- jquery validation -->
@@ -151,15 +147,16 @@
 @endsection
 
 @section('footer')
-<script>
-    ClassicEditor
-        .create(document.querySelector('#content'))
-        .then( editor => {
-            editor.ui.view.editable.element.style.height = '200px';
-        })
-        .catch(error => {
-            console.error(error);
-        });
+    <script src="/ckeditor/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#content'))
+            .then( editor => {
+                editor.ui.view.editable.element.style.height = '200px';
+            })
+            .catch(error => {
+                console.error(error);
+            });
 
-</script>
+    </script>
 @endsection

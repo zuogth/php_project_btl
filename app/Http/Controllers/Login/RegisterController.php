@@ -4,18 +4,23 @@ namespace App\Http\Controllers\Login;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserRequest;
+use App\Http\Services\Client\BillClient\BillServiceClient;
+use App\Http\Services\Client\ProductClient\ProductServiceClient;
 use App\Http\Services\Client\UserClient\UserClientService;
-use App\Models\Comments;
-use App\Models\User;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
+    protected BillServiceClient $billServiceClient;
     protected UserClientService $userService;
-    public function __construct(UserClientService $userService)
+    protected ProductServiceClient $productServiceClient;
+    public function __construct(UserClientService $userService,
+                                ProductServiceClient $productServiceClient,
+                                BillServiceClient $billServiceClient)
     {
         $this->userService=$userService;
+        $this->productServiceClient=$productServiceClient;
+        $this->billServiceClient=$billServiceClient;
     }
 
     public function store(UserRequest $request)
@@ -29,7 +34,6 @@ class RegisterController extends Controller
 
     public function register()
     {
-        DB::table('users_role')->where('user_id',9)->delete();
         return view('user.home.register',[
             'title'=>'Đăng ký tài khoản mới'
         ]);

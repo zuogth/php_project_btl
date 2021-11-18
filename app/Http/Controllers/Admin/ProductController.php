@@ -26,7 +26,7 @@ class ProductController extends Controller
     public function index($code)
     {
         $category=$this->categoryService->findByCode($code);
-        $products=$this->productService->findByCategory($category->id,'');
+        $products=$this->productService->findByCategory($category->id);
         return view('admin.product.list',[
             'title'=>'Danh sách sản phẩm',
             'products'=>$products,
@@ -75,7 +75,7 @@ class ProductController extends Controller
         $spec_id=[];
         $this->addArray($code,$request,$spec_id);
         $this->productService->edit($product,$request,$spec_id);
-        return redirect()->back();
+        return redirect('admin/product/list/'.$code);
     }
 
     public function destroy(Request $request)

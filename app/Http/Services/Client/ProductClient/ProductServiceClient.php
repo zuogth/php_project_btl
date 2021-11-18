@@ -37,6 +37,16 @@ class ProductServiceClient
             return false;
         }
     }
+
+    public function starsProduct()
+    {
+        return DB::table('comments')
+            ->select('comments.product_id')
+            ->selectRaw('avg(stars) as star')
+            ->groupBy('comments.product_id')
+            ->get();
+    }
+
     public function findAllByBrand($cateName,$brand){
         try {
             $cate = Category::where('categorycode',$cateName)->where('status',1)->get('id')->first();
@@ -239,5 +249,7 @@ class ProductServiceClient
         return $id;
     }
 
-    /////////////////////////////
+   public function findById($id){
+        return Product::find($id);
+   }
 }

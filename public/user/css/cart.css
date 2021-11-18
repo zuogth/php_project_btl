@@ -207,3 +207,10 @@
     background-color: black;
     color: #fff;
 }
+td.countOut-td{
+    text-align: center;
+}
+.countOut{
+    font-size: 0.8rem;
+    color: #eb0854;
+}

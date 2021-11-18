@@ -14,7 +14,6 @@
                     <th>Họ tên</th>
                     <th>SĐT</th>
                     <th>Địa chỉ</th>
-                    <th>Username</th>
                     <th>Hoạt động</th>
                     <th>Role</th>
                     <th style="width:10%">&nbsp;</th>
@@ -26,8 +25,7 @@
                             <td>{{$user->fullname}}</td>
                             <td>{{$user->phone}}</td>
                             <td>{{$user->address}}</td>
-                            <td>{{$user->username}}</td>
-                            <td>{!!\App\Helpers\Helper::status($user->status)!!}</td>
+                            <td>{!!\App\Helpers\Helper::status('users',$user->status,$user->id)!!}</td>
                             <td>{{$user->roles[0]->rolename}}</td>
                             <td>
                                 <a href="/admin/user/edit/{{$user->id}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
@@ -53,5 +51,6 @@
             });
             $("div.toolbar").html();
         } );
+
     </script>
 @endsection

@@ -63,10 +63,9 @@
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
-                <b>Version</b> 3.2.0-rc
+                <b>AdminH3</b>
             </div>
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
-            reserved.
+            <strong>Bản quyền © 2021 Công ty H3 bảo lưu mọi quyền</strong>
         </footer>
 
         <!-- Control Sidebar -->

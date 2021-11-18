@@ -14,11 +14,11 @@
                 </div>
                 <form method="POST" action="" id="m-form-register-main">
                     <div class="form-login-input-page">
-                        <div class="l-themes-page"><label for="username">Tài khoản *</label></div>
-                        <input type="text"  id="username" placeholder="Nhập tài khoản *" name="username">
+                        <div class="l-themes-page"><label for="username">Tài khoản email *</label></div>
+                        <input type="text"  id="email" placeholder="Nhập email *" name="email">
                         <div class="modal-errorMessage">
                             <span class="errorMessage"></span>
-                            @error('username')
+                            @error('email')
                             <span style="color: #da0101">{{$message}}</span>
                             @enderror
                         </div>
@@ -45,16 +45,6 @@
                         <input type="text" id="fullname" placeholder="Nhập họ và tên *" name="fullname">
                         <div class="modal-errorMessage">
                             <span class="errorMessage"></span>
-                        </div>
-                    </div>
-                    <div class="form-login-input-page">
-                        <div class="l-themes-page"><label for="email">Email *</label></div>
-                        <input type="email" id="email" placeholder="Email*" name="email">
-                        <div class="modal-errorMessage">
-                            <span class="errorMessage"></span>
-                            @error('email')
-                            <span style="color: #da0101">{{$message}}</span>
-                            @enderror
                         </div>
                     </div>
                     <div class="form-login-input-page">
@@ -85,7 +75,6 @@
             error: ".errorMessage",
             formGroupSelector: '.form-login-input-page',
             rules: [
-                validation.isRequired("#username", "Bạn hãy nhập tài khoản"),
                 validation.isRequired("#password", "Bạn hãy nhập mật khẩu"),
                 validation.isMinLength("#password", min = 6 ,`Số kí tự phải lớn hơn hoặc bằng ${min}`),
                 validation.isRequired("#repeat_password", "Bạn hãy nhập lại mật khẩu"),

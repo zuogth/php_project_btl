@@ -25,8 +25,7 @@ class UserRequest extends FormRequest
     {
         return [
             'fullname'=>'required',
-            'username'=>'required|unique:users',
-            'email'=>'required|email:rfc,dns|unique:users',
+            'email'=>'required|email|unique:users',
             'password'=>'required|min:6',
             'repeat_password'=>'required|same:password'
         ];
@@ -36,11 +35,9 @@ class UserRequest extends FormRequest
     {
         return [
             'fullname.required'=>'Hãy nhập đầy đủ tên của bạn',
-            'username.required'=>'Vui lòng nhập tên tài khoản',
             'email.required'=>'Vui lòng nhập email',
             'email.unique'=>'Email này đã được đăng ký trước đó',
             'email.email'=>'Email không hợp lệ',
-            'username.unique'=>'Tài khoản này đã có người sử dụng',
             'password.required'=>'Mật khẩu không thể bỏ trống',
             'repeat_password.required'=>'Hãy xác nhận lại mật khẩu',
             'repeat_password.same'=>'Mật khẩu nhập lại không chính xác',

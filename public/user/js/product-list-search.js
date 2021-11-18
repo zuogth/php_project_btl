@@ -140,7 +140,6 @@ $(function () {
                 datatype:'JSON',
                 data:{page,categoryCode,typeCode,brandCode},
                 success:function(result){
-                    console.log(result)
                     count = $('#count_pageing').html()
                     let html = `
                                     <div id="category_code" style="display: none">${result.cateName}</div>
@@ -201,20 +200,51 @@ $(function () {
 
 //Thêm sản phẩm vào cart
 function addCart(event,id){
-    $.ajax({
-        url:'/cart/'+id,
-        type:'GET',
-        success:function (result){
-            if(result.error==true){
-                window.location.href='/user/login';
+    let user=$('div#info-user').attr("data-user");
+    if(user){
+        $.ajax({
+            url:'/cart/'+id,
+            type:'GET',
+            success:function (result){
+                if(result.error==true){
+                    window.location.href='/user/login';
+                }
+                html=`<a onclick="addCart(this,${id})" class="btn btn-danger">Mua<i class="fas fa-check"></i></a>`
+                $(event).parents().eq(0).html(html);
+            },
+            error:function (){
+                alert('Error');
             }
-            html=`<a onclick="addCart(this,${id})" class="btn btn-danger">Mua<i class="fas fa-check"></i></a>`
-            $(event).parents().eq(0).html(html);
-        },
-        error:function (){
-            alert('Error');
+        })
+    }else{
+        let list_cart=[];
+        let flag=false;
+        list_cart=JSON.parse(window.localStorage.getItem('list_cart'));
+        if(list_cart!=null){
+            for (let item of list_cart){
+                if(item.product_id==id){
+                    item.quantily+=1;
+                    flag=true;
+                }
+            }
+            if(!flag){
+                let data={};
+                data['product_id']=id;
+                data['quantily']=1;
+                list_cart.push(data);
+            }
+        }else{
+            list_cart=[];
+            let data={};
+            data['product_id']=id;
+            data['quantily']=1;
+            list_cart.push(data);
         }
-    })
+        localStorage.setItem('list_cart', JSON.stringify(list_cart));
+        html=`<a onclick="addCart(this,${id})" class="btn btn-danger">Mua<i class="fas fa-check"></i></a>`
+        $(event).parents().eq(0).html(html);
+    }
+
 }
 
 

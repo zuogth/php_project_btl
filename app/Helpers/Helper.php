@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Http\Services\Client\ProductClient\ProductServiceClient;
 use NumberFormatter;
 
 class Helper{
@@ -17,7 +18,7 @@ class Helper{
                     <td>$category->id</td>
                     <td>$char$category->categoryname</td>
                     <td>$category->description</td>
-                    <td>".self::status($category->status)."</td>
+                    <td>".self::status('category',$category->status,$category->id)."</td>
                     <td>
                         <a href='/admin/category/edit/$category->id' class='btn btn-primary btn-sm'><i class='fas fa-edit'></i></a>
                         <a href='#' class='btn btn-danger btn-sm' onclick='removeRow($category->id,\"/admin/category/delete\")'><i class='fas fa-trash-alt'></i></a>
@@ -32,11 +33,11 @@ class Helper{
         return $html;
     }
 
-    public static function status($status):string{
+    public static function status($table,$status,$id):string{
         if($status==1){
-            return '<span class="btn btn-success btn-xs">Yes</span>';
+            return '<span class="btn btn-success btn-xs" id="btn-status" table="'.$table.'" onclick="updateStatus(this,'.$id.',0)">Yes</span>';
         }
-        return '<span class="btn btn-danger btn-xs">No</span>';
+        return '<span class="btn btn-danger btn-xs" id="btn-status" table="'.$table.'" onclick="updateStatus(this,'.$id.',1)">No</span>';
     }
 
     public static function statusBill($status):string{
@@ -67,4 +68,36 @@ class Helper{
         }
         return '_';
     }
+
+    public static function address($index,$address)
+    {
+        $arr=explode('-',$address);
+        $village='';
+        for($i=0;$i<sizeof($arr);$i++){
+            if($index==3 && $i>=$index){
+                if($i==sizeof($arr)-1){
+                    $village.=$arr[$i];
+                }else{
+                    $village.=$arr[$i].'-';
+                }
+            }else{
+                if($i==$index){
+                    return $arr[$i];
+                }
+            }
+        }
+        return $village;
+    }
+
+    public static function stars($product_id,$stars)
+    {
+        foreach ($stars as $val)
+        {
+            if($product_id==$val->product_id){
+                return $val->star;
+            }
+        }
+        return 0;
+    }
+
 }

@@ -35,7 +35,7 @@
 /* m-product-bill-user-info-sent-email */
 .m-product-bill-user-info-sent-email{
     margin-top: 1rem;
- 
+
 }
 #sendemail{
     width: 1.2rem;
@@ -75,28 +75,28 @@
 }
 .m-product-bill-detail-list{
     width: 100%;
-    height: 25rem;
+    height: 30rem;
     overflow: auto;
     border-bottom: 1px solid rgba(143, 142, 142, 0.164);
     border-top: 1px solid rgba(143, 142, 142, 0.164);
 
- 
+
 }
 .m-product-bill-detail-list-incart{
     width: 90%;
     display: flex;
     justify-content:space-between;
     margin: 2rem auto;
-    
-  
+
+
 }
 .m-product-bill-detail-list-incart>div>img{
     width: 5rem;
     height: 6rem;
 }
 .m-product-bill-detail-list-incart p{
-    font-size: 1.2rem;
-    line-height: 3rem;
+    font-size: 1rem;
+    line-height: 2rem;
     padding: 1rem;
 }
 
@@ -157,3 +157,35 @@
     font-size: 1.3rem;
 }
 
+.form-group-cus {
+    position: relative;
+}
+
+.province,
+.district,
+.ward {
+    overflow: auto;
+    height: auto;
+    max-height: 200px;
+    position: absolute;
+    background-color: white;
+    right: 4rem;
+    left: 0;
+    padding: 0 1rem;
+    display: none;
+    z-index: 99;
+    border: 1px solid black;
+    border-top: none;
+    margin: 0!important;
+}
+
+.province ul,
+.district ul,
+.ward ul {
+    list-style: none;
+}
+
+#m-cart-to-bill li:hover {
+    background-color: aliceblue;
+    cursor: pointer;
+}

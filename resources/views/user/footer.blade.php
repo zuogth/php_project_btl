@@ -21,7 +21,7 @@
         <hr>
         <div class="footer-m align-items-center">
             <div class="f-national">
-                <img src="./img/vietnam.png" alt=""><a href="#">Việt Nam</a>
+                <img src="/user/img/vietnam.png" alt=""><a href="#">Việt Nam</a>
             </div>
             <div class="f-social">
                 <ul>
@@ -42,12 +42,12 @@
                     <li><a href="">Phát lý</a></li>
                     <li><a href="">Chính sách mua hàng và đổi trả</a></li>
                 </ul>
-                <p>Bản quyền © 2021 Công ty HHH bảo lưu mọi quyền</p>
+                <p>Bản quyền © 2021 Công ty H3 bảo lưu mọi quyền</p>
                 <p>ĐT: 024 3934 5151</p>
                 <p>Email: <a href="mailto:tuanhieu342000@gmail.com">tuanhieu342000@gmail.com</a></p>
             </div>
             <fiv class="footer-b-l">
-                <img src="./img/icon-vn01.png" alt="">
+                <img src="/user/img/icon-vn01.png" alt="">
             </fiv>
         </div>
     </div>
@@ -68,7 +68,7 @@
                 @include('admin.alert')
                 <form action="/user/login" method="POST" id="modal-form-login" >
                     <div class="form-login-input">
-                        <input type="text" id="username" placeholder="Tài khoản*" name="username">
+                        <input type="text" id="email" placeholder="Email *" name="email">
                         <div class="modal-errorMessage">
                             <span class="errorMessage"></span>
                         </div>
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                     <div class="l-modal-footer-detail">
-                        <div class="forgot-password"><a  href="./forgot.html"
+                        <div class="forgot-password"><a  href="/user/forgot"
                             >Quên mật khẩu?</a></div>
                     </div>
                     <div class="btn-google">
@@ -139,7 +139,8 @@
         error: ".errorMessage",
         formGroupSelector: '.form-login-input',
         rules: [
-            validation.isRequired("#username", "Bạn hãy nhập tài khoản"),
+            validation.isRequired("#email", "Bạn hãy nhập email"),
+            validation.isEmail("#email","Trường này phải là email"),
             validation.isRequired("#password", "Bạn hãy nhập mật khẩu"),
             validation.isMinLength("#password", min = 6 ,`số kí tự phải lớn hơn hoặc bằng ${min}`)
         ],

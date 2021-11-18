@@ -33,7 +33,7 @@
             <div class="icon">
                 <i class="fal fa-user-plus"></i>
             </div>
-            <a href="/admin/user/list" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="/admin/user/list" class="small-box-footer">Xem chi tiết <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
 @endsection

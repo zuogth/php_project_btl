@@ -26,7 +26,7 @@
                             </td>
                             <td>{{$receipt->receipt_date}}</td>
                             <td>{{$receipt->totalprice}}</td>
-                            <td>{!! \App\Helpers\Helper::status($receipt->status) !!}</td>
+                            <td>{!! \App\Helpers\Helper::status('receipt',$receipt->status,$receipt->id) !!}</td>
                             <td>
                                 <a href="/admin/receipt/edit/{{$receipt->id}}" class="btn btn-primary btn-sm"><i class="fas fa-info"></i></a>
                             </td>

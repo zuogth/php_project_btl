@@ -22,9 +22,11 @@ class HelperMenu
                                 <div class="h-menu-child d-flex">
                                 <div class="m-category-list"><ul>';
                     foreach ($brands as $brand){
-                        $html .= '<li><h5><a href="/product/brand/'.$child.''.$brand->brandcode.'">'.$brand->brandname.'</a></h5></li>';
+                        $html .= '<li><h5><a class="list-brand" href="/product/brand/'.$child.''.$brand->brandcode.'">'.$brand->brandname.'
+                                            <i class="fas fa-angle-right"></i></a></h5></li>';
                     }
                     $html .='</ul> <ul>'.self::menus($menus,$brands,$menu->id,$child).'</ul>';
+                    $html.='<img src="'.$menu->thumb.'" width="250px">';
                     $html .='</div>
                              </div>
                              </div>';

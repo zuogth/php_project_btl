@@ -10,9 +10,9 @@ use App\Http\Services\Client\SpecialityClient\SpecialityServiceClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-
 class HomePageController extends Controller
 {
+
     protected ProductServiceClient $productService;
 
     protected CategoryServiceClient $categoryServiceClient;

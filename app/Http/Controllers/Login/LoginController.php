@@ -24,7 +24,7 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         $credentials=$request->validate([
-            'username'=>'required',
+            'email'=>'required',
             'password'=>'required'
         ]);
 
@@ -49,9 +49,11 @@ class LoginController extends Controller
     public function logout()
     {
         $user = Auth::user();
-        if ($user->roles[0]->rolecode == 'QL') {
-            Auth::logout();
-            return redirect()->route('login');
+        if($user){
+            if ($user->roles[0]->rolecode == 'QL') {
+                Auth::logout();
+                return redirect()->route('login');
+            }
         }
         Auth::logout();
         return redirect()->route('home');

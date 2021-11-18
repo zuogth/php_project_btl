@@ -75,14 +75,6 @@ class UserClientController extends Controller
         if($user==null){
             return response()->json(['error'=>true]);
         }
-        $userDetail=$this->userClientService->findByEmail($user->id,$request->email);
-        if($userDetail!=null){
-            return response()->json([
-                'error'=>true,
-                'email'=>false,
-                'message'=>'Email đã được sử dụng!'
-            ]);
-        }
         $this->userClientService->updateDetail($user->id,$request);
         return response()->json(['error'=>false]);
     }
@@ -95,9 +87,9 @@ class UserClientController extends Controller
         }
         $pass=$user->password;
         if(Hash::check($request->password_now, $pass)){
-            $this->userClientService->changePass($user->id,$request);
+            $this->userClientService->changePass($user->id,$request->new_password);
         }else{
-            Session::flash('password-err','Mật khẩu không chính xác.');
+            Session::flash('error','Mật khẩu không chính xác.');
             return redirect()->back();
         }
         Session::flash('success','Đổi mật khẩu thành công, hãy đăng nhập lại!');

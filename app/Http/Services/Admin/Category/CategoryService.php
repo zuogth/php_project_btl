@@ -50,7 +50,7 @@ class CategoryService{
         $category->fill($request->input());
         $category->categorycode=Str::slug($request->input('categoryname'),'-');
         $category->save();
-        $request->session()->flash('success', 'Update thành công!');
+        $request->session()->flash('success', 'Cập nhật thành công!');
         return true;
     }
 

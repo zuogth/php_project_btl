@@ -70,26 +70,26 @@ class ProductService
         return true;
     }
 
-    public function findByCategory($category_id,$orderby)
+    public function findByCategory($category_id)
     {
-        $str=($orderby==''?'product.id':'product.pricesell');
-        $order=($orderby==''?'asc':$orderby);
         Paginator::useBootstrap();
-
+        $pb=DB::table('product_bill')
+            ->join('bill','bill.id','=','product_bill.bill_id')
+            ->where('bill.bill_type','=','bill')
+            ->select('product_bill.*');
         $receipt=DB::table('product')
                     ->select('product.id',DB::raw('sum(product_receipt.quantily) as count'))
                     ->leftJoin('product_receipt','product_receipt.product_id','=','product.id')
                     ->groupBy('product.id');
         return DB::table('product')
                     ->select('category.parent_id','product.*','category.categoryname',
-                        DB::raw('if(sum(product_bill.quantily) is null,0,sum(product_bill.quantily)) as sell'),
+                        DB::raw('if(sum(pb.quantily) is null,0,sum(pb.quantily)) as sell'),
                         DB::raw('if(receipt.count is null,0,receipt.count) as import'))
                     ->join('category','product.category_id','=','category.id')
-                    ->leftJoin('product_bill','product.id','=','product_bill.product_id')
+                    ->leftJoinSub($pb,'pb','product.id','=','pb.product_id')
                     ->joinSub($receipt,'receipt','receipt.id','=','product.id')
                     ->where('category.parent_id',$category_id)
                     ->groupBy('product.id')
-                    ->orderBy($str,$order)
                     ->get();
     }
 
@@ -170,9 +170,13 @@ class ProductService
 
     public function countBill()
     {
+        $pb=DB::table('product_bill')
+                ->join('bill','bill.id','=','product_bill.bill_id')
+                ->where('bill.bill_type','=','bill')
+                ->select('product_bill.*');
         return DB::table('product')
-            ->leftJoin('product_bill','product.id','=','product_bill.product_id')
             ->join('category','category.id','=','product.category_id')
+            ->leftJoinSub($pb,'pb','pb.product_id','=','product.id')
             ->groupBy('category.parent_id')
             ->select('category.parent_id',DB::raw('if(sum(quantily) is null,0,sum(quantily)) as count'))
             ->get();

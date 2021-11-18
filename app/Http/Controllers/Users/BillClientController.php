@@ -10,6 +10,7 @@ use App\Http\Services\Client\UserClient\UserClientService;
 use App\Models\Bill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class BillClientController extends Controller
 {
@@ -37,8 +38,9 @@ class BillClientController extends Controller
 
     public function store(Bill $bill,UserBillRequest $request)
     {
-        $this->billServiceClient->updateBill($bill);
-        $this->userClientService->update($bill->user_id,$request);
-        return redirect()->back();
+        $this->billServiceClient->updateBill($bill,$request);
+        $this->userClientService->updateDetail($bill->user_id,$request);
+        Session::flash('success','Bạn đã đặt hàng thành công, kiểm tra đơn hàng trong đơn hàng của bạn!');
+        return redirect('/user/detail/1');
     }
 }

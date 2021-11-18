@@ -118,7 +118,11 @@
                                                     @if(in_array($product->id,$comments))
                                                         <a data-id="{{$product->id}}" class="btn-comment">Đã đánh giá</a>
                                                     @else
-                                                        <a data-toggle="modal" data-target="#comment" data-id="{{$product->id}}" class="btn-comment">Đánh giá</a>
+                                                        @if($bill->status==2)
+                                                            <a data-toggle="modal" data-target="#comment" data-id="{{$product->id}}" class="btn-comment">Đánh giá</a>
+                                                        @else
+                                                            <a class="btn-comment">Chưa thể đánh giá</a>
+                                                        @endif
                                                     @endif
                                                 </td>
                                             </tr>
@@ -127,11 +131,10 @@
                                     </table>
                                     <div class="detail-price">
                                         <h4>Tính tiền:</h4>
-                                        <h6>22.000.000 VND</h6>
+                                        <h6>{!! \App\Helpers\Helper::price($bill->totalprice-100000) !!}</h6>
                                         <h6>+100.000 VND</h6>
-                                        <h6>-1.000.000 VND</h6>
                                         <hr>
-                                        <h5>21.100.000 VND</h5>
+                                        <h5>{!! \App\Helpers\Helper::price($bill->totalprice) !!}</h5>
                                     </div>
                                 </div>
                             </div>

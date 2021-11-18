@@ -53,7 +53,7 @@
 .option-t-r>span:nth-child(1){color: rgb(145, 5, 5);}
 .products-list{
     display: flex;
-
+    justify-content: flex-start;
     flex-wrap: wrap;
     margin: 2em 0;
 }
@@ -61,7 +61,7 @@
     width: 30%;
     border: 1px solid silver;
     border-radius: 5px;
-    margin: 1rem 1.1rem;
+    margin: 1rem 1%;
     padding: 1em 0;
 }
 .product a{color: black;}

@@ -14,8 +14,8 @@
                 </div>
                 <form method="post" action="" id="m-form-login-main">
                     <div class="form-login-input-page">
-                        <div class="l-themes-page"><label for="username">Tài khoản *</label></div>
-                        <input type="text"  id="username" placeholder="Nhập tài khoản *" name="username">
+                        <div class="l-themes-page"><label for="username">Tài khoản email *</label></div>
+                        <input type="text"  id="email" placeholder="Nhập email *" name="email">
                         <div class="modal-errorMessage">
                             <span class="errorMessage"></span>
                         </div>
@@ -38,7 +38,7 @@
                             <button type="submit" id="login" class="login">Đăng nhập</button>
                         </div>
                         <div class="l-footer-page">
-                            <div class="forgot-password-page"><a href="./forgot.html">Quên mật khẩu?</a></div>
+                            <div class="forgot-password-page"><a href="/user/forgot">Quên mật khẩu?</a></div>
                         </div>
                     </div>
                     @csrf
@@ -49,14 +49,14 @@
 @endsection
 
 @section('footer')
-    <script src="./js/validate.js"></script>
     <script>
         validation({
             form: "#m-form-login-main",
             error: ".errorMessage",
             formGroupSelector: '.form-login-input-page',
             rules: [
-                validation.isRequired("#username", "Bạn hãy nhập tài khoản"),
+                validation.isRequired("#email", "Bạn hãy nhập email"),
+                validation.isEmail("#email","Trường này phải là email"),
                 validation.isRequired("#password", "Bạn hãy nhập mật khẩu"),
                 validation.isMinLength("#password", min = 6 ,`Số kí tự phải lớn hơn hoặc bằng ${min}`)
             ],

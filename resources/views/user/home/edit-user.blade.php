@@ -22,24 +22,44 @@
                             </div>
                         </div>
                         <div class="form-group col-sm-6">
-                            <label for="email">Email</label>
-                            <input type="email" name="email" id="email" value="{{$user->email}}" class="input-update-info" placeholder="Email">
-                            <div class="modal-errorMessage">
-                                <span class="errorMessage"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-6">
                             <label for="phone">Điện thoại <span>*</span></label>
                             <input type="number" name="phone" id="phone" value="{{$user->phone}}" class="input-update-info" placeholder="Điện thoại">
                             <div class="modal-errorMessage">
                                 <span class="errorMessage"></span>
                             </div>
                         </div>
-                        <div class="form-group col-sm-6">
-                            <label for="address">Địa chỉ</label>
-                            <input type="text" name="address" id="address" value="{{$user->address}}" class="input-update-info" placeholder="Địa chỉ">
+                    </div>
+                    <label for="address">Địa chỉ</label>
+                    <div class="row">
+                        <div class="form-group form-group-cus col-sm-6">
+                            <input type="text" onkeyup="searchProvince(this)" onfocus="listProvince(this)" id="province" onfocusout="unFocusInput(this)"
+                                   name="province" parent_code="" class="input-update-info" value="{!! \App\Helpers\Helper::address(0,$user->address) !!}" placeholder="Thành phố...">
+                            <div class="province" onmouseleave="onMouseLeave()" onmouseenter="onMouseEnter()">
+                                <ul id="listData"></ul>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-cus col-sm-6">
+                            <input type="text" onkeyup="searchDistrict(this)" onfocus="listDistrict(this)" parent="province" onfocusout="unFocusInput(this)"
+                                   name="district" id="district" parent_code="" value="{!! \App\Helpers\Helper::address(1,$user->address) !!}" class="input-update-info"
+                                   placeholder="Huyện...">
+                            <div class="district" onmouseleave="onMouseLeave()" onmouseenter="onMouseEnter()">
+                                <ul class="listData"></ul>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group form-group-cus col-sm-6">
+                            <input type="text" onkeyup="searchWard(this)" onfocus="listWard(this)" parent="district" onfocusout="unFocusInput(this)"
+                                   name="ward" id="ward" parent_code="" value="{!! \App\Helpers\Helper::address(2,$user->address) !!}" class="input-update-info"
+                                   placeholder="Xã...">
+                            <div class="ward" onmouseleave="onMouseLeave()" onmouseenter="onMouseEnter()">
+                                <ul class="listData"></ul>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-cus col-sm-6">
+                            <input type="text" name="village" id="village" class="input-update-info"
+                                   value="{!! \App\Helpers\Helper::address(3,$user->address) !!}" placeholder="Chi tiết (thôn, số nhà,...)">
                         </div>
                     </div>
                     <div class="btn-update-group">
@@ -95,5 +115,6 @@
 
 @section('footer')
     <script src="/user/js/info.js"></script>
+    <script src="/user/js/getcities.js"></script>
 @endsection
 
