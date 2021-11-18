@@ -29,9 +29,7 @@ $(function () {
                         <div class="content-cm-right">
                             <h5>${e.title}</h5>
                             <p>${e.context}</p>
-                            <div class="comment-to-cus">
-                                <a href="#">Bình luận</a>
-                            </div>
+
                         </div>
                     </div>
                     <script src="/user/stars/starts-rating.js"></script>
