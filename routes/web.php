@@ -161,9 +161,10 @@ Route::prefix('/')->group(function(){
 
     #Bill
     Route::post('/bill/check',[BillClientController::class,'check']);
+    Route::POST('/bill/cancel',[BillClientController::class,'cancel']);
     Route::get('/bill/{bill}',[BillClientController::class,'index']);
     Route::post('/bill/{bill}',[BillClientController::class,'store']);
-    Route::POST('/bill/cancel',[BillClientController::class,'cancel']);
+
 
 
     #User
