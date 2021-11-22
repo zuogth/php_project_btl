@@ -226,6 +226,43 @@ function removeCart(){
     })
 };
 
+function checkOrder(){
+    let data={};
+    data['id']=[];
+    data['count']=[];
+    $('tbody tr').each(function (index,element){
+        data['id'].push($(element).attr("data-id"));
+        data['count'].push($(element).children().eq(2).children().children().eq(1).children().val())
+    })
+    $.ajax({
+        url:'/bill/check',
+        type:'post',
+        datatype:'JSON',
+        contentType: 'application/json',
+        data:JSON.stringify(data),
+        success:function (result){
+            if(!result.error){
+                let bill_id=$('input#bill_id').val();
+                window.location.href='/bill/'+bill_id;
+            }else{
+                for(let i=0;i<result.carts.length;i++){
+                    let id=result.carts[i].id;
+                    $('tr#product-'+id).children().eq(2).children().children().eq(1).children().val(result.carts[i].count);
+                    $('span#'+id).html('Chỉ còn '+result.carts[i].count+' sản phẩm');
+                    updateCart(id,result.carts[i].count,result.carts[i].count);
+                }
+            }
+        },
+        error:function (){
+            Swal.fire(
+                'Lỗi!',
+                'Xảy ra lỗi, vui lòng thử lại.',
+                'error'
+            )
+        }
+    })
+}
+
 //Load cart from local storage
 $(()=>{
     let user=$('div#info-user').attr("data-user");

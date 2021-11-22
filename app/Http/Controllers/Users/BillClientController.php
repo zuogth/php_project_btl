@@ -43,4 +43,40 @@ class BillClientController extends Controller
         Session::flash('success','Bạn đã đặt hàng thành công, kiểm tra đơn hàng trong đơn hàng của bạn!');
         return redirect('/user/detail/1');
     }
+
+    public function check(Request $request)
+    {
+        $order=[];
+        $countArr=sizeof($request->id);
+        for($i=0;$i<$countArr;$i++){
+            $bill = $this->billServiceClient->findQuantityByProductId($request->id[$i]);
+            $billCus=0;
+            if($bill==null){
+                $billCus=0;
+            }else{
+                $billCus=$bill->count_bill;
+            }
+            $receipt = $this->billServiceClient->findQuantitReceiptByProductId($request->id[$i]);
+            if($request->count[$i]>$receipt->count_receipt-$billCus){
+                $data['id']=$request->id[$i];
+                $data['count']=$receipt->count_receipt-$billCus;
+                array_push($order,$data);
+            }
+        }
+        if(sizeof($order)>0){
+            return response()->json([
+                'error'=>true,
+                'carts'=>$order
+            ]);
+        }
+        return response()->json([
+            'error'=>false
+        ]);
+    }
+
+    public function cancel(Request $request){
+
+        $this->billServiceClient->deleteBill($request->id);
+        return true;
+    }
 }

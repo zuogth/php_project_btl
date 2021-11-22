@@ -110,4 +110,19 @@ class Helper{
         return 0;
     }
 
+
+    public static function checkDate($date,$status,$id){
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $dateNow=date("Y-m-d H:i:s");
+        $diff=strtotime($dateNow)-strtotime($date);
+        $years = floor($diff / (365*60*60*24));
+
+        $months = floor(($diff - $years * 365*60*60*24)/(30*60*60*24));
+
+        $days = floor(($diff - $years * 365*60*60*24-$months*30*60*60*24)/(60*60*24));
+        if($days<3 && $status!=2){
+            return '<a onclick="cancelOrder('.$id.')" id="cancel">Hủy</a>';
+        }
+        return '';
+    }
 }

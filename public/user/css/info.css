@@ -194,6 +194,11 @@ li.active-info{
     background-color: aliceblue;
     cursor: pointer;
 }
+
+#cancel{
+    cursor: pointer;
+    text-decoration: underline;
+}
 @media only screen and (max-width:991px){
     .detail-item{display: block;}
     .detail-item .detail-price{

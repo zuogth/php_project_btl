@@ -57,6 +57,38 @@ function authPass(){
     })
 }
 
+function cancelOrder(id){
+    Swal.fire({
+        title: 'Bạn có chắc muốn xóa không?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Xóa',
+        cancelButtonText:'Hủy'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url:'/bill/cancel',
+                type:'POST',
+                datatype:'JSON',
+                data:{id},
+                success:function (result){
+                    location.reload();
+                },
+                error:function (){
+                    Swal.fire(
+                        'Lỗi!',
+                        'Xảy ra lỗi, vui lòng thử lại.',
+                        'error'
+                    )
+                }
+            })
+        }
+    })
+
+}
+
 //update info user
 validation({
     form: "#formDetail",

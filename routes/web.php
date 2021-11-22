@@ -160,8 +160,11 @@ Route::prefix('/')->group(function(){
     Route::POST('/cart/load',[CartController::class,'loadFromLocal']);
 
     #Bill
+    Route::post('/bill/check',[BillClientController::class,'check']);
     Route::get('/bill/{bill}',[BillClientController::class,'index']);
     Route::post('/bill/{bill}',[BillClientController::class,'store']);
+    Route::POST('/bill/cancel',[BillClientController::class,'cancel']);
+
 
     #User
     Route::get('/user/detail/{active}',[UserClientController::class,'index']);

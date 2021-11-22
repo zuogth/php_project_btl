@@ -117,7 +117,7 @@
                                         <div><span id="m-cart-grand-total" data-total-price="{{$cart->totalprice}}">{!! \App\Helpers\Helper::price($cart->totalprice) !!}</span></div>
                                     </div>
                                     <div class="m-product-cart-price-total-submit">
-                                        <a href="/bill/{{$cart->id}}">
+                                        <a onclick="checkOrder()">
                                             Mua hàng
                                         </a>
                                     </div>

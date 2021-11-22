@@ -89,7 +89,7 @@
                                     <th>Ngày đặt</th>
                                     <th>Tổng tiền</th>
                                     <th style="width: 20%">Trạng thái</th>
-                                    <th></th>
+                                    <th>{!!\App\Helpers\Helper::checkDate($bill->bill_date,$bill->status,$bill->id)!!}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
