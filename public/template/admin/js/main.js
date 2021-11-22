@@ -180,3 +180,26 @@ function updateStatus(element,id,status){
 }
 
 
+$(document).ready(function (){
+    $('td select').change(function (){
+        let status=$(this).val();
+        let id=$(this).parents('tr').children().eq(0).html();
+        $.ajax({
+            url:'/admin/bill/edit/'+id,
+            type:'put',
+            datatype:'JSON',
+            data:{status},
+            success:function (result){
+                location.reload();
+            },
+            error:function (){
+                Swal.fire(
+                    'Lỗi!',
+                    'Xảy ra lỗi, vui lòng thử lại.',
+                    'error'
+                )
+            }
+        })
+    })
+})
+

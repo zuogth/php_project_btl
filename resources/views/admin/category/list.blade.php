@@ -32,6 +32,7 @@
                 'info':false
             });
             $("div.toolbar").html();
+
         } );
     </script>
 @endsection

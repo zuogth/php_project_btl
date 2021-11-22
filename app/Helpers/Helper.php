@@ -42,12 +42,22 @@ class Helper{
 
     public static function statusBill($status):string{
         if($status==1){
-            return '<span class="btn btn-warning btn-xs">Đang giao</span>';
+            return '<select name="status" class="btn btn-warning">
+                        <option value="0">Đang xử lý</option>
+                        <option value="1" selected>Đang giao</option>
+                        <option value="2">Hoàn tất</option>
+                    <select/>';
         }elseif ($status==2)
         {
-            return '<span class="btn btn-success btn-xs">Hoàn tất</span>';
+            return '<select name="status" class="btn btn-success" disabled>
+                        <option value="2" selected>Hoàn tất</option>
+                    <select/>';
         }
-        return '<span class="btn btn-danger btn-xs">Đang xử lý</span>';
+        return '<select name="status" class="btn btn-danger">
+                        <option value="0"  selected>Đang xử lý</option>
+                        <option value="1">Đang giao</option>
+                        <option value="2">Hoàn tất</option>
+                    <select/>';
     }
 
     public static function statusBillClient($status):string{

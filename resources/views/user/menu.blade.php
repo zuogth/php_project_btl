@@ -15,7 +15,7 @@
     <div class="container-cus container-header">
         <div class="header">
             <div class="h-logo">
-                <a href="/"><img src="/user/img/logo-b2c.jpg" alt=""></a>
+                <a href="/"><img src="/user/img/logo.png" alt=""></a>
             </div>
             <div class="header-r">
                 <div class="h-menu-t">
@@ -98,7 +98,7 @@
                         </nav>
                     </div>
                     <div class="h-logo-m">
-                        <img src="/user/img/logo-b2c-m.jpg" alt="">
+                        <img src="/user/img/logo-res.png" alt="">
                     </div>
                     <div class="h-menu-right">
                         <ul>

@@ -37,11 +37,18 @@ class CartController
     public function update(Request $request)
     {
         $bill = $this->billServiceClient->findQuantityByProductId($request->id);
-        if($bill==null){$bill=0;}
+        $billCus=0;
+        if($bill==null){
+            $billCus=0;
+        }else{
+            $billCus=$bill->count_bill;
+        }
         $receipt = $this->billServiceClient->findQuantitReceiptByProductId($request->id);
-        if($request->count>$receipt->count_receipt-$bill){
+
+        if($request->count>$receipt->count_receipt-$billCus){
             return response()->json([
-               'countOut'=>true
+               'countOut'=>true,
+                'count'=>$receipt->count_receipt-$billCus
             ]);
         }
         $rs=$this->billServiceClient->updateCart($request);

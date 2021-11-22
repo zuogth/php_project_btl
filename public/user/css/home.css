@@ -474,59 +474,6 @@ html {
     }
 
 }
-@media only screen and (max-width:767px){
-    html{font-size: 10px;}
-    .h-search-content{padding: 0 2em;}
-    .h-keyword-field .most-searched{
-        padding-left: 15px;
-    }
-    .h-keyword-field .h-recently-keyword{padding-right: 15px;}
 
-    .img-scale {
-
-        overflow: hidden;
-        border: 1px solid #e4e4e4;
-        border-radius: 0.7rem;
-        width: 19rem;
-        height: 26.6rem;
-        position: relative;
-        background-color: white;
-
-    }
-
-    .banner-introduce-context{
-        width: 25rem;
-        height: 12.85rem;
-        position: absolute;
-        bottom: 5rem;
-        left: 6rem;
-
-    }
-    .banner-introduce-context>h2{
-        font-size: 2rem;
-
-    }
-
-    .list-product-content{
-        width: 85%;
-        margin: 5rem auto;
-       border-bottom: 1px solid rgba(0, 0, 0, 0.219);
-    }
-
-    .component-square>a>img{
-        width: 100%;
-         height: 100%;
-        margin: 0 0 0 1.3rem;
-    }
-}
-@media only screen and (max-width:575px){
-    html{font-size: 5px;}
-    .h-keyword-field .most-searched{
-        border: none;
-    }
-    .h-search-input input{text-align: start;}
-    .h-search-content h2{display: none;}
-    .footer-b ul{display: block;}
-}
 
 

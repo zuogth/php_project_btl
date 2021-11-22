@@ -9,38 +9,31 @@ $( document ).ready(function() {
 
     $(document).on("click",".m-cart-minus" ,function(){
         let id= $(this).parents().eq(3).attr('data-id')
-        // console.log("id"+id)
-        let count;
-       $('.count').each(function (index, value) {
-            let id2 = $(this).parents().eq(3).attr('data-id')
-           if(id2 == id){
-               count =$(value).val()
-               if(count == 1) return;
-               count--;
-              $(value).val(count)
-              totalPrice(id,count)
-           }
-      });
-        let product_id=$(this).attr("product_id");
-        updateCart(product_id,count);
+        let count=$(this).parents('.m-product-cart-table-body-count-button').children().eq(1).children().val();
+        if(count*1===1){return;}
+        count--;
+        updateCart(id,count,count+1);
     })
 
     $(document).on("click",".m-cart-plus" ,function(){
         let id= $(this).parents().eq(3).attr('data-id')
         // console.log("id"+id)
-        let count;
-       $('.count').each(function (index, value) {
-            let id2 = $(this).parents().eq(3).attr('data-id')
-           //console.log(id2)
-            if(id2 == id){
-               count = $(value).val()
-               count++;
-              $(value).val(count)
-              totalPrice(id,count)
-            }
-      });
-        let product_id=$(this).attr("product_id");
-        updateCart(product_id,count);
+        let count=$(this).parents('.m-product-cart-table-body-count-button').children().eq(1).children().val();
+        count++;
+        updateCart(id,count,count-1);
+    })
+    $('input.count').focusin(function (){
+        $(this).data('val',$(this).val());
+    }).change(function (){
+        let id= $(this).parents().eq(3).attr('data-id')
+        let countOld=$(this).data('val');
+        let count=$(this).val();
+        if(count*1<1){
+            $(this).val("1");
+            totalPrice(id,1);
+            return;
+        }
+        updateCart(id,count,countOld);
     })
 });
 function putPrice(id,result){
@@ -68,7 +61,7 @@ function totalPrice(id,count){
 
     });
 }
-function updateCart(product_id,count){
+function updateCart(product_id,count,countOld){
     let user=$('div#info-user').attr("data-user");
     if(user){
         let  data = {}
@@ -76,18 +69,6 @@ function updateCart(product_id,count){
         data['id'] = product_id;
         data['count'] = count;
         data['totalprice']=$("#m-cart-grand-total").attr("data-total-price");
-        // $('.id').each(function (index, value) {
-        //     var listId = $(this).val()
-        //     data['id'].push(listId)
-        // });
-        // $('.count').each(function (index, value) {
-        //     var listId = $(this).val()
-        //     data['count'].push(listId)
-        // });
-        // $('.price').each(function (index, value) {
-        //     var listId = $(this).val()
-        //     data['price'].push(listId)
-        // });
         $.ajax({
             url:'/cart',
             type:'put',
@@ -95,17 +76,13 @@ function updateCart(product_id,count){
             contentType: 'application/json',
             data:JSON.stringify(data),
             success:function (result){
+                console.log(result.rs);
                 if(result.countOut){
-                    $('.count').each(function (index, value) {
-                        let id = $(this).attr('product_id');
-                        if(id === product_id){
-                            let id2= $(value).parents().eq(3).attr('data-id')
-                            $(value).val(count-1);
-                            totalPrice(id2,count-1);
-                        }
-                    });
-                    $('button#plus-'+product_id).attr("disabled","true");
-                    $('span#'+product_id).html('Chỉ còn '+(count-1)+' sản phẩm');
+                    if(result.count<countOld){
+                        $('button#plus-'+product_id).attr("disabled","true");
+                    }
+                    $('span#'+product_id).html('Chỉ còn '+result.count+' sản phẩm');
+                    $('tr#product-'+product_id).children().eq(2).children().children().eq(1).children().val(countOld);
                 }else if (result.error){
                     Swal.fire(
                         'Thông báo!',
@@ -113,6 +90,8 @@ function updateCart(product_id,count){
                         'error'
                     )
                 }else{
+                    $('tr#product-'+product_id).children().eq(2).children().children().eq(1).children().val(count);
+                    totalPrice(product_id,count);
                     $('button#plus-'+product_id).attr("disabled",false);
                 }
             },

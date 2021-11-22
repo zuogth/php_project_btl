@@ -70,11 +70,7 @@
             @csrf
             <!-- /.card-body -->
                 <div class="card-footer">
-                    @if($bill->status==2)
-                        <a href="/admin/bill/list" class="btn btn-primary">Back</a>
-                    @else
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    @endif
+                    <a href="/admin/bill/list" class="btn btn-primary">Back</a>
                 </div>
             </form>
         </div>

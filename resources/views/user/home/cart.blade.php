@@ -31,7 +31,7 @@
                             </thead>
                             <tbody class="m-product-cart-table-body">
                             @foreach($cart->products as $key => $product)
-                                <tr data-id="{{$key+1}}" class="m-cart-table-line">
+                                <tr data-id="{{$product->id}}" id="product-{{$product->id}}" class="m-cart-table-line">
                                     <td scope="row">
                                         <div class="m-product-cart-table-body-img">
                                             <input type="text" hidden value="{{$product->id}}" name="id" id="id" class="id">

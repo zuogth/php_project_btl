@@ -31,7 +31,7 @@
                             <td>{!! \App\Helpers\Helper::statusBill($bill->status) !!}</td>
                             <td>
                                 <a href="/admin/bill/edit/{{$bill->id}}" class="btn btn-primary btn-sm">
-                                    <i class="fas fa-{{$bill->status==2?'info':'edit'}}"></i>
+                                    <i class="fas fa-info"></i>
                                 </a>
                             </td>
                         </tr>

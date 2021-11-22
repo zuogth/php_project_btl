@@ -82,7 +82,7 @@ Route::middleware(['auth','role'])->group(function () {
         Route::prefix('bill')->group(function(){
             Route::get('list',[BillController::class,'index']);
             Route::get('edit/{bill}',[BillController::class,'show']);
-            Route::post('edit/{bill}',[BillController::class,'edit']);
+            Route::put('edit/{bill}',[BillController::class,'edit']);
         });
 
         #Receipt

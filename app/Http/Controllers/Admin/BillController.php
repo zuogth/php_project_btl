@@ -34,7 +34,7 @@ class BillController extends Controller
     public function edit(Bill $bill,Request $request)
     {
         $this->billService->editStatus($bill,$request);
-        return redirect()->back();
+        return true;
     }
 
 }
