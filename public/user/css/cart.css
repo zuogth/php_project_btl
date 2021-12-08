@@ -197,15 +197,16 @@
     height: 3.6rem;
     background-color: #fff;
     border: 1px solid rgba(104, 103, 103, 0.411);
-    color: black;
+    color: black !important;
     padding: 1rem 0;
     text-align: center;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .m-product-cart-price-total-submit>a:hover{
     background-color: black;
-    color: #fff;
+    color: white !important;
 }
 td.countOut-td{
     text-align: center;

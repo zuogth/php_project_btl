@@ -189,7 +189,7 @@ $(function () {
                                 if(e.count*1===0){
                                     html+=`<a class="btn btn-danger dis-btn-buy" count="${e.count}">Hết hàng</a>`;
                                 }else {
-                                    html+=`<a onClick="addCart(this,${e.id})" class="btn btn-danger"count="${e.count}">Mua</a>`;
+                                    html+=`<a onClick="addCart(this,${e.id},${e.count})" class="btn btn-danger"count="${e.count}">Mua</a>`;
                                 }
 
                             html+=`</div>
@@ -207,18 +207,30 @@ $(function () {
 });
 
 //Thêm sản phẩm vào cart
-function addCart(event,id){
+function addCart(event,id,countMax){
     let user=$('div#info-user').attr("data-user");
     if(user){
         $.ajax({
             url:'/cart/'+id,
             type:'GET',
             success:function (result){
+                let out=false;
                 if(result.error==true){
-                    window.location.href='/user/login';
+                    if(result.count==null){
+                        window.location.href='/user/login';
+                    }else {
+                        $(event).html('Hết hàng');
+                        $(event).addClass("dis-btn-buy");
+                        out=true;
+                    }
                 }
-                html=`<a onclick="addCart(this,${id})" class="btn btn-danger">Mua<i class="fas fa-check"></i></a>`
-                $(event).parents().eq(0).html(html);
+                if(!out){
+                    html=`<div class="icon-cart" style="color: white;">
+                                            <i class="fas fa-cart-plus"></i>
+                                            <i class="fas fa-check"></i>
+                                        </div>`
+                    $(event).html(html);
+                }
             },
             error:function (){
                 alert('Error');
@@ -227,12 +239,20 @@ function addCart(event,id){
     }else{
         let list_cart=[];
         let flag=false;
+        let out=false;
         list_cart=JSON.parse(window.localStorage.getItem('list_cart'));
         if(list_cart!=null){
             for (let item of list_cart){
                 if(item.product_id==id){
-                    item.quantily+=1;
-                    flag=true;
+                    if(item.quantily===countMax){
+                        $(event).html('Hết hàng');
+                        $(event).addClass("dis-btn-buy");
+                        flag=true;
+                        out=true;
+                    }else {
+                        item.quantily+=1;
+                        flag=true;
+                    }
                 }
             }
             if(!flag){
@@ -249,8 +269,13 @@ function addCart(event,id){
             list_cart.push(data);
         }
         localStorage.setItem('list_cart', JSON.stringify(list_cart));
-        html=`<a onclick="addCart(this,${id})" class="btn btn-danger">Mua<i class="fas fa-check"></i></a>`
-        $(event).parents().eq(0).html(html);
+        if(!out){
+            html=`<div class="icon-cart" style="color: white;">
+                                            <i class="fas fa-cart-plus"></i>
+                                            <i class="fas fa-check"></i>
+                                        </div>`
+            $(event).html(html);
+        }
     }
 
 }
