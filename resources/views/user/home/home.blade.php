@@ -45,7 +45,13 @@
                                             @if($e->discount > 0)
                                                 <span style="color: #9b3838">(<span>-{{$e->discount}}</span>%)</span>
                                             @endif
-                                            </a></div>
+                                            </a>
+                                        @if($e->count==0)
+                                            <p class="p-noti" id="noti-{{$e->id}}">Hết hàng</p>
+                                        @else
+                                            <p class="p-noti non-ac" id="noti-{{$e->id}}">Sản phẩm đã hết hàng</p>
+                                        @endif
+                                    </div>
                                     <div class="price-sell">
                                         <div class="m-price-product-description">
                                             <a href="#">{{$e->description}}
@@ -58,24 +64,38 @@
                                     </div>
                                     <div class="product-action">
 
-                                        <div class="icon-heart">
-                                            <i class="far fa-heart"></i>
-                                            <i class="fas fa-heart"></i>
-
-                                        </div>
-                                        <a href="/product-detail/{{$e->productcode}}" style="color: #ffffff">
-                                            <div class="icon-search">
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-search-plus"></i>
-                                            </div>
-                                        </a>
-                                        <a onclick="addCart(this,{{$e->id}})">
-                                            <div class="icon-cart" style="color: white;">
-                                                <i class="fas fa-cart-plus"></i>
-                                                <i class="fas fa-shopping-cart"></i>
+                                        @if($e->count==0)
+                                            <div class="icon-heart">
+                                                <i class="far fa-heart"></i>
+                                                <i class="fas fa-heart"></i>
 
                                             </div>
-                                        </a>
+                                            <a href="/product-detail/{{$e->productcode}}" style="color: #ffffff">
+                                                <div class="icon-search">
+                                                    <i class="fas fa-search"></i>
+                                                    <i class="fas fa-search-plus"></i>
+                                                </div>
+                                            </a>
+                                        @else
+                                            <div class="icon-heart">
+                                                <i class="far fa-heart"></i>
+                                                <i class="fas fa-heart"></i>
+
+                                            </div>
+                                            <a href="/product-detail/{{$e->productcode}}" style="color: #ffffff">
+                                                <div class="icon-search">
+                                                    <i class="fas fa-search"></i>
+                                                    <i class="fas fa-search-plus"></i>
+                                                </div>
+                                            </a>
+                                            <a onclick="addCart(this,{{$e->id}},{{$e->count}})">
+                                                <div class="icon-cart" style="color: white;">
+                                                    <i class="fas fa-cart-plus"></i>
+                                                    <i class="fas fa-shopping-cart"></i>
+
+                                                </div>
+                                            </a>
+                                        @endif
 
                                     </div>
                                 </div>
@@ -170,7 +190,13 @@
                                         @if($e->discount > 0)
                                             <span style="color: #9b3838">(<span>-{{$e->discount}}</span>%)</span>
                                         @endif
-                                    </a></div>
+                                    </a>
+                                    @if($e->count==0)
+                                        <p class="p-noti" id="noti-{{$e->id}}">Hết hàng</p>
+                                    @else
+                                        <p class="p-noti non-ac" id="noti-{{$e->id}}">Sản phẩm đã hết hàng</p>
+                                    @endif
+                                </div>
                                 <div class="price-sell">
                                     <div class="m-price-product-description">
                                         <a href="#">{{$e->description}}
@@ -181,24 +207,38 @@
                                     </div>
                                 </div>
                                 <div class="product-action">
+                                    @if($e->count==0)
+                                        <div class="icon-heart">
+                                            <i class="far fa-heart"></i>
+                                            <i class="fas fa-heart"></i>
 
-                                    <div class="icon-heart">
-                                        <i class="far fa-heart"></i>
-                                        <i class="fas fa-heart"></i>
-                                    </div>
-                                    <a href="/product-detail/{{$e->productcode}}" style="color: #ffffff">
-                                    <div class="icon-search">
-                                        <i class="fas fa-search"></i>
-                                        <i class="fas fa-search-plus"></i>
-                                    </div>
-                                    </a>
-                                    <a onclick="addCart(this,{{$e->id}})">
-                                        <div class="icon-cart" style="color: white;">
-                                            <i class="fas fa-cart-plus"></i>
-                                            <i class="fas fa-shopping-cart"></i>
                                         </div>
-                                    </a>
+                                        <a href="/product-detail/{{$e->productcode}}" style="color: #ffffff">
+                                            <div class="icon-search">
+                                                <i class="fas fa-search"></i>
+                                                <i class="fas fa-search-plus"></i>
+                                            </div>
+                                        </a>
+                                    @else
+                                        <div class="icon-heart">
+                                            <i class="far fa-heart"></i>
+                                            <i class="fas fa-heart"></i>
 
+                                        </div>
+                                        <a href="/product-detail/{{$e->productcode}}" style="color: #ffffff">
+                                            <div class="icon-search">
+                                                <i class="fas fa-search"></i>
+                                                <i class="fas fa-search-plus"></i>
+                                            </div>
+                                        </a>
+                                        <a onclick="addCart(this,{{$e->id}},{{$e->count}})">
+                                            <div class="icon-cart" style="color: white;">
+                                                <i class="fas fa-cart-plus"></i>
+                                                <i class="fas fa-shopping-cart"></i>
+
+                                            </div>
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -250,56 +290,7 @@
             });
 
         })
-        function addCart(event,id){
-            let user=$('div#info-user').attr("data-user");
-            if(user){
-                $.ajax({
-                    url:'/cart/'+id,
-                    type:'GET',
-                    success:function (result){
-                        if(result.error==true){
-                            window.location.href='/user/login';
-                        }
-                        html=`<div class="icon-cart" style="color: white;">
-                                            <i class="fas fa-cart-plus"></i>
-                                            <i class="fas fa-check"></i>
-                                        </div>`
-                        $(event).html(html);
-                    },
-                    error:function (){
-                        alert('Error');
-                    }
-                })
-            }else{
-                let list_cart=[];
-                let flag=false;
-                list_cart=JSON.parse(window.localStorage.getItem('list_cart'));
-                if(list_cart!=null){
-                    for (let item of list_cart){
-                        if(item.product_id==id){
-                            item.quantily+=1;
-                            flag=true;
-                        }
-                    }
-                    if(!flag){
-                        let data={};
-                        data['product_id']=id;
-                        data['quantily']=1;
-                        list_cart.push(data);
-                    }
-                }else{
-                    list_cart=[];
-                    let data={};
-                    data['product_id']=id;
-                    data['quantily']=1;
-                    list_cart.push(data);
-                }
-                localStorage.setItem('list_cart', JSON.stringify(list_cart));
-                html=`<a onclick="addCart(this,${id})" class="btn btn-danger">Mua<i class="fas fa-check"></i></a>`
-                $(event).parents().eq(0).html(html);
-            }
 
-        }
     </script>
     <script src="/user/js/active.js"></script>
     <script src="/user/js/product_new.js"></script>

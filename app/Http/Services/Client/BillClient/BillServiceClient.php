@@ -108,7 +108,7 @@ class BillServiceClient
                         if($prod_bill){
                             DB::table('product_bill')->where('bill_id',$oldBill->id)
                                 ->where('product_id',$item['product']->id)
-                                ->update(['quantily'=>$prod_bill->quantily+$item['quantily']]);
+                                ->update(['quantily'=>$item['quantily']]);
                         }else{
                             $oldBill->products()->attach([
                                 $item['product']->id=>[
@@ -132,6 +132,15 @@ class BillServiceClient
 
     public function addCart($user_id,$product)
     {
+        $billCount = self::findQuantityByProductId($product->id);
+        $billCus=0;
+        if($billCount==null){
+            $billCus=0;
+        }else{
+            $billCus=$billCount->count_bill;
+        }
+        $receipt = self::findQuantitReceiptByProductId($product->id);
+        $countMax=$receipt->count_receipt-$billCus;
         $bill=Bill::with('products')
                     ->where('user_id',$user_id)
                     ->where('bill_type','cart')
@@ -144,6 +153,9 @@ class BillServiceClient
                             ->first();
             if($prod_bill!=null)
             {
+                if($prod_bill->quantily==$countMax){
+                    return false;
+                }
                 $quantily=$prod_bill->quantily+1;
                 DB::table('product_bill')
                     ->where('bill_id',$bill->id)

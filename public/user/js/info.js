@@ -59,12 +59,12 @@ function authPass(){
 
 function cancelOrder(id){
     Swal.fire({
-        title: 'Bạn có chắc muốn xóa không?',
+        title: 'Bạn có chắc muốn hủy không?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Xóa',
+        confirmButtonText: 'Xác nhận',
         cancelButtonText:'Hủy'
     }).then((result) => {
         if (result.isConfirmed) {

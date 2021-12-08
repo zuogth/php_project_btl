@@ -198,3 +198,7 @@ button.wishlistBtn:hover{
 .caption >span{
     display: none;
 }
+.dis-btn-buy{
+    background-color: silver !important;
+    border: none;
+}

@@ -2,7 +2,6 @@
 @section('head')
     <link rel="stylesheet" href="/user/css/slick.css">
     <link rel="stylesheet" href="/user/css/category.css">
-    <link rel="stylesheet" href="/user/css/home.css">
                 {{--    stars--}}
     <link rel="stylesheet" href="/user/stars/stars-rating.css">
 

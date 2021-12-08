@@ -189,8 +189,9 @@
                         {!! \App\Helpers\HelperMenu::bill($bill) !!}
                         {!! \App\Helpers\HelperMenu::repo($bill,$receipt) !!}
                     </div>
+                    <span class="span-noti">Sản phẩm đã hết hàng</span>
                     <div class="add-cart">
-                        <a onclick="addCart(this,{{$product->id}})" class="btn btn-danger">Mua</a>
+                        <a onclick="addCart(this,{{$product->id}})" class="btn btn-danger" id="btn-add-cart">Mua</a>
                     </div>
                     <ul class="hidden-info-min">
                         {!! $product->content !!}

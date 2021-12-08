@@ -8,19 +8,37 @@ $( document ).ready(function() {
 
 
     $(document).on("click",".m-cart-minus" ,function(){
-        let id= $(this).parents().eq(3).attr('data-id')
+        let id= $(this).parents().eq(3).attr('data-id');
         let count=$(this).parents('.m-product-cart-table-body-count-button').children().eq(1).children().val();
-        if(count*1===1){return;}
+        if(count*1<=1){return;}
         count--;
-        updateCart(id,count,count+1);
+        let user=$('div#info-user').attr("data-user");
+        if(!user){
+            let te=$('tr#product-'+id).children().eq(2).children().children().eq(1).children().val()
+            $('tr#product-'+id).children().eq(2).children().children().eq(1).children().val(count);
+            totalPrice(id,count);
+        }else{
+            updateCart(id,count,count+1);
+        }
+
     })
 
     $(document).on("click",".m-cart-plus" ,function(){
-        let id= $(this).parents().eq(3).attr('data-id')
+        let id= $(this).parents().eq(3).attr('data-id');
+        let countMax=$(this).attr("count");
         // console.log("id"+id)
         let count=$(this).parents('.m-product-cart-table-body-count-button').children().eq(1).children().val();
+        if(count*1>=countMax*1){
+            return;
+        }
         count++;
-        updateCart(id,count,count-1);
+        let user=$('div#info-user').attr("data-user");
+        if(!user){
+            $('tr#product-'+id).children().eq(2).children().children().eq(1).children().val(count);
+            totalPrice(id,count);
+        }else{
+            updateCart(id,count,count-1);
+        }
     })
     $('input.count').focusin(function (){
         $(this).data('val',$(this).val());
@@ -79,10 +97,20 @@ function updateCart(product_id,count,countOld){
                 console.log(result.rs);
                 if(result.countOut){
                     if(result.count<countOld){
+                        $('span#'+product_id).html('Chỉ còn '+result.count+' sản phẩm');
                         $('button#plus-'+product_id).attr("disabled","true");
+                        $('tr#product-'+product_id).children().eq(2).children().children().eq(1).children().val(result.count);
+                        totalPrice(product_id,result.count);
                     }
-                    $('span#'+product_id).html('Chỉ còn '+result.count+' sản phẩm');
-                    $('tr#product-'+product_id).children().eq(2).children().children().eq(1).children().val(countOld);
+                    if(result.count===0){
+                        $('span#'+product_id).html('Sản phẩm đã hết hàng');
+                        $('tr#product-'+product_id).children().eq(2).children().children().eq(1).children().val(0);
+                        totalPrice(product_id,0 );
+                    }
+                    if(result.count<count){
+                        $('span#'+product_id).html('Chỉ còn '+result.count+' sản phẩm');
+                        $('tr#product-'+product_id).children().eq(2).children().children().eq(1).children().val(countOld);
+                    }
                 }else if (result.error){
                     Swal.fire(
                         'Thông báo!',
@@ -106,11 +134,35 @@ function updateCart(product_id,count,countOld){
     }
 }
 
-function updateCartLocal(op,id){
+function updateCartLocal(e,op,id){
     let user=$('div#info-user').attr("data-user");
     if(!user){
         let list_cart=[];
         list_cart=JSON.parse(window.localStorage.getItem('list_cart'));
+        let countMax=$(e).attr("count");
+        // console.log("id"+id)
+        let count=$(e).parents('.m-product-cart-table-body-count-button').children().eq(1).children().val();
+        if(count*1>=countMax*1){
+            if(countMax*1===0){
+                for (let item of list_cart){
+                    if(item.product_id===id){
+                        list_cart=list_cart.filter(i=>i!=item);
+                    }
+                }
+                setTimeout(function (){
+                    $('tr#product-'+id).remove();
+                },2000)
+            }
+            if(list_cart.length===0){
+                localStorage.removeItem('list_cart');
+            }else {
+                localStorage.setItem('list_cart', JSON.stringify(list_cart));
+            }
+
+            $('span#'+id).html('Chỉ còn '+countMax+' sản phẩm');
+            return;
+        }
+
         for (let item of list_cart){
             if(item.product_id===id){
                 if(op==1){
@@ -227,6 +279,46 @@ function removeCart(){
 };
 
 function checkOrder(){
+    let flag=false;
+    $('.m-product-cart-table-body tr.m-cart-table-line').each(function (i,e){
+        let count=$(e).children().eq(2).children().children().eq(1).children().val();
+        let id=$(e).attr("data-id");
+        if(count*1===0){
+            console.log(count)
+            flag=true;
+            let user=$('div#info-user').attr("data-user");
+            if(user){
+                bill_id=$('#bill_id').val();
+                $.ajax({
+                    url:'/cart/delete/'+id,
+                    type:'DELETE',
+                    datatype: 'JSON',
+                    data: {bill_id},
+                    success:function (result){
+                        $(e).remove();
+                        updateTotal();
+                    },
+                    error:function (result){
+                        alert(result);
+                    }
+                })
+            }else{
+                let list_cart=[];
+                list_cart=JSON.parse(window.localStorage.getItem('list_cart'));
+                for (let item of list_cart) {
+                    if(item.product_id===id){
+                        list_cart=list_cart.filter(i=>i!=item);
+                    }
+                }
+                localStorage.setItem('list_cart', JSON.stringify(list_cart));
+                $(e).parents().eq(2).remove();
+                updateTotal();
+            }
+        }
+    })
+    if(flag){
+        return;
+    }
     let data={};
     data['id']=[];
     data['count']=[];
@@ -296,7 +388,7 @@ $(()=>{
                         let totalprice=0;
                         for (item of result){
                             index+=1;
-                            html+=`<tr data-id="${index}" class="m-cart-table-line">
+                            html+=`<tr id="product-${item.product.id}" data-id="${item.product.id}" class="m-cart-table-line">
                                               <td scope="row">
                                                   <div class="m-product-cart-table-body-img">
                                                        <input type="text" hidden value="${item.product.id}" name="id" id="id" class="id">
@@ -320,7 +412,7 @@ $(()=>{
                                                 <td>
                                                     <div class="m-product-cart-table-body-count-button">
                                                         <div class="m-product-cart-table-body-minus">
-                                                            <button type="button" onclick="updateCartLocal(0,${item.product.id})" class="m-cart-minus">
+                                                            <button type="button" onclick="updateCartLocal(this,0,${item.product.id})" class="m-cart-minus">
                                                                 <i class="fas fa-minus"></i>
                                                             </button>
                                                         </div>
@@ -328,11 +420,12 @@ $(()=>{
                                                             <input type="number" value="${item.quantily}" name="count" class="count">
                                                         </div>
                                                         <div class="m-product-cart-table-body-minus">
-                                                            <button type="button" onclick="updateCartLocal(1,${item.product.id})" class="m-cart-plus">
+                                                            <button type="button" onclick="updateCartLocal(this,1,${item.product.id})" count="${item.count}" class="m-cart-plus">
                                                                 <i class="fas fa-plus"></i>
                                                             </button>
                                                         </div>
                                                     </div>
+                                                    <span class="countOut" id="${item.product.id}"></span>
                                                 </td>
                                                 <td>
                                                     <div class="m-product-cart-price-total-button">

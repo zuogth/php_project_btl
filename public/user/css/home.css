@@ -474,6 +474,12 @@ html {
     }
 
 }
-
+.p-noti{
+    font-size: .8rem;
+    color: #bd0101;
+}
+p.non-ac{
+    display: none;
+}
 
 

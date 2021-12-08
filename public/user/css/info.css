@@ -49,7 +49,7 @@ li.active-info{
 }
 .detail-item .table td{border: none;}
 .detail-item .table tbody tr td{
-    line-height: 5rem;
+    vertical-align: middle;
     text-align: center;
 }
 

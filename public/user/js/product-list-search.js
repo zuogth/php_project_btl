@@ -71,10 +71,13 @@ function pagetest(data,count) {
                                 ${pricesale(e.pricesell, e.discount)}
 
                             </div>
-                            <div class="add-cart">
-
-                                <a onclick="addCart(this,${e.id})" class="btn btn-danger">Mua</a>
-                            </div>
+                            <div class="add-cart">`;
+                                if(e.count*1===0){
+                                    html+=`<a class="btn btn-danger dis-btn-buy" count="${e.count}">Hết hàng</a>`;
+                                }else {
+                                    html+=`<a onClick="addCart(this,${e.id})" class="btn btn-danger"count="${e.count}">Mua</a>`;
+                                }
+                            html+=`</div>
                         </div><script src="/user/stars/starts-rating.js"></script>`;
                         })
 
@@ -182,9 +185,14 @@ $(function () {
                                 ${pricesale(e.pricesell, e.discount)}
 
                             </div>
-                            <div class="add-cart">
-                                <a onclick="addCart(this,${e.id})" class="btn btn-danger">Mua</a>
-                            </div>
+                            <div class="add-cart">`;
+                                if(e.count*1===0){
+                                    html+=`<a class="btn btn-danger dis-btn-buy" count="${e.count}">Hết hàng</a>`;
+                                }else {
+                                    html+=`<a onClick="addCart(this,${e.id})" class="btn btn-danger"count="${e.count}">Mua</a>`;
+                                }
+
+                            html+=`</div>
                         </div><script src="/user/stars/starts-rating.js"></script>`;
                     })
 

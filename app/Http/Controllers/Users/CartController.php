@@ -70,8 +70,16 @@ class CartController
                 'error'=>true
             ]);
         }
-        $this->billServiceClient->addCart($user->id,$product);
-        return true;
+        $flag=$this->billServiceClient->addCart($user->id,$product);
+        if(!$flag){
+            return response()->json([
+                'error'=>true,
+                'count'=>'max'
+            ]);
+        }
+        return response()->json([
+            'error'=>false
+        ]);
     }
 
     public function loadFromLocal(Request $request)
@@ -85,6 +93,15 @@ class CartController
             $data['product']=$product;
             $data['quantily']=$quantily;
             $totalprice+=$product->pricesell*(1-$product->discount/100)*$quantily;
+            $bill = $this->billServiceClient->findQuantityByProductId($id);
+            $billCus=0;
+            if($bill==null){
+                $billCus=0;
+            }else{
+                $billCus=$bill->count_bill;
+            }
+            $receipt = $this->billServiceClient->findQuantitReceiptByProductId($id);
+            $data['count']=$receipt->count_receipt-$billCus;
             array_push($list_cart,$data);
         }
         $user=Auth::user();

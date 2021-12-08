@@ -92,19 +92,19 @@ class HelperMenu
         if($receipt != null && $bill !=null){
             $html .='<div class="label-prod-item"><i class="fas fa-warehouse"></i>
                             <span>Còn trong kho:</span>
-                            <span>'. $receipt->count_receipt - $bill->count_bill .'</span>
+                            <span id="count-span">'. $receipt->count_receipt - $bill->count_bill .'</span>
                         </div>';
 
         } else if ($receipt != null && $bill == null){
             $html .='<div class="label-prod-item"><i class="fas fa-warehouse"></i>
                             <span>Còn trong kho:</span>
-                            <span>'. $receipt->count_receipt .'</span>
+                            <span id="count-span">'. $receipt->count_receipt .'</span>
                         </div>';
         }
         else{
             $html .='<div class="label-prod-item"><i class="fas fa-warehouse"></i>
                             <span>Còn trong kho:</span>
-                            <span> 0 </span>
+                            <span id="count-span"> 0 </span>
                         </div>';
         }
         return $html;

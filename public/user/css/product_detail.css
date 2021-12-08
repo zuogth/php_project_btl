@@ -439,6 +439,16 @@ nav.nav-options div ul li a{
     border-left: 1px solid silver;
     border-right: 1px solid silver;
 }
+
+.span-noti{
+    font-size: .8rem;
+    color: #9b0000;
+    display: none;
+}
+.dis-btn-buy{
+    background-color: silver !important;
+    border: none;
+}
 /* responsive */
 @media only screen and (max-width:1200px){
     .help-1-items{justify-content: center;}

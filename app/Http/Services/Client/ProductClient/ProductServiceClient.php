@@ -23,12 +23,15 @@ class ProductServiceClient
             foreach ($catechild as $e){
                 $result[] = $e->id;
             }
+            $main=self::mainGetCount();
+
             return DB::table('product')
                 ->leftJoin('comments','product.id','=','comments.product_id')
+                ->joinSub($main,'main','main.id','=','product.id')
                 ->where('status',1)
 //                ->whereBetween('category_id',[$result[0], $result[count($result)-1]])
                     ->whereIn('category_id',$result)
-                ->select('product.*')
+                ->select('product.*','main.count')
                 ->selectRaw('count(comments.product_id) as cmt')
                 ->selectRaw('ROUND(avg( comments.stars),1) as star')
                 ->groupBy('product.id')
@@ -59,14 +62,16 @@ class ProductServiceClient
             foreach ($catechild as $e){
                 $result[] = $e->id;
             }
+            $main=self::mainGetCount();
             return DB::table('product')
                 ->leftJoin('comments','product.id','=','comments.product_id')
+                ->joinSub($main,'main','main.id','=','product.id')
                 ->where('status',1)
                 ->whereIn('category_id',$result)
                 ->when($brand != null, function ($query) use ($brand){
                     $query->where('brand_id',$brand->id);
                 })
-                ->select('product.*')
+                ->select('product.*','main.count')
                 ->selectRaw('count(comments.product_id) as cmt')
                 ->selectRaw('ROUND(avg( comments.stars),1) as star')
                 ->groupBy('product.id')
@@ -83,8 +88,11 @@ class ProductServiceClient
             $result[] = $e->id;
         }
 
+        $main=self::mainGetCount();
+
        return DB::table('product')
            ->leftJoin('comments','product.id','=','comments.product_id')
+           ->joinSub($main,'main','main.id','=','product.id')
             ->where('status',1)
            ->whereIn('category_id',$result)
            ->when($request->brand != null, function ($query) use ($request){
@@ -98,7 +106,7 @@ class ProductServiceClient
                    ->join('speciality','speciality.id','=','product_speciality.speciality_id')
                    ->where('speciality.id',$request->speciality);
            })
-            ->select('product.*')
+            ->select('product.*','main.count')
            ->selectRaw('count(comments.product_id) as cmt')
            ->selectRaw('ROUND(avg( comments.stars),1) as star')
            ->groupBy('product.id')
@@ -168,17 +176,22 @@ class ProductServiceClient
 /// home product////////////////////////////////////////
 ///
     public function findProductSale(){
+        $main=self::mainGetCount();
         return DB::table('product')
-            ->where('discount','>','1')
+            ->joinSub($main,'main','main.id','=','product.id')
+            ->where('discount','>','0')
+            ->select('product.*','main.count')
             ->orderBy('product.id')
             ->paginate(8);
     }
 
 //    hiển thị sản phẩm bán
     public function findProductByBestSell(){
+        $main=self::mainGetCount();
         return DB::table('product')
            ->join('product_bill','product.id','=','product_bill.product_id')
-            ->select("product.*")
+            ->joinSub($main,'main','main.id','=','product.id')
+            ->select("product.*",'main.count')
             ->selectRaw("sum(product_bill.quantily) as quantily")
             ->groupBy('product.id')
             ->orderBy('quantily', 'desc')
@@ -186,9 +199,11 @@ class ProductServiceClient
     }
 //    hiển thị sản phẩm bán theo đánh giá
     public function findProductByStars(){
+        $main=self::mainGetCount();
         return DB::table('product')
             ->join('comments','product.id','=','comments.product_id')
-            ->select("product.*")
+            ->joinSub($main,'main','main.id','=','product.id')
+            ->select("product.*",'main.count')
             ->selectRaw("ROUND(avg( comments.stars),1) as rate ")
             ->groupBy('product.id')
             ->orderBy('rate', 'desc')
@@ -197,11 +212,13 @@ class ProductServiceClient
 
 //    hiển thị sản phẩm theo gợi ý
     public function findProductBYValue($request){
+        $main=self::mainGetCount();
             if ($request->value == 'new'){
                 $prodcuct = DB::table('product')
                     ->join('product_receipt','product.id','=','product_receipt.product_id')
                     ->join('receipt','receipt.id','=','product_receipt.receipt_id')
-                    ->select("product.*")
+                    ->joinSub($main,'main','main.id','=','product.id')
+                    ->select("product.*",'main.count')
                     ->selectRaw("max(receipt.receipt_date) as date")
                     ->groupBy('product.id')
                     ->orderBy('date', 'desc')
@@ -212,7 +229,9 @@ class ProductServiceClient
                 $prodcuct = self::findProductByStars();
             } else {
                 $prodcuct =DB::table('product')
-                        ->inRandomOrder()
+                    ->joinSub($main,'main','main.id','=','product.id')
+                    ->select("product.*",'main.count')
+                    ->inRandomOrder()
                          ->paginate(6)->items();
             }
         return $prodcuct;
@@ -251,5 +270,23 @@ class ProductServiceClient
 
    public function findById($id){
         return Product::find($id);
+   }
+
+   private function mainGetCount(){
+       $pb=DB::table('product_bill')
+           ->join('bill','bill.id','=','product_bill.bill_id')
+           ->where('bill.bill_type','=','bill')
+           ->select('product_bill.*');
+       $receipt=DB::table('product')
+           ->select('product.id',DB::raw('sum(product_receipt.quantily) as count'))
+           ->leftJoin('product_receipt','product_receipt.product_id','=','product.id')
+           ->groupBy('product.id');
+
+       return DB::table('product')
+           ->select('product.id',
+               DB::raw('if(receipt.count is null,0,receipt.count)-if(sum(pb.quantily) is null,0,sum(pb.quantily)) as count'))
+           ->leftJoinSub($pb,'pb','product.id','=','pb.product_id')
+           ->joinSub($receipt,'receipt','receipt.id','=','product.id')
+           ->groupBy('product.id');
    }
 }
