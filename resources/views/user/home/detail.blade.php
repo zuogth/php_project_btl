@@ -45,11 +45,11 @@
                 <div class="imgs-prod">
                     <div class="gallery_01">
                         <a class="img-item" id="img_01" data-image="{{$product->images}}">
-                            <img src="{{$product->images}}" />
+                            <img src="{{asset($product->images)}}" />
                         </a>
                         @foreach($img as $e)
                             <a class="img-item" id="img_{{$e->id}}" data-image="{{$e->image}}">
-                                <img src="{{$e->image}}" />
+                                <img src="{{asset($e->image)}}" />
                             </a>
                         @endforeach
                         <a class="more-img" data-toggle="modal" data-target="#imgs-prod-detail">
