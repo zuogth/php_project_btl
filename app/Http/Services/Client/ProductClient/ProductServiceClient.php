@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 class ProductServiceClient
 {
+    public function findBySlug($slug){
+        $main=self::mainGetCount();
+        return DB::table('product')
+            ->joinSub($main,'main','main.id','=','product.id')
+            ->select('product.*','main.count')
+            ->where('product.productcode','=',$slug)
+            ->first();
+    }
 //////////////////////////list product////////////////////////////
     public function findAllByType($cateName,$type){
         try {

@@ -191,7 +191,7 @@
                     </div>
                     <span class="span-noti">Sản phẩm đã hết hàng</span>
                     <div class="add-cart">
-                        <a onclick="addCart(this,{{$product->id}})" class="btn btn-danger" id="btn-add-cart">Mua</a>
+                        <a onclick="addCart(this,{{$product->id}},{{$product->count}})" class="btn btn-danger" id="btn-add-cart">Mua</a>
                     </div>
                     <ul class="hidden-info-min">
                         {!! $product->content !!}
