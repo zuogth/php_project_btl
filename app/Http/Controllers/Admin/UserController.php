@@ -17,6 +17,7 @@ class UserController extends Controller
 
     public function index()
     {
+        dd($this->userService->findAll());
         return view('admin.users.list',[
             'title'=>'Danh sách người dùng',
             'users'=>$this->userService->findAll()

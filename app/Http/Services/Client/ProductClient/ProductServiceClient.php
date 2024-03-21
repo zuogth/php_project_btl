@@ -34,7 +34,7 @@ class ProductServiceClient
                 ->select('product.*','main.count')
                 ->selectRaw('count(comments.product_id) as cmt')
                 ->selectRaw('ROUND(avg( comments.stars),1) as star')
-                ->groupBy('product.id')
+                ->groupBy('product.id','product.productname','product.pricesell','product.priceentry','product.description','product.content','product.productcode','product.category_id','product.brand_id','product.images','product.status','product.discount','main.count')
                 ->orderBy('product.id');
         } catch (\Exception $ex){
             return false;
@@ -191,9 +191,9 @@ class ProductServiceClient
         return DB::table('product')
            ->join('product_bill','product.id','=','product_bill.product_id')
             ->joinSub($main,'main','main.id','=','product.id')
-            ->select("product.*",'main.count')
+            ->select("product.id",'product.images','product.productname','product.discount','product.description','product.pricesell','product.productcode','main.count')
             ->selectRaw("sum(product_bill.quantily) as quantily")
-            ->groupBy('product.id')
+            ->groupBy('product.id','product.images','product.productname','product.discount','product.description','product.pricesell','product.productcode','main.count')
             ->orderBy('quantily', 'desc')
             ->paginate(6)->items();
     }
@@ -287,6 +287,6 @@ class ProductServiceClient
                DB::raw('if(receipt.count is null,0,receipt.count)-if(sum(pb.quantily) is null,0,sum(pb.quantily)) as count'))
            ->leftJoinSub($pb,'pb','product.id','=','pb.product_id')
            ->joinSub($receipt,'receipt','receipt.id','=','product.id')
-           ->groupBy('product.id');
+           ->groupBy('product.id','receipt.count');
    }
 }

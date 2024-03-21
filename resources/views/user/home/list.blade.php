@@ -135,48 +135,48 @@
         </form>
         <div class="container-cus view-max">
             <h2>Sản phẩm {{$productName}} bán nhiều nhất </h2>
-            <div class="view-ul">
-                @foreach($bestsell as $e)
-                    <div class="product" style="border-radius: 10px; border: 1px solid rgba(152,141,141,0.42)">
-                        <div class="product-t">
-                            <span>0</span>
-                            <div class="wishlist">
-                                <button type="button" class="wishlistBtn"></button>
-                            </div>
-                        </div>
-                        <div class="img-prod">
-                            <img src="{{$e->images}}" alt=""  height="250px">
-                        </div>
-                        <div class="info-prod">
-                            <a href="/product-detail/{{$e->productcode}}" >{{$e->productname}}</a>
-                            @if($e->discount > 0)
-                                <span style="color: red; font-size: 1.2rem">(<span>{{$e->discount}}</span>%)</span>
-                            @endif
-                        </div>
-                        <div class="star-prod">
-                            <a href="#">
-                                <input id="input-1" name="input-1" class="rating rating-loading"
-                                       data-min="0" data-max="5" data-step="0.1" value="{{$e->star}}" disabled>
-                                <div class="star-num">({{$e->cmt}})</div>
-                            </a>
-                        </div>
-                        <div class="label-prod">
-                            <div class="label-prod-item">
-                                <i class="fal fa-shipping-fast"></i><span>Vận chuyển miễn phí</span>
-                            </div>
-                            <div class="label-prod-item"><i class="fal fa-shield-check"></i><span>An tâm giao dịch và tận hưởng ưu đãi độc
-                                    quyền</span>
-                            </div>
-                        </div>
-                        <div class="price-prod">
-                            {!! \App\Helpers\HelperMenu::pricesale($e->pricesell,$e->discount) !!}
-                        </div>
-                        <div class="add-cart">
-                            <a href="" class="btn btn-danger">Mua</a>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
+{{--            <div class="view-ul">--}}
+{{--                @foreach($bestsell as $e)--}}
+{{--                    <div class="product" style="border-radius: 10px; border: 1px solid rgba(152,141,141,0.42)">--}}
+{{--                        <div class="product-t">--}}
+{{--                            <span>0</span>--}}
+{{--                            <div class="wishlist">--}}
+{{--                                <button type="button" class="wishlistBtn"></button>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="img-prod">--}}
+{{--                            <img src="{{$e->images}}" alt=""  height="250px">--}}
+{{--                        </div>--}}
+{{--                        <div class="info-prod">--}}
+{{--                            <a href="/product-detail/{{$e->productcode}}" >{{$e->productname}}</a>--}}
+{{--                            @if($e->discount > 0)--}}
+{{--                                <span style="color: red; font-size: 1.2rem">(<span>{{$e->discount}}</span>%)</span>--}}
+{{--                            @endif--}}
+{{--                        </div>--}}
+{{--                        <div class="star-prod">--}}
+{{--                            <a href="#">--}}
+{{--                                <input id="input-1" name="input-1" class="rating rating-loading"--}}
+{{--                                       data-min="0" data-max="5" data-step="0.1" value="{{$e->star}}" disabled>--}}
+{{--                                <div class="star-num">({{$e->cmt}})</div>--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
+{{--                        <div class="label-prod">--}}
+{{--                            <div class="label-prod-item">--}}
+{{--                                <i class="fal fa-shipping-fast"></i><span>Vận chuyển miễn phí</span>--}}
+{{--                            </div>--}}
+{{--                            <div class="label-prod-item"><i class="fal fa-shield-check"></i><span>An tâm giao dịch và tận hưởng ưu đãi độc--}}
+{{--                                    quyền</span>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="price-prod">--}}
+{{--                            {!! \App\Helpers\HelperMenu::pricesale($e->pricesell,$e->discount) !!}--}}
+{{--                        </div>--}}
+{{--                        <div class="add-cart">--}}
+{{--                            <a href="" class="btn btn-danger">Mua</a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
         </div>
     </section>
     <button id="myBtnTop" title="Lên đầu trang"></button>

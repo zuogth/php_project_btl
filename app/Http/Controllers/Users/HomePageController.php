@@ -40,9 +40,9 @@ class HomePageController extends Controller
         $productsSale = $this->productService->findProductSale();
 
         return view('user.home.home',[
-            'title'=>'Trang chủ',
-            'productsSale'=>$productsSale,
-            'productBestSell'=>$this->productService->findProductByBestSell()
+             'title'=>'Trang chủ',
+             'productsSale'=>$productsSale,
+             'productBestSell'=>$this->productService->findProductByBestSell()
         ]);
     }
 

@@ -32,6 +32,7 @@ class CommentServiceClient
 
         return count(DB::table('comments')
             ->select('comments.*')
+            ->groupBy('comments.product_id','comments.id','comments.user_id','comments.cmt_datetime','comments.title','comments.context','comments.stars')
             ->having('comments.product_id','=',$product_id)->get());
     }
 
