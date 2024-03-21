@@ -37,6 +37,9 @@
                                     <div>
                                         <input type="text" onkeyup="searchProvince(this)" onfocus="listProvince(this)" id="province" onfocusout="unFocusInput(this)"
                                                name="province" parent_code="" value="{!! \App\Helpers\Helper::address(0,$user->address) !!}" placeholder="Thành phố...">
+                                        <div class="modal-errorMessage">
+                                            <span class="errorMessage"></span>
+                                        </div>
                                     </div>
                                     <div class="province" onmouseleave="onMouseLeave()" onmouseenter="onMouseEnter()">
                                         <ul id="listData"></ul>
@@ -48,6 +51,9 @@
                                         <input type="text" onkeyup="searchDistrict(this)" onfocus="listDistrict(this)" parent="province" onfocusout="unFocusInput(this)"
                                                name="district" id="district" parent_code="" value="{!! \App\Helpers\Helper::address(1,$user->address) !!}"
                                                placeholder="Huyện...">
+                                        <div class="modal-errorMessage">
+                                            <span class="errorMessage"></span>
+                                        </div>
                                     </div>
                                     <div class="district" onmouseleave="onMouseLeave()" onmouseenter="onMouseEnter()">
                                         <ul class="listData"></ul>
@@ -59,6 +65,9 @@
                                         <input type="text" onkeyup="searchWard(this)" onfocus="listWard(this)" parent="district" onfocusout="unFocusInput(this)"
                                                name="ward" id="ward" parent_code="" value="{!! \App\Helpers\Helper::address(2,$user->address) !!}"
                                                placeholder="Xã...">
+                                        <div class="modal-errorMessage">
+                                            <span class="errorMessage"></span>
+                                        </div>
                                     </div>
                                     <div class="ward" onmouseleave="onMouseLeave()" onmouseenter="onMouseEnter()">
                                         <ul class="listData"></ul>
@@ -69,6 +78,9 @@
                                     <div>
                                         <input type="text" name="village" id="village"
                                                value="{!! \App\Helpers\Helper::address(3,$user->address) !!}" placeholder="Chi tiết (thôn, số nhà,...)">
+                                        <div class="modal-errorMessage">
+                                            <span class="errorMessage"></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -143,7 +155,10 @@
                 validation.isRequired("#email", "Bạn hãy nhập email"),
                 validation.isEmail("#email","Trường này phải là email"),
                 validation.isRequired("#fullname", "Bạn hãy nhập họ và tên "),
-                validation.isRequired("#address","Nhập địa chỉ"),
+                validation.isRequired("#province","Nhập địa chỉ thành phố"),
+                validation.isRequired("#district","Nhập địa chỉ huyện/quận"),
+                validation.isRequired("#ward","Nhập địa chỉ phường/xã"),
+                validation.isRequired("#village","Nhập địa chỉ chi tiết nơi nhận hàng"),
 
 
             ],

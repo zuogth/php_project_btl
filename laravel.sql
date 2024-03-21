@@ -35,7 +35,11 @@ CREATE TABLE `bill` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_bill` (`user_id`,`bill_date`),
   CONSTRAINT `fk_bill_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=46 ;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+>>>>>>> origin/master
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -60,7 +64,11 @@ CREATE TABLE `brand` (
   `brandname` varchar(60) NOT NULL,
   `brandcode` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=5 ;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+>>>>>>> origin/master
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +99,11 @@ CREATE TABLE `category` (
   PRIMARY KEY (`id`),
   KEY `fk_category_parent_id` (`parent_id`),
   CONSTRAINT `fk_category_parent_id` FOREIGN KEY (`parent_id`) REFERENCES `category` (`id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=22 ;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+>>>>>>> origin/master
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,7 +136,11 @@ CREATE TABLE `comments` (
   KEY `fk_users_cmt` (`user_id`),
   CONSTRAINT `fk_product_cmt1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
   CONSTRAINT `fk_users_cmt` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=9 ;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+>>>>>>> origin/master
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -189,7 +205,11 @@ CREATE TABLE `product` (
   KEY `fk_product_brand` (`brand_id`),
   CONSTRAINT `fk_product_brand` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`id`),
   CONSTRAINT `fk_product_cate` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=36 ;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+>>>>>>> origin/master
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -220,7 +240,11 @@ CREATE TABLE `product_bill` (
   KEY `fk_bill_product` (`bill_id`),
   CONSTRAINT `fk_bill_product` FOREIGN KEY (`bill_id`) REFERENCES `bill` (`id`),
   CONSTRAINT `fk_prodcut_bill` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=168 ;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=168 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+>>>>>>> origin/master
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -250,7 +274,11 @@ CREATE TABLE `product_receipt` (
   KEY `fk_receipt_product` (`receipt_id`),
   CONSTRAINT `fk_prodcut_receipt` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
   CONSTRAINT `fk_receipt_product` FOREIGN KEY (`receipt_id`) REFERENCES `receipt` (`id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=122 ;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+>>>>>>> origin/master
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -277,7 +305,11 @@ CREATE TABLE `product_speciality` (
   KEY `fk_speciality_product` (`product_id`),
   CONSTRAINT `fk_product_speciality` FOREIGN KEY (`speciality_id`) REFERENCES `speciality` (`id`),
   CONSTRAINT `fk_speciality_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB ;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+>>>>>>> origin/master
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -306,7 +338,11 @@ CREATE TABLE `receipt` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_receipt` (`user_id`,`receipt_date`),
   CONSTRAINT `fk_receipt_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=31 ;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+>>>>>>> origin/master
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -331,7 +367,11 @@ CREATE TABLE `role` (
   `rolename` varchar(20) NOT NULL,
   `rolecode` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=4 ;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+>>>>>>> origin/master
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -361,7 +401,11 @@ CREATE TABLE `speciality` (
   `typeproduct` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_speciality` (`typename`,`typenumber`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=22 ;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+>>>>>>> origin/master
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -394,7 +438,11 @@ CREATE TABLE `users` (
   `remember_token` varchar(255) DEFAULT NULL,
   `social_id` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=11 ;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+>>>>>>> origin/master
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -421,7 +469,11 @@ CREATE TABLE `users_role` (
   KEY `fk_role_users` (`role_id`),
   CONSTRAINT `fk_role_users` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
   CONSTRAINT `fk_users_role` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB ;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+>>>>>>> origin/master
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -443,4 +495,8 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+<<<<<<< HEAD
 -- Dump completed on 2023-12-17 23:45:49
+=======
+-- Dump completed on 2023-12-17 23:45:49
+>>>>>>> origin/master

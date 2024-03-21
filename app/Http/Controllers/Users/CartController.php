@@ -67,14 +67,15 @@ class CartController
         $user=Auth::user();
         if($user==null){
             return response()->json([
-                'error'=>true
+                'error'=>true,
+                'count'=>false
             ]);
         }
         $flag=$this->billServiceClient->addCart($user->id,$product);
         if(!$flag){
             return response()->json([
                 'error'=>true,
-                'count'=>'max'
+                'count'=>true
             ]);
         }
         return response()->json([

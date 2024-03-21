@@ -55,7 +55,7 @@ class ProductDetailController extends Controller
     }
 
     public function index($slug){
-        $product = Product::where('productcode',$slug)->first();
+        $product = $this->productService->findBySlug($slug);
         $bill = $this->billServiceClient->findQuantityByProductId($product->id);
         $receipt = $this->billServiceClient->findQuantitReceiptByProductId($product->id);
         $categoryChild = $this->categoryServiceClient->findOneById($product->category_id);

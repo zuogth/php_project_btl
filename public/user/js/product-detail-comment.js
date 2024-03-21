@@ -55,7 +55,7 @@ $(function (){
 })
 
 //Thêm sản phẩm vào cart
-function addCart(event,id){
+function addCart(event,id,countMax){
     let count=$('span#count-span').html();
     if(count*1===0){
         $('span.span-noti').show();
@@ -67,43 +67,62 @@ function addCart(event,id){
             url:'/cart/'+id,
             type:'GET',
             success:function (result){
-                if(result.error==true){
+                if(result.count===false){
                     window.location.href='/user/login';
+                }else {
+                    $(event).html('Hết hàng');
+                    $(event).addClass("dis-btn-buy");
+                    out=true;
                 }
-                html=`<a onclick="addCart(this,${id})" class="btn btn-danger">Mua<i class="fas fa-check"></i></a>`
-                $(event).parents().eq(0).html(html);
+                if(!out){
+                    html=`<a onclick="addCart(this,${id})" class="btn btn-danger">Mua<i class="fas fa-check"></i></a>`
+                    $(event).parents().eq(0).html(html);
+                }
             },
             error:function (){
                 alert('Error');
             }
         })
-    }else{
-        let list_cart=[];
-        let flag=false;
-        list_cart=JSON.parse(window.localStorage.getItem('list_cart'));
-        if(list_cart!=null){
-            for (let item of list_cart){
-                if(item.product_id==id){
-                    item.quantily+=1;
-                    flag=true;
+    }else {
+        let list_cart = [];
+        let flag = false;
+        let out = false;
+        list_cart = JSON.parse(window.localStorage.getItem('list_cart'));
+        if (list_cart != null) {
+            for (let item of list_cart) {
+                if (item.product_id == id) {
+                    if (item.quantily === countMax) {
+                        $(event).html('Hết hàng');
+                        $(event).addClass("dis-btn-buy");
+                        flag = true;
+                        out = true;
+                    } else {
+                        item.quantily += 1;
+                        flag = true;
+                    }
                 }
             }
-            if(!flag){
-                let data={};
-                data['product_id']=id;
-                data['quantily']=1;
+            if (!flag) {
+                let data = {};
+                data['product_id'] = id;
+                data['quantily'] = 1;
                 list_cart.push(data);
             }
-        }else{
-            list_cart=[];
-            let data={};
-            data['product_id']=id;
-            data['quantily']=1;
+        } else {
+            list_cart = [];
+            let data = {};
+            data['product_id'] = id;
+            data['quantily'] = 1;
             list_cart.push(data);
         }
         localStorage.setItem('list_cart', JSON.stringify(list_cart));
-        html=`<a onclick="addCart(this,${id})" class="btn btn-danger">Mua<i class="fas fa-check"></i></a>`
-        $(event).parents().eq(0).html(html);
+        if (!out) {
+            html = `<div class="icon-cart" style="color: white;">
+                                            <i class="fas fa-cart-plus"></i>
+                                            <i class="fas fa-check"></i>
+                                        </div>`
+            $(event).html(html);
+        }
     }
 
 }

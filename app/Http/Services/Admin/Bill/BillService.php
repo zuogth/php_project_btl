@@ -9,7 +9,7 @@ class BillService
 {
     public function findAll()
     {
-        return Bill::with('user')->where('bill_type','bill')->paginate(10);
+        return Bill::with('user')->where('bill_type','bill')->get();
     }
 
     public function findById($id)
